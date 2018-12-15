@@ -1,0 +1,27 @@
+{
+  "name": "softeng",
+  "version": "1.0.0",
+  "description": "description",
+  "main": "main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orfeas-menis/SoftEng.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orfeas-menis/SoftEng/issues"
+  },
+  "homepage": "https://github.com/orfeas-menis/SoftEng#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mariadb": "^2.0.2-rc",
+    "sequelize": "^5.0.0-beta.15"
+  }
+}
