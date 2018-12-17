@@ -10,6 +10,10 @@ module.exports = {
         password: process.env.ADMIN_PASS || "admin",
         email: process.env.ADMIN_EMAIL || "admin@admin.com",
         category: process.env.ADMIN_CATEGORY || '0'
+    },
+    simple_user: {
+        username: 'anonymous', //find a way to autoincrement a number next to anonymous
+        category: '1'
     }
 }
 

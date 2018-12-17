@@ -1,6 +1,7 @@
 var express             = require('express'),
     app                 = express(),
     session             = require('express-session'),
+    bodyParser          = require("body-parser"),
     User                = require("./database/models/users"),
     sequelize           = require("./database/connect"),
     index_router        = require("./routing/index_router");
@@ -25,13 +26,21 @@ myConnectionStore.sync();
 // set static folder
 app.use("/static", express.static("public"));
 
+// add bodyParser middleware to parse POST request body
+app.use(bodyParser.urlencoded({ extended: true }));
 
+/*
+ - - - - -- - - - - - - - -- - - - - -- ROUTING - -- - - - - - - -- - - - - - -- - - - - - -- - - -  -- - -
+*/
 
-
-
+//testing
 app.use('/', index_router)
+
+
 
 
 app.listen(process.env.PORT || 1245, () => {
     console.log("Hello World console");
 })
+
+
