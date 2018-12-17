@@ -5,7 +5,9 @@ const credentials = require("../../config/credentials");
 
 
 const User = dbo.define('user', {
-    //user id
+    /*
+    user id
+    */
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -13,7 +15,9 @@ const User = dbo.define('user', {
         autoIncrement: true,
         unique: true
     },
-    //username
+    /*
+    username
+    */
     username: {
         type: Sequelize.STRING(30),
         unique: true,
@@ -29,7 +33,9 @@ const User = dbo.define('user', {
             }
         }
     },
-    //user email
+    /*
+    user email
+    */
     email: {
         type: Sequelize.STRING(30),
         allowNull: false,
@@ -38,7 +44,9 @@ const User = dbo.define('user', {
         },
         unique: true
     },
-    //password (hashed)
+    /*
+    password (hashed)
+    */
     password: {
         type: Sequelize.STRING(100),
         allowNull: false,
@@ -49,11 +57,16 @@ const User = dbo.define('user', {
     last_login: {
         type: Sequelize.DATE
     },
-    //category: 0 -> admin , 1 -> user
+    /*
+    category: 0 -> admin , 1 -> user
+    */
     category: {
         type: Sequelize.ENUM('0','1'),
         allowNull: false
     },
+    /*
+    last login of the user
+    */
     last_login: {
         type: Sequelize.DATE
     }
