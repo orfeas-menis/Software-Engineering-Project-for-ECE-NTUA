@@ -1,17 +1,21 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var User = require('../database/models/users');
 const authController = require('../controllers/AuthController');
+const authControllerPolicy = require('../policies/AuthPolicy');
 
 
-
+router.post('/',
+  authControllerPolicy.login,
+  authController.postLogin)
 
 
 //POST route for updating data (First Time Sign up)
-router.post('/', authController.signUp)
+//router.post('/', authController.signUp)
 
+/*
 // GET route after registering
-router.get('/profile', function (req, res, next) {
+router.post('/', function (req, res, next) {
   User.findById(req.session.userId)
     .exec(function (error, user) {
       if (error) {
@@ -27,8 +31,8 @@ router.get('/profile', function (req, res, next) {
       }
     });
 });
-
-// GET for logout logout
+*/
+// GET for logout 
 router.get('/logout', function (req, res, next) {
   if (req.session) {
     // delete session object
@@ -44,9 +48,3 @@ router.get('/logout', function (req, res, next) {
 
 module.exports = router;
 
-
-/*
-https://medium.com/createdd-notes/starting-with-authentication-a-tutorial-with-node-js-and-mongodb-25d524ca0359?fbclid=IwAR1pmVysWhw5vtidPEuMQj5efIO4D3nRMSNcaATX-79SeiIXxD2ICexsWxQ
-->
-https://github.com/Createdd/authenticationIntro/blob/master/routes/router.js
-*/

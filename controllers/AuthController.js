@@ -1,11 +1,11 @@
-const User = require("../database/models/users")
+var User = require("../database/models/users")
 const bcrypt = require("bcryptjs");
 
 
-const authController = (req, res) => {
+const AuthController = (req, res) => {
 }
 
-authController.signUp = (req, res) => {
+AuthController.signUp = (req, res) => {
 
 // confirm that user typed same password twice
 
@@ -65,3 +65,44 @@ authController.signUp = (req, res) => {
     }
 */
 }
+
+
+AuthController.postLogin = (req, res) => {
+    if (req.body.passwordConf){
+        /*this is a way to use the same path for login and sign up and distinguish the difference by the    
+        "variables" in the post request body. If it is Login there will only be username (or email, we will see)
+        and passord, if it is Sign up there will be additionally email (or username in the other ase), 
+        password Confirmation, and any other info asked during the Sign up process*/ 
+        console.log("It is Sign Up, not Login")
+    }
+    else{
+        
+        User.findOne({ where: { username: req.body.username } }).then(foundUser => {
+        if (foundUser) {
+            console.log(foundUser);
+            bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
+            if (err) throw err;
+            if (result === true) {
+                req.session.userId = foundUser.Id;
+                console.log(req.session);
+                foundUser.update({
+                last_login: Date.now()
+                });
+                res.redirect('/')
+            } else {
+                req.session.userId = null;
+                res.status(401).send('incorrect pass');
+            }
+            });
+        } 
+        else {
+            console.log("user not found");
+            res.status(403).redirect("/");
+        }
+        // res.redirect("/");
+        });
+    }
+  }
+  
+
+module.exports = AuthController;

@@ -23,9 +23,14 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-session-sequelize": "^6.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "joi": "^14.3.0",
     "mariadb": "^2.0.2-rc",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-sequelize": "^0.8.0",
     "sequelize": "^5.0.0-beta.15"
   }
 }

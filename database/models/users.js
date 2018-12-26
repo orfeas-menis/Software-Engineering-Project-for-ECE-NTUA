@@ -21,7 +21,6 @@ const User = dbo.define('user', {
     username: {
         type: Sequelize.STRING(30),
         unique: true,
-        primaryKey: true,
         allowNull: false,
         validate: {
             notEmpty: true,
@@ -54,9 +53,6 @@ const User = dbo.define('user', {
             notEmpty: true
         }
     },
-    last_login: {
-        type: Sequelize.DATE
-    },
     /*
     category: 0 -> admin , 1 -> user
     */
@@ -72,6 +68,7 @@ const User = dbo.define('user', {
     }
   }
 )
+
 
 
 User.sync({ force: false }).then(() => {
@@ -93,6 +90,5 @@ User.sync({ force: false }).then(() => {
         }
     })
 });
-
 
 module.exports = User;
