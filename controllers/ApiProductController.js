@@ -16,12 +16,12 @@ ApiProductController.products = (req, res) => {
     if (format == null || format == 'json'){
         temp = req.query.start
         tempInt = parseInt(temp)
-        if (temp != null && tempInt != NaN){
+        if (temp != null && !isNaN(tempInt)){
             start = tempInt
         }
         temp = req.query.count
         tempInt = parseInt(temp)
-        if (temp != null && tempInt != NaN){
+        if (temp != null && !isNaN(tempInt)){
             count = tempInt
         }
         var whereClause = {withdrawn: false} //ACTIVE (default) means not withdrawn
@@ -71,6 +71,34 @@ ApiProductController.products = (req, res) => {
         res.sendStatus(400) //res.status(400).send('Bad Request') 
     }
 };
+
+
+ApiProductController.addProduct = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    var format = req.query.format
+    if (format == null || format == 'json'){
+        if (isNaN(prodId)){
+            res.sendStatus(400)
+        }
+        else{
+            
+            Product.findByPk(prodId).then(product => {
+                if (product == null){
+                    res.status(400).send("There is no Product with id: "+prodId)
+                }
+                else{
+                    res.status(200).send(product)
+                }
+            })
+        }
+    }
+    else{
+        res.sendStatus(400)
+    }
+}
+
+
+
 
 module.exports = ApiProductController;
 /*

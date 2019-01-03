@@ -68,7 +68,7 @@ Product.prototype.toJSON =  function () {
     }
     values.tags = res
     return values;
-  }
+}
 /*
 Connect DB and add a sample product
 */

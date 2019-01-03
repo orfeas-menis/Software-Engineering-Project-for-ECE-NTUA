@@ -69,7 +69,17 @@ const Shop = dbo.define('shop', {
   }
 )
 
-
+Shop.prototype.toJSON =  function () {
+    var values = Object.assign({}, this.get());
+    var res = null
+    delete values.createdAt;
+    delete values.updatedAt;
+    if (values.tags != null){
+        res = values.tags.split(",");
+    }
+    values.tags = res
+    return values;
+}
 /*
 Connect DB and add a sample shop
 */

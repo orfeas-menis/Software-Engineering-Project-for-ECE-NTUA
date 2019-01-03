@@ -16,12 +16,15 @@ ApiShopController.shops = (req, res) => {
     if (format == null || format == 'json'){
         temp = req.query.start
         tempInt = parseInt(temp)
-        if (temp != null && tempInt != NaN){
+        /* 
+        We decided to ignore invalid inputs (NaN) and use default values instead (we do not return "Bad request" code 400)
+        */
+        if (temp != null && !isNaN(tempInt)){ 
             start = tempInt
         }
         temp = req.query.count
         tempInt = parseInt(temp)
-        if (temp != null && tempInt != NaN){
+        if (temp != null && !isNaN(tempInt)){
             count = tempInt
         }
         var whereClause = {withdrawn: false} //ACTIVE (default) means not withdrawn
