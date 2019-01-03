@@ -28,7 +28,8 @@ const Product = dbo.define('product', {
     product description
     */
     description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
     },
     /*
     product category
@@ -44,7 +45,8 @@ const Product = dbo.define('product', {
     tags for product
     */
     tags: {
-        type: Sequelize.STRING // all tags are in one String seperated by comma
+        type: Sequelize.STRING, // all tags are in one String seperated by comma
+        allowNull: false
     },
     /*
     withdrawn: true -> our site does not "observe" prices for this product anymore

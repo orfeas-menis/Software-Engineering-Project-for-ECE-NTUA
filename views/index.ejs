@@ -1,13 +1,21 @@
 <!doctype html>
 <head></head><body>
-<form action="/login" method="post">
+<form action="/observatory/api/products" method="post">
     <div>
-        <label>Username:</label>
-        <input type="text" name="username"/>
+        <label>Name:</label>
+        <input type="text" name="name"/>
     </div>
     <div>
-        <label>Password:</label>
-        <input type="password" name="password"/>
+        <label>Description:</label>
+        <input type="text" name="description"/>
+    </div>
+    <div>
+        <label>Category:</label>
+        <input type="text" name="category"/>
+    </div>
+    <div>
+        <label>Tags:</label>
+        <input type="text" name="tags"/>
     </div>
     <div>
         <input type="submit" value="Log In"/>

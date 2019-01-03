@@ -73,7 +73,7 @@ ApiProductController.products = (req, res) => {
 };
 
 
-ApiProductController.addProduct = (req, res) => {
+ApiProductController.findProduct = (req, res) => {
     var prodId = parseInt(req.params.productId)
     var format = req.query.format
     if (format == null || format == 'json'){
@@ -97,7 +97,24 @@ ApiProductController.addProduct = (req, res) => {
     }
 }
 
+ApiProductController.addProduct = (req, res) => {
+    
+    sname = req.body.name.toString()
+    sdescription = req.body.description.toString()
+    scategory = req.body.category.toUpperCase()
+    stags = req.body.tags.toString() // We take as granted that tags have been sent to us as one String and tags are seperated with commas
+        
+  
+    Product.create({
+        name: sname,
+        description: sdescription,
+        category: scategory,
+        tags: stags
+    }).then(product => {
+        res.send(product)
+    })
 
+}
 
 
 module.exports = ApiProductController;
