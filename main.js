@@ -7,10 +7,11 @@ var express             = require('express'),
     User                = require("./database/models/users"),
     Product             = require("./database/models/products"),
     Shop                = require("./database/models/shops"),
-    Price                = require("./database/models/prices"),
+    Price               = require("./database/models/prices"),
     sequelize           = require("./database/connect"),
     index_router        = require("./routing/index_router"),
     AuthRouter          = require("./routing/AuthRouter"),
+    ApiRouter           = require("./routing/ApiRouter"),
     sessionOptions      = require("./config/session");
 
 /*
@@ -70,6 +71,7 @@ app.use('/', index_router)
 
 app.use('/login', AuthRouter)
 
+app.use('/observatory/api', ApiRouter)
 
 
 

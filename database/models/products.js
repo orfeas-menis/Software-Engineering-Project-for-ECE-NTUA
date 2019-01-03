@@ -44,7 +44,7 @@ const Product = dbo.define('product', {
     tags for product
     */
     tags: {
-        type: Sequelize.ENUM('0','1'), // ???????????? How do I set as type a list or an array of Strings? 
+        type: Sequelize.STRING // all tags are in one String seperated by comma
     },
     /*
     withdrawn: true -> our site does not "observe" prices for this product anymore
@@ -56,6 +56,19 @@ const Product = dbo.define('product', {
   }
 )
 
+
+
+Product.prototype.toJSON =  function () {
+    var values = Object.assign({}, this.get());
+    var res = null
+    delete values.createdAt;
+    delete values.updatedAt;
+    if (values.tags != null){
+        res = values.tags.split(",");
+    }
+    values.tags = res
+    return values;
+  }
 /*
 Connect DB and add a sample product
 */
@@ -69,7 +82,33 @@ Product.sync({ force: false }).then(() => {
             Product.create({
                 name: 'Gasoline',
                 description: 'Normal Gasoline Description',
-                category: 'FUEL'
+                category: 'FUEL',
+                tags: 'fuel,yeah,new,benzina file'
+            })
+            Product.create({
+                name: 'Gasoline Super',
+                description: 'Super Gasoline Description',
+                category: 'FUEL',
+                tags: 'fuel2,yeah2,new2,benzina22 file'
+            })
+            Product.create({
+                name: 'Gas',
+                description: 'Gas Description',
+                category: 'FUEL',
+                tags: 'my_gas,aerio file',
+                withdrawn: 'true'
+            })
+            Product.create({
+                name: 'Petrol',
+                description: 'Normal Petrol Description',
+                category: 'FUEL',
+                tags: 'petreleokilida man,petroleum file'
+            })
+            Product.create({
+                name: 'Whole Cleaning',
+                description: 'Whole Car Cleaning Description',
+                category: 'SERVICE',
+                tags: 'katharisma man,new777,ka8aro file'
             })
 
         }

@@ -35,7 +35,7 @@ const Price = dbo.define('price', {
   }
 )
 
-Price.belongsTo(User);
+Price.belongsTo(User,{constraints:false, onDelete: 'CASCADE', hooks:true});
 Price.belongsTo(Product);
 Price.belongsTo(Shop);
 
@@ -43,7 +43,7 @@ Price.belongsTo(Shop);
 Connect DB and add a sample shop
 */
 
-Price.sync({ force: false }).then(() => {
+Price.sync({ force: true }).then(() => {
     Price.findOne({ where: { id: 1 } }).then(found => {
         if (found) {
             console.log("there's already a price in the db. Contact dev team for more info");
@@ -62,5 +62,4 @@ Price.sync({ force: false }).then(() => {
     })
 });
 
-
-module.exports = Shop;
+module.exports = Price;

@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 const dbo = require("../connect");
 
-
 const Shop = dbo.define('shop', {
     /*
     shop id
@@ -58,7 +57,7 @@ const Shop = dbo.define('shop', {
     tags for shop
     */
     tags: {
-        type: Sequelize.ENUM('0','1'), // ???????????? How do I set as type a list or an array of Strings? 
+        type: Sequelize.STRING // all tags are in one String seperated by comma
     },
     /*
     withdrawn: true -> our site does not "observe" prices from this shop anymore
@@ -69,6 +68,7 @@ const Shop = dbo.define('shop', {
     }
   }
 )
+
 
 /*
 Connect DB and add a sample shop
@@ -90,6 +90,4 @@ Shop.sync({ force: false }).then(() => {
         }
     })
 });
-
-
 module.exports = Shop;
