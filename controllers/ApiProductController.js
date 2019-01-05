@@ -7,96 +7,65 @@ var Price = require("../database/models/prices")
 const ApiProductController = (req, res) => {
 }
 
+//Checked!
 ApiProductController.products = (req, res) => {
     var format = req.query.format
     var start = 0
     var count = 20
     var status = 'ACTIVE'
+    var sort= {}
     var temp, tempInt
-    if (format == null || format == 'json'){
-        temp = req.query.start
-        tempInt = parseInt(temp)
-        if (temp != null && !isNaN(tempInt)){
-            start = tempInt
-        }
-        temp = req.query.count
-        tempInt = parseInt(temp)
-        if (temp != null && !isNaN(tempInt)){
-            count = tempInt
-        }
-        var whereClause = {withdrawn: false} //ACTIVE (default) means not withdrawn
+    temp = req.query.start
+    tempInt = parseInt(temp)
+    if (temp){
+        start = tempInt
+    }
+    temp = req.query.count
+    tempInt = parseInt(temp)
+    if (temp){
+        count = tempInt
+    }
 
-        temp = req.query.status
-        if (temp == 'WITHDRAWN'){
-            status = temp
-            whereClause = {withdrawn: true }
-        }
-        else if (temp == 'ALL'){
-            status = temp
-            whereClause = {}
-        }
+    var whereClause = {withdrawn: false} //ACTIVE (default) means not withdrawn
+    temp = req.query.status
+    if (temp == 'WITHDRAWN'){
+        status = temp
+        whereClause = {withdrawn: true }
+    }
+    else if (temp == 'ALL'){
+        status = temp
+        whereClause = {}
+    }
 
-        temp = req.query.sort
-        var sort= {}
-        sort[0] = 'id'
-        sort[1] = 'ASC'
+    temp = req.query.sort
         
-        if (temp != null){
+    sort[0] = 'id'
+    sort[1] = 'ASC'
+        
+    if (temp){
             
-            temp = temp.split('|')
+        temp = temp.split('|')
             
-            if (temp[0] == 'name'){
-                sort[0] = temp[0]
-            }
-            if (temp[1] == 'DESC'){
-                sort[1] = temp[1]
-            }
+        if (temp[0] == 'name'){
+            sort[0] = temp[0]
         }
-
-        Product.findAndCountAll({ where: whereClause , order:[[sort[0],sort[1]]]  }).then(result => {
-            var total = result.count;
-            var slice = result.rows.slice(start,start+count);
-
-            var text = '{ "start" : ' + start + ' , "count" : ' + count + ', "total" : ' + total +  '}';
-            var response = JSON.parse(text);
-            response.products = slice
-            res.send(response)
-        })
-        //res.sendStatus(200)
+        if (temp[1] == 'DESC'){
+            sort[1] = temp[1]
+        }
     }
-    else{
-        /*
-        http://expressjs.com/en/4x/api.html#res.status
-        */
-        res.sendStatus(400) //res.status(400).send('Bad Request') 
-    }
+
+    Product.findAndCountAll({ where: whereClause , order:[[sort[0],sort[1]]]  }).then(result => {
+        var total = result.count;
+        var slice = result.rows.slice(start,start+count);
+
+        var text = '{ "start" : ' + start + ' , "count" : ' + count + ', "total" : ' + total +  '}';
+        var response = JSON.parse(text);
+        response.products = slice
+        res.send(response)
+    })
 };
 
-
-ApiProductController.findProduct = (req, res) => {
-    var prodId = parseInt(req.params.productId)
-    var format = req.query.format
-    if (format == null || format == 'json'){
-        if (isNaN(prodId)){
-            res.sendStatus(400)
-        }
-        else{
-            
-            Product.findByPk(prodId).then(product => {
-                if (product == null){
-                    res.status(400).send("There is no Product with id: "+prodId)
-                }
-                else{
-                    res.status(200).send(product)
-                }
-            })
-        }
-    }
-    else{
-        res.sendStatus(400)
-    }
-}
-
+//Checked!
 ApiProductController.addProduct = (req, res) => {
     
     sname = req.body.name.toString()
@@ -111,35 +80,96 @@ ApiProductController.addProduct = (req, res) => {
         category: scategory,
         tags: stags
     }).then(product => {
-        res.send(product)
+        if (product){
+            res.status(200).send(product)
+        }
+        else{
+            res.sendStatus(400)
+        }   
     })
+
+}
+
+//Checked!
+ApiProductController.findProduct = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    Product.findByPk(prodId).then(product => {
+        if (product){
+            res.status(200).send(product)
+        }
+        else{
+            res.sendStatus(400)
+        }
+    })
+}
+
+//Checked!
+ApiProductController.fullUpdateProduct = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    sname = req.body.name.toString()
+    sdescription = req.body.description.toString()
+    scategory = req.body.category.toUpperCase()
+    stags = req.body.tags.toString()
+    Product.findByPk(prodId).then(product =>{
+        if (product){
+            product.update({ 
+                name: sname, 
+                description: sdescription,
+                category: scategory,
+                tags: stags
+            }).then(prod => {
+                if (product){
+                    res.status(200).send(product)
+                }
+                else{
+                    res.sendStatus(400)
+                }
+            })
+        }
+    })
+}
+
+//Checked!
+ApiProductController.partialUpdateProduct = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    myJson = {}
+    fields = []
+    if (req.body.name){
+        myJson.name = req.body.name.toString()
+        fields.push('name')
+    }
+    if (req.body.description){
+        myJson.description = req.body.description.toString()
+        fields.push('description')
+    }
+    if (req.body.category){
+        myJson.category = req.body.category.toUpperCase()
+        fields.push('category')
+    }
+    if (req.body.tags){
+        myJson.tags = req.body.tags.toString()
+        fields.push('tags')
+    }
+    
+    Product.findByPk(prodId).then(product =>{
+        if (product){
+            product.update(myJson,{fields: fields}).then(product => {
+                if (product){
+                    res.status(200).send(product)
+                }
+                else{
+                    res.sendStatus(400)
+                }
+            })
+        }
+    })
+
+}
+
+ApiProductController.deleteProduct = (req, res) => {
+    
 
 }
 
 
 module.exports = ApiProductController;
-/*
-Format Handling
-JSON -> accepted , XML -> rejected
-
-
-https://stackoverflow.com/questions/6912584/how-to-get-get-query-string-variables-in-express-js-on-node-js
-
-var format = req.query.format
-this is the way to get the query parameter format from the GET request
-
-example:
-RESTController.RESTAction = (req, res) => {
-    var format = req.query.format
-    cnsole.log(format)
-};
------------------------------------------------------------------------------------------------------------------------------
-POST request parameters
-
-var format = req.body.format 
-
-Like normal authentication
-
-
-
-*/
