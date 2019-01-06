@@ -46,14 +46,6 @@ const Shop = dbo.define('shop', {
     allowNull: false
     },
     /*
-    shop location (coordinates)
-    We either use location and get longitude and latityde from it, or we use seperate longitude and latitude (declared above)
-    https://stackoverflow.com/questions/44675630/geospatial-distance-calculator-using-sequelize-mysql
-    */
-    location: {
-        type: Sequelize.GEOMETRY('POINT') 
-    },
-    /*
     tags for shop
     */
     tags: {

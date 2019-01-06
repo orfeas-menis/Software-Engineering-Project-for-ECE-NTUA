@@ -2,6 +2,7 @@ const User = require("../database/models/users")
 const jwt = require('jsonwebtoken')
 const credentials = require("../config/credentials");
 const Joi = require('joi')
+var Blacklist = require("../database/models/blacklist")
 
 /*
 Joi Documentation: https://www.npmjs.com/package/joi
@@ -34,14 +35,21 @@ module.exports = {
   isLoggedIn (req,res,next){
     var token = req.headers['x-observatory-auth']  // Express headers are auto converted to lowercase
     if (token) {
-      jwt.verify(token, credentials.secret, (err, decoded) => {
-        if (err) {
-          res.status(403).send("Token is not valid")
-        } else {
-          req.decoded = decoded;
-          next();
+      Blacklist.findByPk(token).then(found => {
+        if (found){
+          res.status(403).send("You are not logged in. Please Login.")
         }
-      });
+        else{
+          jwt.verify(token, credentials.secret, (err, decoded) => {
+            if (err) {
+              res.status(403).send("Token is not valid")
+            } else {
+              req.decoded = decoded;
+              next();
+            }
+          });
+        }
+      }) 
     } else {
       res.status(403).send("Login needed!")
     }

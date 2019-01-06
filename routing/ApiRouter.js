@@ -13,7 +13,7 @@ var authPolicy = require("../policies/AuthPolicy")
 */
 
 router.post('/login', authPolicy.login, ApiAuthController.login)
-router.post('/logout', ApiAuthController.logout)
+router.post('/logout', authPolicy.isLoggedIn, ApiAuthController.logout)
 
 
 
@@ -23,15 +23,21 @@ router.post('/logout', ApiAuthController.logout)
 */
 
 router.get('/products', databasePolicy.products, ApiProductController.products)
-router.post('/products', databasePolicy.addProduct, ApiProductController.addProduct)
+router.post('/products', authPolicy.isLoggedIn, databasePolicy.addProduct, ApiProductController.addProduct)
 router.get('/products/:productId', databasePolicy.findProduct, ApiProductController.findProduct) //get productId in the Controller code with req.params.productId
-router.put('/products/:productId', databasePolicy.fullUpdateProduct, ApiProductController.fullUpdateProduct)
-router.patch('/products/:productId', databasePolicy.partialUpdateProduct, ApiProductController.partialUpdateProduct)
+router.put('/products/:productId', authPolicy.isLoggedIn, databasePolicy.fullUpdateProduct, ApiProductController.fullUpdateProduct)
+router.patch('/products/:productId', authPolicy.isLoggedIn, databasePolicy.partialUpdateProduct, ApiProductController.partialUpdateProduct)
 router.delete('/products/:productId', authPolicy.isLoggedIn, databasePolicy.deleteProduct, ApiProductController.deleteProduct)
 
 /*
 --------------------------------------------- SHOPS ---------------------------------------------
 */
-router.get('/shops', ApiShopController.shops)
+router.get('/shops', databasePolicy.shops, ApiShopController.shops)
+router.post('/shops', authPolicy.isLoggedIn, databasePolicy.addShop, ApiShopController.addShop)
+router.get('/shops/:shopId', databasePolicy.findShop, ApiShopController.findShop) 
+router.put('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.fullUpdateShop, ApiShopController.fullUpdateShop)
+router.patch('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.partialUpdateShop, ApiShopController.partialUpdateShop)
+router.delete('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.deleteShop, ApiShopController.deleteShop)
+
 
 module.exports = router;

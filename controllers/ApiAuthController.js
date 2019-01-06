@@ -5,7 +5,9 @@ var Price = require("../database/models/prices")
 const jwt = require('jsonwebtoken')
 const credentials = require("../config/credentials");
 const bcrypt = require("bcryptjs");
-
+var Blacklist = require("../database/models/blacklist")
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op
 
 const ApiAuthController = (req, res) => {
 }
@@ -22,7 +24,7 @@ ApiAuthController.login = (req, res) => {
                 if (isMatch){
                     var token = jwt.sign({username: username},
                         credentials.secret,
-                        { expiresIn: '1h'} // expires in 24 hours
+                        { expiresIn: '1 h'} // expires in 1 hour
                     );
                     // return the JWT token for the future API calls
                     res.status(200).send(token)
@@ -36,7 +38,28 @@ ApiAuthController.login = (req, res) => {
 }
 
 ApiAuthController.logout = (req, res) => {
-
+    var token = req.headers['x-observatory-auth']
+    if(token){
+        var exp = req.decoded.exp
+        Blacklist.findAll(
+            {where: { 
+                exp : {
+                    [Op.lt]: parseInt(Date.now() / 1000) 
+                } 
+            }}).then(found =>{
+            console.log(parseInt(Date.now() / 1000))
+            found.forEach(function myFunction(value,index,array){
+                console.log(value.exp)
+                value.destroy({force:true})
+            })
+        })
+        Blacklist.create({
+            token: token,
+            exp : exp
+        })
+        res.sendStatus(200)
+    }
+    
 }
 
 module.exports = ApiAuthController;

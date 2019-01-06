@@ -76,4 +76,134 @@ ApiShopController.shops = (req, res) => {
     }
 };
 
+// All shops functions are with products code! CHANGE NEEDED!!!!!!!!!!!!!!!!!!
+
+ApiShopController.addShop = (req, res) => {
+    
+    sname = req.body.name.toString()
+    sdescription = req.body.description.toString()
+    scategory = req.body.category.toUpperCase()
+    stags = req.body.tags.toString() // We take as granted that tags have been sent to us as one String and tags are seperated with commas
+        
+  
+    Product.create({
+        name: sname,
+        description: sdescription,
+        category: scategory,
+        tags: stags
+    }).then(product => {
+        if (product){
+            res.status(200).send(product)
+        }
+        else{
+            res.sendStatus(400)
+        }   
+    })
+
+}
+
+ApiShopController.findShop = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    Product.findByPk(prodId).then(product => {
+        if (product){
+            res.status(200).send(product)
+        }
+        else{
+            res.sendStatus(400)
+        }
+    })
+}
+
+ApiShopController.fullUpdateShop = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    sname = req.body.name.toString()
+    sdescription = req.body.description.toString()
+    scategory = req.body.category.toUpperCase()
+    stags = req.body.tags.toString()
+    Product.findByPk(prodId).then(product =>{
+        if (product){
+            product.update({ 
+                name: sname, 
+                description: sdescription,
+                category: scategory,
+                tags: stags
+            }).then(prod => {
+                if (product){
+                    res.status(200).send(product)
+                }
+                else{
+                    res.sendStatus(400)
+                }
+            })
+        }
+    })
+}
+
+ApiShopController.partialUpdateShop = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    myJson = {}
+    fields = []
+    if (req.body.name){
+        myJson.name = req.body.name.toString()
+        fields.push('name')
+    }
+    if (req.body.description){
+        myJson.description = req.body.description.toString()
+        fields.push('description')
+    }
+    if (req.body.category){
+        myJson.category = req.body.category.toUpperCase()
+        fields.push('category')
+    }
+    if (req.body.tags){
+        myJson.tags = req.body.tags.toString()
+        fields.push('tags')
+    }
+    
+    Product.findByPk(prodId).then(product =>{
+        if (product){
+            product.update(myJson,{fields: fields}).then(product => {
+                if (product){
+                    res.status(200).send(product)
+                }
+                else{
+                    res.sendStatus(400)
+                }
+            })
+        }
+    })
+
+}
+
+ApiShopController.deleteShop = (req, res) => {
+    var prodId = parseInt(req.params.productId)
+    delResponse={}
+    delResponse.message = "OK"
+    userName = req.decoded.username
+    User.findOne({where: {username: userName}}).then(user =>{
+        if (user){
+            Product.findByPk(prodId).then(product =>{
+                if (product){
+                    if (user.category == 0){
+                        product.destroy({force:true}).then(() => {
+                            res.status(200).send(delResponse)
+                        })
+                    }
+                    else{
+                        product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
+                            res.status(200).send(delResponse)
+                        })
+                    }  
+                }
+                else{
+                    res.sendStatus(400)
+                }
+            })
+        }
+        else{
+            res.sendStatus(400)
+        }
+    }) 
+}
+
 module.exports = ApiShopController;
