@@ -15,7 +15,7 @@ router.post('/products', databasePolicy.addProduct, ApiProductController.addProd
 router.get('/products/:productId', databasePolicy.findProduct, ApiProductController.findProduct) //get productId in the Controller code with req.params.productId
 router.put('/products/:productId', databasePolicy.fullUpdateProduct, ApiProductController.fullUpdateProduct)
 router.patch('/products/:productId', databasePolicy.partialUpdateProduct, ApiProductController.partialUpdateProduct)
-router.delete('/products/:productId', ApiProductController.deleteProduct) //we can add a middleware to check if the user is logged in and if it is an admin
+router.delete('/products/:productId', databasePolicy.deleteProduct, ApiProductController.deleteProduct) //we can add a middleware to check if the user is logged in and if it is an admin
 
 /*
 --------------------------------------------- SHOPS ---------------------------------------------

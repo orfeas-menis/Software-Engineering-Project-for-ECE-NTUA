@@ -1,5 +1,6 @@
 module.exports = {
     host: process.env.HOST || "localhost",
+    secret: process.env.SECRET || "Kako Logopegnio Soft Eng 2019",
     database: {
         db_name: process.env.DB_NAME || "soft_eng_data",
         username: process.env.DB_USER ||"orfeas",
@@ -10,10 +11,6 @@ module.exports = {
         password: process.env.ADMIN_PASS || "admin",
         email: process.env.ADMIN_EMAIL || "admin@admin.com",
         category: process.env.ADMIN_CATEGORY || '0'
-    },
-    simple_user: {
-        username: 'anonymous', //find a way to autoincrement a number next to anonymous
-        category: '1'
     }
 }
 

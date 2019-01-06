@@ -27,6 +27,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "joi": "^14.3.0",
+    "jsonwebtoken": "^8.4.0",
     "mariadb": "^2.0.2-rc",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

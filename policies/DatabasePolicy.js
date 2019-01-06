@@ -48,7 +48,7 @@ module.exports = {
         else{
 
             const schema = {
-                name: Joi.string().alphanum().required(),
+                name: Joi.string().required(),
                 description: Joi.string().required(),
                 category: Joi.string().uppercase().valid('FUEL','SERVICE').required(),
                 tags: Joi.string().required(),
@@ -115,7 +115,7 @@ module.exports = {
         }
         else{
             const schema = {
-                name: Joi.string().alphanum().required(),
+                name: Joi.string().required(),
                 description: Joi.string().required(),
                 category: Joi.string().valid('FUEL','SERVICE','fuel','service').required(),
                 tags: Joi.string().required()
@@ -162,7 +162,7 @@ module.exports = {
         else{
         
             const schema = {
-                name: Joi.string().alphanum(),
+                name: Joi.string(),
                 description: Joi.string(),
                 category: Joi.string().valid('FUEL','SERVICE','fuel','service'),
                 tags: Joi.string()
@@ -200,6 +200,26 @@ module.exports = {
                 }           
             }
         }
+    },
+    deleteProduct(req, res, next){
+        var prodId = parseInt(req.params.productId)
+        var format = req.query.format
+        if ((format && (format.toLowerCase() != 'json')) || isNaN(prodId)){
+            res.sendStatus(400)
+        }
+        else{
+            var flag = true
+            Product.findByPk(prodId).then(product =>{
+                if (!product){
+                    res.status(404).send("Product with id: "+ prodId + " does not exist.")
+                    flag = false
+                }
+            })
+            if (flag){
+                next();
+            }    
+        }
+               
     }
 };
   

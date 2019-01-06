@@ -28,11 +28,11 @@ ApiProductController.products = (req, res) => {
 
     var whereClause = {withdrawn: false} //ACTIVE (default) means not withdrawn
     temp = req.query.status
-    if (temp == 'WITHDRAWN'){
+    if (temp && (temp.toUpperCase() == 'WITHDRAWN')){
         status = temp
         whereClause = {withdrawn: true }
     }
-    else if (temp == 'ALL'){
+    else if (temp && (temp.toUpperCase() == 'ALL')){
         status = temp
         whereClause = {}
     }
@@ -166,9 +166,30 @@ ApiProductController.partialUpdateProduct = (req, res) => {
 
 }
 
+//Checked!
 ApiProductController.deleteProduct = (req, res) => {
-    
-
+    var prodId = parseInt(req.params.productId)
+    admin = true
+    delResponse={}
+    delResponse.message = "OK"
+    Product.findByPk(prodId).then(product =>{
+        if (product){
+            if (admin){
+                product.destroy({force:true}).then(() => {
+                    res.status(200).send(delResponse)
+                })
+            }
+            else{
+                product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
+                    res.status(200).send(delResponse)
+                })
+            }
+            
+        }
+        else{
+            res.sendStatus(400)
+        }
+    })
 }
 
 
