@@ -169,27 +169,33 @@ ApiProductController.partialUpdateProduct = (req, res) => {
 //Checked!
 ApiProductController.deleteProduct = (req, res) => {
     var prodId = parseInt(req.params.productId)
-    admin = true
     delResponse={}
     delResponse.message = "OK"
-    Product.findByPk(prodId).then(product =>{
-        if (product){
-            if (admin){
-                product.destroy({force:true}).then(() => {
-                    res.status(200).send(delResponse)
-                })
-            }
-            else{
-                product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
-                    res.status(200).send(delResponse)
-                })
-            }
-            
+    userName = req.decoded.username
+    User.findOne({where: {username: userName}}).then(user =>{
+        if (user){
+            Product.findByPk(prodId).then(product =>{
+                if (product){
+                    if (user.category == 0){
+                        product.destroy({force:true}).then(() => {
+                            res.status(200).send(delResponse)
+                        })
+                    }
+                    else{
+                        product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
+                            res.status(200).send(delResponse)
+                        })
+                    }  
+                }
+                else{
+                    res.sendStatus(400)
+                }
+            })
         }
         else{
             res.sendStatus(400)
         }
-    })
+    }) 
 }
 
 

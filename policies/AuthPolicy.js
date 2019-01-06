@@ -1,5 +1,6 @@
 const User = require("../database/models/users")
-
+const jwt = require('jsonwebtoken')
+const credentials = require("../config/credentials");
 const Joi = require('joi')
 
 /*
@@ -9,10 +10,8 @@ Joi Documentation: https://www.npmjs.com/package/joi
 module.exports = {
   login (req, res, next){
     const schema = {
-      username: Joi.string().alphanum().min(4).max(20).required(),
-      password: Joi.string().required(),
-      email: Joi.string() 
-      //In case we use the same path for Login and Sign Up we have to find a way to also check the sign up values here
+      username: Joi.string().required(),
+      password: Joi.string().required()
     };
     const { error } = Joi.validate(req.body, schema);
     if(error){
@@ -31,11 +30,21 @@ module.exports = {
       next();
     }
   },
+
   isLoggedIn (req,res,next){
-    if(req.session.userId){
-      next();
-    } else{
-      res.redirect("/");
+    var token = req.headers['x-observatory-auth']  // Express headers are auto converted to lowercase
+    if (token) {
+      jwt.verify(token, credentials.secret, (err, decoded) => {
+        if (err) {
+          res.status(403).send("Token is not valid")
+        } else {
+          req.decoded = decoded;
+          next();
+        }
+      });
+    } else {
+      res.status(403).send("Login needed!")
     }
   }
+  
 };
