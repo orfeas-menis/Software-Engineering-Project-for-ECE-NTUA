@@ -36,7 +36,9 @@ router.get('/shops', databasePolicy.shops, ApiShopController.shops)
 router.post('/shops', authPolicy.isLoggedIn, databasePolicy.addShop, ApiShopController.addShop)
 router.get('/shops/:shopId', databasePolicy.findShop, ApiShopController.findShop) 
 router.put('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.fullUpdateShop, ApiShopController.fullUpdateShop)
-router.patch('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.partialUpdateShop, ApiShopController.partialUpdateShop)
+//router.patch('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.partialUpdateShop, ApiShopController.partialUpdateShop)
+router.patch('/shops/:shopId',  databasePolicy.partialUpdateShop, ApiShopController.partialUpdateShop)
+
 router.delete('/shops/:shopId', authPolicy.isLoggedIn, databasePolicy.deleteShop, ApiShopController.deleteShop)
 
 

@@ -1,4 +1,6 @@
 const Product = require("../database/models/products")
+const Shop = require("../database/models/shops")
+
 const Joi = require('joi')
 
 
@@ -48,7 +50,7 @@ module.exports = {
         else{
 
             const schema = {
-                name: Joi.string().required(),
+                name: Joi.string().max(50).required(),
                 description: Joi.string().required(),
                 category: Joi.string().uppercase().valid('FUEL','SERVICE').required(),
                 tags: Joi.string().required(),
@@ -100,10 +102,10 @@ module.exports = {
                     res.status(404).send("Product with id: "+ prodId + " does not exist.")
                     flag = false
                 }
-            })
-            if (flag){
-                next();
-            }    
+                else{
+                    next();
+                }
+            })   
         }
                
     },
@@ -140,16 +142,14 @@ module.exports = {
                         break;
                 }
             } else{
-                var flag = true
                 Product.findByPk(prodId).then(product =>{
                     if (!product){
                         res.status(404).send("Product with id: "+ prodId + " does not exist.")
-                        flag = false
                     }
-                })
-                if (flag){
-                    next();
-                }           
+                    else{
+                        next();
+                    }
+                })        
             }
         }
     },
@@ -188,16 +188,15 @@ module.exports = {
                         break;
                 }
             } else{
-                var flag = true
                 Product.findByPk(prodId).then(product =>{
                     if (!product){
                         res.status(404).send("Product with id: "+ prodId + " does not exist.")
-                        flag = false
+                    }
+                    else{
+                        next();
                     }
                 })
-                if (flag){
-                    next();
-                }           
+                           
             }
         }
     },
@@ -208,16 +207,14 @@ module.exports = {
             res.sendStatus(400)
         }
         else{
-            var flag = true
             Product.findByPk(prodId).then(product =>{
                 if (!product){
                     res.status(404).send("Product with id: "+ prodId + " does not exist.")
-                    flag = false
                 }
-            })
-            if (flag){
-                next();
-            }    
+                else{
+                    next();
+                }
+            }) 
         }
                
     },
@@ -259,6 +256,7 @@ module.exports = {
             next();
         }           
     },
+    //addShop checked!
     addShop (req, res, next){
         var format = req.query.format
         // format validation could also be done with joi
@@ -269,9 +267,10 @@ module.exports = {
 
             const schema = {
                 name: Joi.string().required(),
-                description: Joi.string().required(),
-                category: Joi.string().uppercase().valid('FUEL','SERVICE').required(),
-                tags: Joi.string().required(),
+                address: Joi.string().required(),
+                lng: Joi.number().required(),
+                lat: Joi.number().required(),
+                tags: Joi.string().required()
             };
             const { error } = Joi.validate(req.body, schema);
 
@@ -280,11 +279,14 @@ module.exports = {
                     case 'name':
                         res.status(400).json({ error: "You must provide a valid name!"});
                         break;
-                    case 'category':
-                        res.status(400).json({ error: "Category " + req.body.category + " does not exist!"});
+                    case 'address':
+                        res.status(400).json({ error: "You must provide a valid address!"});
                         break;
-                    case 'descritpion':
-                        res.status(400).json({ error: "Invalid description"});
+                    case 'lng':
+                        res.status(400).json({ error: "Invalid longitude value"});
+                        break;
+                    case 'lat':
+                        res.status(400).json({ error: "Invalid latitude value"});
                         break;
                     case 'tags':
                         res.status(400).json({ error: "invalid tags"});
@@ -293,51 +295,59 @@ module.exports = {
                         res.status(400).json({ error: "Incorrect Input "});
                         break;
                 }
-            } else{
+            } 
+            else{
+                var lngFloat = parseFloat(req.body.lng)
+                var latFloat = parseFloat(req.body.lat)
                 var flag = true
-                Product.findAll({where: {name: req.body.name}}).then(product =>{
+                if(isNaN(lngFloat) || isNaN(latFloat) || lngFloat < -180.0 || lngFloat > 180.0 || latFloat < -90.0 || latFloat > 90.0){
+                    flag = false
+                    res.status(400).send("Invalid Coordinates!")
+                }
+                Shop.findAll({where: {name: req.body.name}}).then(product =>{
                     if (product.length > 0){
                         res.status(400).send("Product with name: "+ req.body.name + " already exists.")
-                        flag = false
                     }
-                })
-                if (flag){
-                    next();
-                }           
+                    else{
+                        if (flag){
+                            next();
+                        }
+                    }
+                })          
             }
         }
     },
+    //findShop checked!
     findShop(req, res, next){
-        var prodId = parseInt(req.params.productId)
+        var shopId = parseInt(req.params.shopId)
         var format = req.query.format
-        if ((format && (format.toLowerCase() != 'json')) || isNaN(prodId)){
+        if ((format && (format.toLowerCase() != 'json')) || isNaN(shopId)){
             res.sendStatus(400)
         }
         else{
-            var flag = true
-            Product.findByPk(prodId).then(product =>{
-                if (!product){
-                    res.status(404).send("Product with id: "+ prodId + " does not exist.")
-                    flag = false
+            Shop.findByPk(shopId).then(shop =>{
+                if (!shop){
+                    res.status(404).send("Shop with id: "+ shopId + " does not exist.")
                 }
-            })
-            if (flag){
-                next();
-            }    
+                else{
+                    next();
+                }
+            })   
         }
                
     },
     fullUpdateShop (req, res, next){
-        var prodId = parseInt(req.params.productId)
+        var shopId = parseInt(req.params.shopId)
         var format = req.query.format
-        if ((format && (format.toLowerCase() != 'json')) || isNaN(prodId)){
+        if ((format && (format.toLowerCase() != 'json')) || isNaN(shopId)){
             res.sendStatus(400)
         }
         else{
             const schema = {
                 name: Joi.string().required(),
-                description: Joi.string().required(),
-                category: Joi.string().valid('FUEL','SERVICE','fuel','service').required(),
+                address: Joi.string().required(),
+                lng: Joi.number().required(),
+                lat: Joi.number().required(),
                 tags: Joi.string().required()
             };
             const { error } = Joi.validate(req.body, schema);
@@ -346,11 +356,14 @@ module.exports = {
                     case 'name':
                         res.status(400).json({ error: "You must provide a valid name!"});
                         break;
-                    case 'category':
-                        res.status(400).json({ error: "Category " + req.body.category + " does not exist!"});
+                    case 'address':
+                        res.status(400).json({ error: "You must provide a valid address!"});
                         break;
-                    case 'descritpion':
-                        res.status(400).json({ error: "Invalid description"});
+                    case 'lng':
+                        res.status(400).json({ error: "Invalid longitude value"});
+                        break;
+                    case 'lat':
+                        res.status(400).json({ error: "Invalid latitude value"});
                         break;
                     case 'tags':
                         res.status(400).json({ error: "invalid tags"});
@@ -359,46 +372,56 @@ module.exports = {
                         res.status(400).json({ error: "Incorrect Input "});
                         break;
                 }
-            } else{
+            } 
+            else{
+                var lngFloat = parseFloat(req.body.lng)
+                var latFloat = parseFloat(req.body.lat)
                 var flag = true
-                Product.findByPk(prodId).then(product =>{
-                    if (!product){
-                        res.status(404).send("Product with id: "+ prodId + " does not exist.")
-                        flag = false
+                if(isNaN(lngFloat) || isNaN(latFloat) || lngFloat < -180.0 || lngFloat > 180.0 || latFloat < -90.0 || latFloat > 90.0){
+                    flag = false
+                    res.status(400).send("Invalid Coordinates!")
+                }
+                Shop.findByPk(shopId).then(shop =>{
+                    if (!shop){
+                        res.status(404).send("Shop with id: "+ shopId + " does not exist.")
                     }
-                })
-                if (flag){
-                    next();
-                }           
+                    else{
+                        if(flag){
+                            next();
+                        }
+                    }
+                })          
             }
         }
     },
     partialUpdateShop (req, res, next){
-        var prodId = parseInt(req.params.productId)
+        var shopId = parseInt(req.params.shopId)
         var format = req.query.format
-        if ((format && (format.toLowerCase() != 'json')) || isNaN(prodId)){
+        if ((format && (format.toLowerCase() != 'json')) || isNaN(shopId)){
             res.sendStatus(400)
         }
         else{
-        
             const schema = {
                 name: Joi.string(),
-                description: Joi.string(),
-                category: Joi.string().valid('FUEL','SERVICE','fuel','service'),
+                address: Joi.string(),
+                lng: Joi.number(),
+                lat: Joi.number(),
                 tags: Joi.string()
             };
             const { error } = Joi.validate(req.body, schema);
-
             if(error){
                 switch(error.details[0].context.key){
                     case 'name':
                         res.status(400).json({ error: "You must provide a valid name!"});
                         break;
-                    case 'category':
-                        res.status(400).json({ error: "Category " + req.body.category + " does not exist!"});
+                    case 'address':
+                        res.status(400).json({ error: "You must provide a valid address!"});
                         break;
-                    case 'descritpion':
-                        res.status(400).json({ error: "Invalid description"});
+                    case 'lng':
+                        res.status(400).json({ error: "Invalid longitude value"});
+                        break;
+                    case 'lat':
+                        res.status(400).json({ error: "Invalid latitude value"});
                         break;
                     case 'tags':
                         res.status(400).json({ error: "invalid tags"});
@@ -407,37 +430,51 @@ module.exports = {
                         res.status(400).json({ error: "Incorrect Input "});
                         break;
                 }
-            } else{
+            } 
+            else{
                 var flag = true
-                Product.findByPk(prodId).then(product =>{
-                    if (!product){
-                        res.status(404).send("Product with id: "+ prodId + " does not exist.")
+                if (req.body.lat){
+                    var latFloat = parseFloat(req.body.lat)
+                    if(isNaN(latFloat) || latFloat < -90.0 || latFloat > 90.0){
                         flag = false
+                        res.status(400).send("Invalid Coordinates!")
                     }
-                })
-                if (flag){
-                    next();
-                }           
+                }
+                if ( req.body.lng){
+                    var lngFloat = parseFloat(req.body.lng)
+                    if(isNaN(lngFloat) || lngFloat < -180.0 || lngFloat > 180.0){
+                        flag = false
+                        res.status(400).send("Invalid Coordinates!")
+                    }
+                }
+                Shop.findByPk(shopId).then(shop =>{
+                    if (!shop){
+                        res.status(404).send("Shop with id: "+ shopId + " does not exist.")
+                    }
+                    else{
+                        if (flag){
+                            next();
+                        }
+                    }
+                })          
             }
         }
     },
     deleteShop(req, res, next){
-        var prodId = parseInt(req.params.productId)
+        var shopId = parseInt(req.params.shopId)
         var format = req.query.format
-        if ((format && (format.toLowerCase() != 'json')) || isNaN(prodId)){
+        if ((format && (format.toLowerCase() != 'json')) || isNaN(shopId)){
             res.sendStatus(400)
         }
         else{
-            var flag = true
-            Product.findByPk(prodId).then(product =>{
-                if (!product){
-                    res.status(404).send("Product with id: "+ prodId + " does not exist.")
-                    flag = false
+            Shop.findByPk(shopId).then(shop =>{
+                if (!shop){
+                    res.status(404).send("Shop with id: "+ shopId + " does not exist.")
                 }
-            })
-            if (flag){
-                next();
-            }    
+                else{
+                    next();
+                }
+            }) 
         }
                
     }

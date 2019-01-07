@@ -11,7 +11,7 @@ Joi Documentation: https://www.npmjs.com/package/joi
 module.exports = {
   login (req, res, next){
     const schema = {
-      username: Joi.string().required(),
+      username: Joi.string().max(30).required(),
       password: Joi.string().required()
     };
     const { error } = Joi.validate(req.body, schema);

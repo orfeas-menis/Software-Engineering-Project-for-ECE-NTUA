@@ -1,7 +1,5 @@
 var User = require("../database/models/users")
 var Product = require("../database/models/products")
-var Shop = require("../database/models/shops")
-var Price = require("../database/models/prices")
 
 
 const ApiProductController = (req, res) => {
@@ -166,7 +164,7 @@ ApiProductController.partialUpdateProduct = (req, res) => {
 
 }
 
-//Checked!
+//Checked! (Remains onDelete Cascade implementation!)
 ApiProductController.deleteProduct = (req, res) => {
     var prodId = parseInt(req.params.productId)
     delResponse={}

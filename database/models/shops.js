@@ -16,7 +16,7 @@ const Shop = dbo.define('shop', {
     shop name
     */
     name: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(50),
         unique: true,
         allowNull: false,
         validate: {
@@ -31,18 +31,18 @@ const Shop = dbo.define('shop', {
     },
     /*
     shop longitude (coordinates acording to the World Geodetic System 1984 (WGS84))
-    e.g. lng = "23.7275E" -> 23.7275° E
+    e.g. lng = 23.7275 -> 23.7275° E ,  lng = -23.7275 -> 23.7275° W
     */
     lng: {
-        type: Sequelize.STRING,    
+        type: Sequelize.FLOAT,    
         allowNull: false
     },
     /*
     shop latitude (coordinates acording to the World Geodetic System 1984 (WGS84))
-    e.g. lat = "37.9838N" -> 37.9838° N
+    e.g. lat = 37.9838 -> 37.9838° N , lat = -37.9838 -> 37.9838° S
     */
     lat: {
-    type: Sequelize.STRING,    
+    type: Sequelize.FLOAT,    
     allowNull: false
     },
     /*

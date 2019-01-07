@@ -1,5 +1,4 @@
 var User = require("../database/models/users")
-var Product = require("../database/models/products")
 var Shop = require("../database/models/shops")
 var Price = require("../database/models/prices")
 
@@ -76,24 +75,25 @@ ApiShopController.shops = (req, res) => {
     }
 };
 
-// All shops functions are with products code! CHANGE NEEDED!!!!!!!!!!!!!!!!!!
-
+//Checked!
 ApiShopController.addShop = (req, res) => {
     
     sname = req.body.name.toString()
-    sdescription = req.body.description.toString()
-    scategory = req.body.category.toUpperCase()
+    saddress = req.body.address.toString()
+    slng = req.body.lng.toString()
+    slat = req.body.lat.toString()
     stags = req.body.tags.toString() // We take as granted that tags have been sent to us as one String and tags are seperated with commas
         
   
-    Product.create({
+    Shop.create({
         name: sname,
-        description: sdescription,
-        category: scategory,
+        address: saddress,
+        lng: slng,
+        lat: slat,
         tags: stags
-    }).then(product => {
-        if (product){
-            res.status(200).send(product)
+    }).then(shop => {
+        if (shop){
+            res.status(200).send(shop)
         }
         else{
             res.sendStatus(400)
@@ -102,11 +102,12 @@ ApiShopController.addShop = (req, res) => {
 
 }
 
+//Checked!
 ApiShopController.findShop = (req, res) => {
-    var prodId = parseInt(req.params.productId)
-    Product.findByPk(prodId).then(product => {
-        if (product){
-            res.status(200).send(product)
+    var shopId = parseInt(req.params.shopId)
+    Shop.findByPk(shopId).then(shop => {
+        if (shop){
+            res.status(200).send(shop)
         }
         else{
             res.sendStatus(400)
@@ -115,21 +116,24 @@ ApiShopController.findShop = (req, res) => {
 }
 
 ApiShopController.fullUpdateShop = (req, res) => {
-    var prodId = parseInt(req.params.productId)
+    var shopId = parseInt(req.params.shopId)
     sname = req.body.name.toString()
-    sdescription = req.body.description.toString()
-    scategory = req.body.category.toUpperCase()
+    saddress = req.body.address.toString()
+    slng = req.body.lng.toString()
+    slat = req.body.lat.toString()
     stags = req.body.tags.toString()
-    Product.findByPk(prodId).then(product =>{
-        if (product){
-            product.update({ 
-                name: sname, 
-                description: sdescription,
-                category: scategory,
+
+    Shop.findByPk(shopId).then(shop =>{
+        if (shop){
+            shop.update({ 
+                name: sname,
+                address: saddress,
+                ng: slng,
+                lat: slat,
                 tags: stags
-            }).then(prod => {
-                if (product){
-                    res.status(200).send(product)
+            }).then(shop => {
+                if (shop){
+                    res.status(200).send(shop)
                 }
                 else{
                     res.sendStatus(400)
@@ -140,31 +144,35 @@ ApiShopController.fullUpdateShop = (req, res) => {
 }
 
 ApiShopController.partialUpdateShop = (req, res) => {
-    var prodId = parseInt(req.params.productId)
+    var shopId = parseInt(req.params.shopId)
     myJson = {}
     fields = []
     if (req.body.name){
         myJson.name = req.body.name.toString()
         fields.push('name')
     }
-    if (req.body.description){
-        myJson.description = req.body.description.toString()
-        fields.push('description')
+    if (req.body.address){
+        myJson.address = req.body.address.toString()
+        fields.push('address')
     }
-    if (req.body.category){
-        myJson.category = req.body.category.toUpperCase()
-        fields.push('category')
+    if (req.body.lng){
+        myJson.lng = req.body.lng
+        fields.push('lng')
+    }
+    if (req.body.lat){
+        myJson.lat = req.body.lat
+        fields.push('lat')
     }
     if (req.body.tags){
         myJson.tags = req.body.tags.toString()
         fields.push('tags')
     }
     
-    Product.findByPk(prodId).then(product =>{
-        if (product){
-            product.update(myJson,{fields: fields}).then(product => {
-                if (product){
-                    res.status(200).send(product)
+    Shop.findByPk(shopId).then(shop =>{
+        if (shop){
+            shop.update(myJson,{fields: fields}).then(shop => {
+                if (shop){
+                    res.status(200).send(shop)
                 }
                 else{
                     res.sendStatus(400)
@@ -176,21 +184,21 @@ ApiShopController.partialUpdateShop = (req, res) => {
 }
 
 ApiShopController.deleteShop = (req, res) => {
-    var prodId = parseInt(req.params.productId)
+    var shopId = parseInt(req.params.shopId)
     delResponse={}
     delResponse.message = "OK"
     userName = req.decoded.username
     User.findOne({where: {username: userName}}).then(user =>{
         if (user){
-            Product.findByPk(prodId).then(product =>{
-                if (product){
+            Shop.findByPk(shopId).then(shop =>{
+                if (shop){
                     if (user.category == 0){
-                        product.destroy({force:true}).then(() => {
+                        shop.destroy({force:true}).then(() => {
                             res.status(200).send(delResponse)
                         })
                     }
                     else{
-                        product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
+                        shop.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
                             res.status(200).send(delResponse)
                         })
                     }  

@@ -17,7 +17,7 @@ const Product = dbo.define('product', {
     product name
     */
     name: {
-        type: Sequelize.STRING(30),
+        type: Sequelize.STRING(),
         unique: true,
         allowNull: false,
         validate: {
