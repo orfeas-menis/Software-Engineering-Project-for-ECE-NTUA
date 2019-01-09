@@ -9,8 +9,7 @@ var express             = require('express'),
     Shop                = require("./database/models/shops"),
     Price               = require("./database/models/prices"),
     sequelize           = require("./database/connect"),
-    index_router        = require("./routing/index_router"),
-    AuthRouter          = require("./routing/AuthRouter"),
+    indexRouter        = require("./routing/indexRouter"),
     ApiRouter           = require("./routing/ApiRouter"),
     sessionOptions      = require("./config/session");
 
@@ -67,9 +66,7 @@ app.use("/static", express.static("public"));
 */
 
 //testing
-app.use('/', index_router)
-
-app.use('/login', AuthRouter)
+app.use('/', indexRouter)
 
 app.use('/observatory/api', ApiRouter)
 
