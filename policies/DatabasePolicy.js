@@ -219,7 +219,6 @@ module.exports = {
                
     },
     
-    // All shops functions are with products code! CHANGE NEEDED!!!!!!!!!!!!!!!!!!
     shops(req, res, next){
         
         const schema = {
@@ -256,7 +255,6 @@ module.exports = {
             next();
         }           
     },
-    //addShop checked!
     addShop (req, res, next){
         var format = req.query.format
         // format validation could also be done with joi
@@ -317,7 +315,6 @@ module.exports = {
             }
         }
     },
-    //findShop checked!
     findShop(req, res, next){
         var shopId = parseInt(req.params.shopId)
         var format = req.query.format
@@ -477,6 +474,159 @@ module.exports = {
             }) 
         }
                
-    }
+    },
+    prices(req, res, next){
+        
+        const schema = {
+            start: Joi.number().integer(),
+            count: Joi.number().integer(),
+            geoDist: Joi.number(),
+            geoLng: Joi.number(),
+            geoLat: Joi.number(),
+            dateFrom: Joi.date(),
+            dateTo: Joi.date(),
+            products: Joi,
+            shops: Joi,
+            tags: Joi,
+            sort: Joi.string().valid('geo.dist,|ASC','geo.dist,|DESC','price|ASC','price|DESC','date|ASC','date|DESC'),
+            format: Joi.string().lowercase().valid('json')
+        };
+        const { error } = Joi.validate(req.query, schema);
+        if(error){ 
+            res.status(400).json({ error: "Incorrect Input "});
+        }
+        else{
+            var counter = 0
+            var flag = true
+            if (req.query.geoDist){
+                counter = counter + 1
+            }
+            if (req.query.geoLng){
+                counter = counter + 1
+                var lngFloat = parseFloat(req.query.geoLng)
+                if(isNaN(lngFloat) || lngFloat < -180.0 || lngFloat > 180.0){
+                    flag = false
+                    counter = -10
+                    res.status(400).send("Invalid Coordinates!")
+                    //console.log('1')
+                }
+            }
+            if (req.query.geoLat && flag){
+                counter = counter + 1
+                var latFloat = parseFloat(req.query.geoLat)
+                if(isNaN(latFloat) || latFloat < -90.0 || latFloat > 90.0){
+                    flag = false
+                    counter = -10
+                    //console.log('2')
+                    res.status(400).send("Invalid Coordinates!")
+                }
+            }
+            if (counter > 0 && counter < 3 && flag){
+                flag = false
+                //console.log('3')
+                res.sendStatus(400)
+            }
+            counter = 0
+            if (req.query.dateFrom){
+                counter = counter + 1
+            }
+            if (req.query.dateTo){
+                counter = counter + 1
+            }
+            if (flag && counter == 1){
+                flag = false
+                //console.log('4')
+                res.sendStatus(400)
+            }
+            var temp = req.query.shops
+            if (temp){
+                if(isNaN(parseInt(temp))){
+                    for (var i in temp){
+                        if(isNaN(parseInt(temp[i])) && flag){
+                            
+                            flag = false
+                            //console.log('5')
+                            res.sendStatus(400)
+                        }
+                    } 
+                }
+            }
+            var temp = req.query.products
+            if (temp){
+                if(isNaN(parseInt(temp))){
+                    for (var i in temp){
+                        if(isNaN(parseInt(temp[i])) && flag){
+                            flag = false
+                            //console.log('6')
+                            res.sendStatus(400)
+                        }
+                    } 
+                }
+            }
+            if (flag){
+                next();
+            }
+        }           
+    },
+    addPrice (req, res, next){
+        var format = req.query.format
+        // format validation could also be done with joi
+        if (format && (format.toLowerCase() != 'json')){
+            res.sendStatus(400)
+        }
+        else{
+
+            const schema = {
+                name: Joi.string().required(),
+                address: Joi.string().required(),
+                lng: Joi.number().required(),
+                lat: Joi.number().required(),
+                tags: Joi.string().required()
+            };
+            const { error } = Joi.validate(req.body, schema);
+
+            if(error){
+                switch(error.details[0].context.key){
+                    case 'name':
+                        res.status(400).json({ error: "You must provide a valid name!"});
+                        break;
+                    case 'address':
+                        res.status(400).json({ error: "You must provide a valid address!"});
+                        break;
+                    case 'lng':
+                        res.status(400).json({ error: "Invalid longitude value"});
+                        break;
+                    case 'lat':
+                        res.status(400).json({ error: "Invalid latitude value"});
+                        break;
+                    case 'tags':
+                        res.status(400).json({ error: "invalid tags"});
+                        break;
+                    default:
+                        res.status(400).json({ error: "Incorrect Input "});
+                        break;
+                }
+            } 
+            else{
+                var lngFloat = parseFloat(req.query.lng)
+                var latFloat = parseFloat(req.query.lat)
+                var flag = true
+                if(isNaN(lngFloat) || isNaN(latFloat) || lngFloat < -180.0 || lngFloat > 180.0 || latFloat < -90.0 || latFloat > 90.0){
+                    flag = false
+                    res.status(400).send("Invalid Coordinates!")
+                }
+                Shop.findAll({where: {name: req.body.name}}).then(product =>{
+                    if (product.length > 0){
+                        res.status(400).send("Product with name: "+ req.body.name + " already exists.")
+                    }
+                    else{
+                        if (flag){
+                            next();
+                        }
+                    }
+                })          
+            }
+        }
+    },
 };
   

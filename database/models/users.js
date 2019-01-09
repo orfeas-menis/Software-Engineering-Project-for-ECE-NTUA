@@ -3,7 +3,6 @@ const dbo = require("../connect");
 const bcrypt = require("bcryptjs");
 const credentials = require("../../config/credentials");
 
-
 const User = dbo.define('user', {
     /*
     user id
@@ -68,7 +67,6 @@ const User = dbo.define('user', {
     }
   }
 )
-
 
 
 User.sync({ force: false }).then(() => {
