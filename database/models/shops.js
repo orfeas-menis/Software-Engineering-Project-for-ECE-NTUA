@@ -85,8 +85,8 @@ Shop.sync({ force: false }).then(() => {
             Shop.create({
                 name: 'Sample Shop',
                 address: 'Sample Shop Address',
-                lng:  "23.7275E",
-                lat:  "37.9838N"
+                lng:  "23.7275",
+                lat:  "37.9838"
             })
 
         }

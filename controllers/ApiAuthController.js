@@ -47,9 +47,7 @@ ApiAuthController.logout = (req, res) => {
                     [Op.lt]: parseInt(Date.now() / 1000) 
                 } 
             }}).then(found =>{
-            console.log(parseInt(Date.now() / 1000))
             found.forEach(function myFunction(value,index,array){
-                console.log(value.exp)
                 value.destroy({force:true})
             })
         })
@@ -57,7 +55,7 @@ ApiAuthController.logout = (req, res) => {
             token: token,
             exp : exp
         })
-        res.sendStatus(200)
+        res.status(200).json({"message": "OK"})
     }
     
 }

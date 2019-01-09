@@ -146,6 +146,7 @@ ApiPriceController.prices = (req, res) => {
                 }
                 if (req.query.geoDist && !deleted){
                     var dist = distance (req.query.geoLat, lat, req.query.geoLng,lng)
+                    slice[i].shopDist = dist
                     if(dist/1000 > req.query.geoDist){
                         delete slice[i]
                         total = total - 1
@@ -167,27 +168,48 @@ ApiPriceController.prices = (req, res) => {
 
 ApiPriceController.addPrice = (req, res) => {
     
-    sname = req.body.name.toString()
-    saddress = req.body.address.toString()
-    slng = req.body.lng.toString()
-    slat = req.body.lat.toString()
-    stags = req.body.tags.toString() // We take as granted that tags have been sent to us as one String and tags are seperated with commas
+    price = req.body.price
+    shopId = req.body.shopId
+    productId = req.body.productId
+    dateFrom = new Date(req.body.dateFrom)
+    dateTo = new Date(req.body.dateTo) 
+    username = req.decoded.username
+    var date 
+    var counter = 0
+    var obj
+    var myArr = []
+    var myDate = new Date(dateFrom)
+    User.findOne({where: {username: username}}).then(user =>{
+        if (user){
+            for  (date = new Date(dateFrom); date <= dateTo; date.setDate(date.getDate()+1)){
+                obj = {}
+                obj.userId = user.id
+                obj.productId = productId
+                obj.shopId = shopId
+                obj.price = price
+                obj.date = myDate.setDate(dateFrom.getDate()+counter)
+                myArr[counter] = obj
+                counter = counter + 1
+                
+            }
+            console.log(myArr)
+            Price.bulkCreate(myArr).then(prices => {
         
-  
-    Shop.create({
-        name: sname,
-        address: saddress,
-        lng: slng,
-        lat: slat,
-        tags: stags
-    }).then(shop => {
-        if (shop){
-            res.status(200).send(shop)
+                if (prices){
+                    res.status(200).send(prices)
+                }
+                else{
+                    res.sendStatus(400)
+                } 
+                    
+            })
         }
         else{
             res.sendStatus(400)
-        }   
+        }
     })
+    
+    
 
 }
 

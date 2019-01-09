@@ -70,6 +70,7 @@ const User = dbo.define('user', {
 
 
 User.sync({ force: false }).then(() => {
+    
     User.findOne({ where: { username: credentials.admin_user.username } }).then(admin => {
         if (admin) {
             console.log("there's already an admin in the db. Contact dev team for more info");

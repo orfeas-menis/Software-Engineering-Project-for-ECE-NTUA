@@ -570,63 +570,69 @@ module.exports = {
     },
     addPrice (req, res, next){
         var format = req.query.format
-        // format validation could also be done with joi
         if (format && (format.toLowerCase() != 'json')){
             res.sendStatus(400)
         }
         else{
 
             const schema = {
-                name: Joi.string().required(),
-                address: Joi.string().required(),
-                lng: Joi.number().required(),
-                lat: Joi.number().required(),
-                tags: Joi.string().required()
+                price: Joi.number().required(),
+                shopId: Joi.number().required(),
+                productId: Joi.number().required(),
+                dateFrom: Joi.date().required(),
+                dateTo: Joi.date().required()
             };
             const { error } = Joi.validate(req.body, schema);
 
             if(error){
-                switch(error.details[0].context.key){
-                    case 'name':
-                        res.status(400).json({ error: "You must provide a valid name!"});
-                        break;
-                    case 'address':
-                        res.status(400).json({ error: "You must provide a valid address!"});
-                        break;
-                    case 'lng':
-                        res.status(400).json({ error: "Invalid longitude value"});
-                        break;
-                    case 'lat':
-                        res.status(400).json({ error: "Invalid latitude value"});
-                        break;
-                    case 'tags':
-                        res.status(400).json({ error: "invalid tags"});
-                        break;
-                    default:
-                        res.status(400).json({ error: "Incorrect Input "});
-                        break;
-                }
+                res.status(400).json({ error: "Incorrect Input "});
             } 
             else{
-                var lngFloat = parseFloat(req.query.lng)
-                var latFloat = parseFloat(req.query.lat)
                 var flag = true
-                if(isNaN(lngFloat) || isNaN(latFloat) || lngFloat < -180.0 || lngFloat > 180.0 || latFloat < -90.0 || latFloat > 90.0){
+                var price = parseFloat(req.body.price)
+                if (isNaN(price)){
+                    res.sendStatus(400)
                     flag = false
-                    res.status(400).send("Invalid Coordinates!")
                 }
-                Shop.findAll({where: {name: req.body.name}}).then(product =>{
-                    if (product.length > 0){
-                        res.status(400).send("Product with name: "+ req.body.name + " already exists.")
-                    }
-                    else{
-                        if (flag){
-                            next();
+                var shopId = parseInt(req.body.shopId)
+                if(isNaN(shopId)){
+                    flag = false
+                    res.sendStatus(400)
+                }
+                var productId = parseInt(req.body.productId)
+                if (isNaN(productId)){
+                    flag = false
+                    res.sendStatus(400)
+                } 
+
+                if (req.body.dateFrom > req.body.dateTo){
+                    flag = false
+                    res.sendStatus(400)
+                }
+
+                if (flag){
+                    Shop.findByPk(shopId).then(shop =>{
+
+                        if (!shop){
+                            res.status(400).send("Shop with id: "+ shopId + " does not exist.")
+                            flag = false
                         }
-                    }
-                })          
+                        else{
+                            Product.findByPk(productId).then(product => {
+                                if (!product && flag){
+                                    res.status(400).send("Product with id: "+ productId + " does not exist.")
+                                    flag = false
+                                }
+                            })
+                            if (flag){
+                                next()
+                            }
+                        }
+                    }) 
+                }
+                         
             }
         }
-    },
+    }
 };
   

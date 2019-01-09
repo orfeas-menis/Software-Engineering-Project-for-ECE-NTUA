@@ -36,10 +36,9 @@ const Price = dbo.define('price', {
   }
 )
 
-Price.belongsTo(User,{constraints:false, onDelete: 'CASCADE', hooks:true});
-Price.belongsTo(Product);
-
-Price.belongsTo(Shop);
+Price.belongsTo(User, {constraints:false, onDelete: 'CASCADE', hooks:true});
+Price.belongsTo(Product, {constraints:false, onDelete: 'CASCADE', hooks:true});
+Price.belongsTo(Shop, {constraints:false, onDelete: 'CASCADE', hooks:true});
 
 Price.prototype.toJSON =  function () {
     var values = Object.assign({}, this.get());
@@ -57,24 +56,7 @@ Price.prototype.toJSON =  function () {
         mm = "0" + mm
     }
     values.date = yyyy + "-" + mm + "-" + dd
-    /*
-    Product.findByPk(values.productId).then(product => {
-        values.productName = product.name
-        if (product.tags != null){
-            res = product.tags.split(",");
-        }
-        values.productTags = res
-    })
-    res = null
-    Shop.findByPk(values.shopId).then(shop => {
-        values.shopName = shop.name
-        values.shopAddress
-        if (shop.tags != null){
-            res = shop.tags.split(",");
-        }
-        values.productTags = res
-    })
-    */
+    
     return values;
 }
 /*
