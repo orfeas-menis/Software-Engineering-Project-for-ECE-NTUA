@@ -2,7 +2,9 @@ const Sequelize = require("sequelize");
 const dbo = require("../connect");
 const bcrypt = require("bcryptjs");
 const credentials = require("../../config/credentials");
+const alters = require("../../config/alters")
 
+var userCategories = alters.userCategories
 const User = dbo.define('user', {
     /*
     user id
@@ -23,7 +25,7 @@ const User = dbo.define('user', {
         allowNull: false,
         validate: {
             notEmpty: true,
-            len: [4, 20]
+            len: [4, 30]
         },
         set(val){
             if(val){
@@ -56,7 +58,9 @@ const User = dbo.define('user', {
     category: 0 -> admin , 1 -> user
     */
     category: {
-        type: Sequelize.ENUM('0','1'),
+        //type: Sequelize.ENUM(userCategories),
+        type: Sequelize.STRING, //So as if admin changes user categories we will not get DB error when we enter a user with a new category
+        // the validation will still be made with all the new categories valid
         allowNull: false
     },
     /*

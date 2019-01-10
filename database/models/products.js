@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const dbo = require("../connect");
-
-
+alters = require("../../config/alters")
+productCategories = alters.productCategories
 const Product = dbo.define('product', {
     /*
     product id
@@ -35,7 +35,8 @@ const Product = dbo.define('product', {
     product category
     */
     category: {
-        type: Sequelize.ENUM('FUEL','SERVICE'),     //to be filled with product categories 
+        //type: Sequelize.ENUM(productCategories), 
+        type: Sequelize.STRING, 
         allowNull: false,
         validate: {
             notEmpty: true

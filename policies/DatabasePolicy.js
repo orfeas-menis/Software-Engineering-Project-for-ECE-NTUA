@@ -2,7 +2,8 @@ const Product = require("../database/models/products")
 const Shop = require("../database/models/shops")
 
 const Joi = require('joi')
-
+alters = require("../config/alters")
+productCategories = alters.productCategories
 
 module.exports = {
     products(req, res, next){
@@ -52,7 +53,7 @@ module.exports = {
             const schema = {
                 name: Joi.string().max(50).required(),
                 description: Joi.string().required(),
-                category: Joi.string().uppercase().valid('FUEL','SERVICE').required(),
+                category: Joi.string().uppercase().valid(productCategories).required(),
                 tags: Joi.string().required(),
             };
             const { error } = Joi.validate(req.body, schema);

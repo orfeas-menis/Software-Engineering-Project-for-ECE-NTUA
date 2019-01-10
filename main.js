@@ -11,6 +11,7 @@ var express             = require('express'),
     sequelize           = require("./database/connect"),
     indexRouter        = require("./routing/indexRouter"),
     ApiRouter           = require("./routing/ApiRouter"),
+    altersRouter           = require("./routing/altersRouter"),
     sessionOptions      = require("./config/session");
 
 /*
@@ -70,6 +71,7 @@ app.use('/', indexRouter)
 
 app.use('/observatory/api', ApiRouter)
 
+app.use('/alters', altersRouter)
 
 
 app.listen(process.env.PORT || 1245, () => {
