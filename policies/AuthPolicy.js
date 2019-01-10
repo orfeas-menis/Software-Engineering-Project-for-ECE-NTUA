@@ -53,6 +53,24 @@ module.exports = {
     } else {
       res.status(403).send("Login needed!")
     }
+  },
+
+  //isAdmin can be used as a middleware only after isLoggedIn
+  isAdmin (req,res,next){
+    username = req.decoded.username
+    User.findOne({where: {username: username}}).then(user => {
+      if (user){
+        if(user.category == 'admin'){
+          next()
+        }
+        else{
+          res.sendStatus(403)
+        }
+      }
+      else{
+        res.sendStatus(400)
+      }
+    })
   }
   
 };

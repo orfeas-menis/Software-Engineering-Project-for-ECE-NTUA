@@ -66,14 +66,14 @@ const User = dbo.define('user', {
     /*
     last login of the user
     */
-    last_login: {
+    lastLogin: {
         type: Sequelize.DATE
     }
   }
 )
 
 
-User.sync({ force: false }).then(() => {
+User.sync({ force: true }).then(() => {
     
     User.findOne({ where: { username: credentials.admin_user.username } }).then(admin => {
         if (admin) {

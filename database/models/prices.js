@@ -36,7 +36,7 @@ const Price = dbo.define('price', {
   }
 )
 
-Price.belongsTo(User, { onDelete: 'CASCADE', hooks:true});
+//Price.belongsTo(User, { onDelete: 'CASCADE', hooks:true});
 //Price.belongsTo(Product, { onDelete: 'CASCADE', hooks:true});
 Price.belongsTo(Shop, { onDelete: 'CASCADE', hooks:true});
 
@@ -63,7 +63,7 @@ Price.prototype.toJSON =  function () {
 Connect DB and add a sample shop
 */
 
-Price.sync({ force: false }).then(() => {
+Price.sync({ force: true }).then(() => {
     var date = new Date().setHours(2,0,0,0)
     /*Price.findOne({ where: { id: 1 } }).then(found => {
         if (found) {
