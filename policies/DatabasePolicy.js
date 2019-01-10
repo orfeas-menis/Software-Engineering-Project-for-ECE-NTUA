@@ -1,5 +1,6 @@
 const Product = require("../database/models/products")
 const Shop = require("../database/models/shops")
+const User = require("../database/models/users")
 
 const Joi = require('joi')
 alters = require("../config/alters")
@@ -303,9 +304,9 @@ module.exports = {
                     flag = false
                     res.status(400).send("Invalid Coordinates!")
                 }
-                Shop.findAll({where: {name: req.body.name}}).then(product =>{
-                    if (product.length > 0){
-                        res.status(400).send("Product with name: "+ req.body.name + " already exists.")
+                Shop.findAll({where: {name: req.body.name}}).then(shop =>{
+                    if (shop.length > 0){
+                        res.status(400).send("Shop with name: "+ req.body.name + " already exists.")
                     }
                     else{
                         if (flag){
@@ -569,7 +570,7 @@ module.exports = {
             }
         }           
     },
-    addPrice (req, res, next){
+    addPrice(req, res, next){
         var format = req.query.format
         if (format && (format.toLowerCase() != 'json')){
             res.sendStatus(400)
@@ -633,6 +634,82 @@ module.exports = {
                 }
                          
             }
+        }
+    },
+    addUser(req, res, next){
+        const schema = {
+            username: Joi.string().min(4).max(30).required(),
+            password: Joi.string().required(),
+            email: Joi.string().email().required()
+        };
+        const { error } = Joi.validate(req.body, schema);
+
+        if(error){
+            
+            res.status(400).json({ error: "Incorrect Input "});
+        } 
+        else{
+            
+            User.findAll({where: {username: req.body.username}}).then(user =>{
+                if (user.length > 0){
+                    res.status(400).send("User with username: "+ req.body.username + " already exists.")
+                }
+                else{
+                    User.findAll({where: {email: req.body.email}}).then(user2 =>{
+                        if (user2.length > 0){
+                            res.status(400).send("User with email: "+ req.body.email + " already exists.")
+                        }
+                        else{
+                            next()
+                        }
+                    })          
+                }
+            })          
+        }
+    },
+    changeCategory(req, res, next){
+        category = req.body.category
+        userId = parseInt(req.params.userId)
+        if (category && !isNaN(userId)){
+            if ((alters.userCategories).includes(category)){
+                next()
+            }
+            else{
+                res.sendStatus(400)
+            }
+        }
+        else{
+            res.sendStatus(400)
+        }
+    },
+    updateUser(req, res, next){
+        const schema = {
+            username: Joi.string().max(30),
+            password: Joi.string(),
+            email: Joi.string().email()
+        };
+        const { error } = Joi.validate(req.body, schema);
+
+        if(error){
+            res.status(400).json({ error: "Incorrect Input "});
+        } 
+        else{
+            
+            User.findAll({where: {username: req.body.username}}).then(user =>{
+                if (user.length > 0){
+                    res.status(400).send("User with username: "+ req.body.username + " already exists.")
+                }
+                else{
+                    User.findAll({where: {email: req.body.email}}).then(user2 =>{
+                        if (user2.length > 0){
+                            res.status(400).send("User with email: "+ req.body.email + " already exists.")
+                        }
+                        else{
+                            next()
+                        }
+                    })          
+                }
+            })          
         }
     }
 };

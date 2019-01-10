@@ -73,7 +73,7 @@ const User = dbo.define('user', {
 )
 
 
-User.sync({ force: true }).then(() => {
+User.sync({ force: false }).then(() => {
     
     User.findOne({ where: { username: credentials.admin_user.username } }).then(admin => {
         if (admin) {

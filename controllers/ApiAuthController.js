@@ -27,9 +27,7 @@ ApiAuthController.login = (req, res) => {
                         { expiresIn: '1 h'} // expires in 1 hour
                     );
                     var now = new Date()
-                    user.update({"lastLogin" : now},{fileds:["lastLogin"]}).then(() =>{
-
-                    })
+                    user.update({"lastLogin" : now},{fileds:["lastLogin"]})
                     // return the JWT token for the future API calls
                     res.status(200).send(token)
                 }

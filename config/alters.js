@@ -1,4 +1,5 @@
 module.exports = {
     userCategories: ['admin', 'volunteer', 'blocked'],
-    productCategories: ['FUEL', 'SERVICE']
+    productCategories: ['FUEL', 'SERVICE'],
+    standardUserCategory: 'volunteer'
 }

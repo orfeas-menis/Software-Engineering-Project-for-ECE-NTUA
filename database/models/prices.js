@@ -36,8 +36,8 @@ const Price = dbo.define('price', {
   }
 )
 
-//Price.belongsTo(User, { onDelete: 'CASCADE', hooks:true});
-//Price.belongsTo(Product, { onDelete: 'CASCADE', hooks:true});
+Price.belongsTo(User, { onDelete: 'CASCADE', hooks:true});
+Price.belongsTo(Product, { onDelete: 'CASCADE', hooks:true});
 Price.belongsTo(Shop, { onDelete: 'CASCADE', hooks:true});
 
 Price.prototype.toJSON =  function () {

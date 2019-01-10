@@ -192,12 +192,12 @@ ApiShopController.deleteShop = (req, res) => {
         if (user){
             Shop.findByPk(shopId).then(shop =>{
                 if (shop){
-                    if (user.category == 0){
+                    if (user.category == 'admin'){
                         shop.destroy({force:true}).then(() => {
                             res.status(200).send(delResponse)
                         })
                     }
-                    else{
+                    else if(user.category == 'volunteer'){
                         shop.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
                             res.status(200).send(delResponse)
                         })

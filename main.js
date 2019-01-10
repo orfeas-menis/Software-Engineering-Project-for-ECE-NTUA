@@ -9,9 +9,10 @@ var express             = require('express'),
     Shop                = require("./database/models/shops"),
     Price               = require("./database/models/prices"),
     sequelize           = require("./database/connect"),
-    indexRouter        = require("./routing/indexRouter"),
+    indexRouter         = require("./routing/indexRouter"),
     ApiRouter           = require("./routing/ApiRouter"),
-    altersRouter           = require("./routing/altersRouter"),
+    altersRouter        = require("./routing/altersRouter"),
+    userManagementRouter= require("./routing/userManagementRouter")
     sessionOptions      = require("./config/session");
 
 /*
@@ -68,11 +69,9 @@ app.use("/static", express.static("public"));
 
 //testing
 app.use('/', indexRouter)
-
 app.use('/observatory/api', ApiRouter)
-
 app.use('/alters', altersRouter)
-
+app.use('/userManagement', userManagementRouter)
 
 app.listen(process.env.PORT || 1245, () => {
     console.log("Hello World console");

@@ -174,12 +174,12 @@ ApiProductController.deleteProduct = (req, res) => {
         if (user){
             Product.findByPk(prodId).then(product =>{
                 if (product){
-                    if (user.category == 0){
+                    if (user.category == 'admin'){
                         product.destroy({force:true}).then(() => {
                             res.status(200).send(delResponse)
                         })
                     }
-                    else{
+                    else if(user.category == 'volunteer'){
                         product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
                             res.status(200).send(delResponse)
                         })
