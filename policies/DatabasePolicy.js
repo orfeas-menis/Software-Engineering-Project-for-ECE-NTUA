@@ -639,7 +639,8 @@ module.exports = {
     addUser(req, res, next){
         const schema = {
             username: Joi.string().min(4).max(30).required(),
-            password: Joi.string().required(),
+            password: Joi.string().required(),           
+            passwordConf: Joi.string().required(),    
             email: Joi.string().email().required()
         };
         const { error } = Joi.validate(req.body, schema);
@@ -660,7 +661,13 @@ module.exports = {
                             res.status(400).send("User with email: "+ req.body.email + " already exists.")
                         }
                         else{
-                            next()
+                            if(req.body.password == req.body.passwordConf){
+                                next()
+                            }
+                            else{
+                                res.sendStatus(400)
+                            }
+                            
                         }
                     })          
                 }
