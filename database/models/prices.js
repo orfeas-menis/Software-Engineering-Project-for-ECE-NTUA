@@ -36,9 +36,9 @@ const Price = dbo.define('price', {
   }
 )
 
-Price.belongsTo(User, { onDelete: 'CASCADE', hooks:true});
-Price.belongsTo(Product, { onDelete: 'CASCADE', hooks:true});
-Price.belongsTo(Shop, { onDelete: 'CASCADE', hooks:true});
+Price.belongsTo(User, { onDelete: 'CASCADE', hooks:false});
+Price.belongsTo(Product, { onDelete: 'CASCADE', hooks:false});
+Price.belongsTo(Shop, { onDelete: 'CASCADE', hooks:false});
 
 Price.prototype.toJSON =  function () {
     var values = Object.assign({}, this.get());
@@ -63,9 +63,9 @@ Price.prototype.toJSON =  function () {
 Connect DB and add a sample shop
 */
 
-Price.sync({ force: true }).then(() => {
+Price.sync({ force: false }).then(() => {
     var date = new Date().setHours(2,0,0,0)
-    /*Price.findOne({ where: { id: 1 } }).then(found => {
+    Price.findOne({ where: { id: 1 } }).then(found => {
         if (found) {
             console.log("there's already a price in the db. Contact dev team for more info");
         } else {
@@ -96,7 +96,7 @@ Price.sync({ force: true }).then(() => {
             })
 
         }
-    })*/
+    })
 });
 
 

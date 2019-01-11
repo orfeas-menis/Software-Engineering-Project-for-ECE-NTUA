@@ -72,6 +72,13 @@ const User = dbo.define('user', {
   }
 )
 
+User.prototype.toJSON =  function () {
+    var values = Object.assign({}, this.get());
+    delete values.createdAt;
+    delete values.updatedAt;
+    delete values.password;
+    return values;
+}
 
 User.sync({ force: false }).then(() => {
     

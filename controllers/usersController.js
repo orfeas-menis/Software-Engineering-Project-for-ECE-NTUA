@@ -1,7 +1,4 @@
 var User = require("../database/models/users")
-var Product = require("../database/models/products")
-var Shop = require("../database/models/shops")
-var Price = require("../database/models/prices")
 const jwt = require('jsonwebtoken')
 const credentials = require("../config/credentials");
 const bcrypt = require("bcryptjs");
@@ -10,6 +7,17 @@ const Op = Sequelize.Op
 const alters = require("../config/alters")
 
 const usersController = (req, res) => {
+}
+
+usersController.users = (req, res) => {
+    User.findAll().then(users => {
+        if (users){
+            res.status(200).send(users)
+        }
+        else{
+            res.sendStatus(400)
+        }
+    })
 }
 
 usersController.addUser = (req, res) => {

@@ -4,7 +4,7 @@ const authPolicy = require("../policies/AuthPolicy")
 const usersController = require("../controllers/usersController")
 var databasePolicy = require("../policies/DatabasePolicy")
 
-
+router.get("/", authPolicy.isLoggedIn, authPolicy.isAdmin, usersController.users)
 router.post("/", databasePolicy.addUser , usersController.addUser)
 router.put("/:userId", authPolicy.isLoggedIn, authPolicy.isAdmin, databasePolicy.changeCategory, usersController.changeCategory)
 router.patch("/", authPolicy.isLoggedIn, usersController.updateUser)

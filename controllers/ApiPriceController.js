@@ -179,6 +179,14 @@ ApiPriceController.addPrice = (req, res) => {
     var obj
     var myArr = []
     var myDate = new Date(dateFrom)
+    Price.findAll({
+        where: {productId:productId , shopId:shopId, date: {[Op.and]: [{[Op.lte]: dateTo},{[Op.gte]: dateFrom}]}}}).then(prices =>{
+            if(prices){
+                for (var i in prices){
+                    prices[i].destroy({ force: true })
+                }
+            }
+    })
     User.findOne({where: {username: username}}).then(user =>{
         if (user){
             for  (date = new Date(dateFrom); date <= dateTo; date.setDate(date.getDate()+1)){
@@ -192,7 +200,6 @@ ApiPriceController.addPrice = (req, res) => {
                 counter = counter + 1
                 
             }
-            console.log(myArr)
             Price.bulkCreate(myArr).then(prices => {
         
                 if (prices){
