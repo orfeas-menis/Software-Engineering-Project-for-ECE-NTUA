@@ -1,5 +1,6 @@
 var User = require("../database/models/users")
 var Product = require("../database/models/products")
+var alters = require("../config/alters")
 
 
 const ApiProductController = (req, res) => {
@@ -174,12 +175,12 @@ ApiProductController.deleteProduct = (req, res) => {
         if (user){
             Product.findByPk(prodId).then(product =>{
                 if (product){
-                    if (user.category == 'admin'){
+                    if (user.category == alters.adminUserCategory){
                         product.destroy({force:true}).then(() => {
                             res.status(200).send(delResponse)
                         })
                     }
-                    else if(user.category == 'volunteer'){
+                    else if(user.category == alters.standardUserCategory){
                         product.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
                             res.status(200).send(delResponse)
                         })

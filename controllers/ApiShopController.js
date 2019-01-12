@@ -1,7 +1,7 @@
 var User = require("../database/models/users")
 var Shop = require("../database/models/shops")
 var Price = require("../database/models/prices")
-
+var alters = require("../config/alters")
 
 const ApiShopController = (req, res) => {
 }
@@ -192,12 +192,12 @@ ApiShopController.deleteShop = (req, res) => {
         if (user){
             Shop.findByPk(shopId).then(shop =>{
                 if (shop){
-                    if (user.category == 'admin'){
+                    if (user.category == alters.adminUserCategory){
                         shop.destroy({force:true}).then(() => {
                             res.status(200).send(delResponse)
                         })
                     }
-                    else if(user.category == 'volunteer'){
+                    else if(user.category == alters.standardUserCategory){
                         shop.update({withdrawn: true}, {fields: ['withdrawn']}).then(() =>{
                             res.status(200).send(delResponse)
                         })

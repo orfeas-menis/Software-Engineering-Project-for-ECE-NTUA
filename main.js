@@ -73,11 +73,11 @@ app.use('/observatory/api', ApiRouter)
 app.use('/alters', altersRouter)
 app.use('/userManagement', userManagementRouter)
 
-app.listen(process.env.PORT || 1245, () => {
+app.listen(1245, () => {
     console.log("Hello World console");
 })
 
-app.listen(process.env.PORT || 8765, () => {
+app.listen(8765, () => {
     console.log("Hello World console");
 })
 

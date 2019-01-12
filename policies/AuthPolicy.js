@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const credentials = require("../config/credentials");
 const Joi = require('joi')
 var Blacklist = require("../database/models/blacklist")
+const alters = require("../config/alters")
 
 /*
 Joi Documentation: https://www.npmjs.com/package/joi
@@ -60,7 +61,7 @@ module.exports = {
     username = req.decoded.username
     User.findOne({where: {username: username}}).then(user => {
       if (user){
-        if(user.category == 'admin'){
+        if(user.category == alters.adminUserCategory){
           next()
         }
         else{
