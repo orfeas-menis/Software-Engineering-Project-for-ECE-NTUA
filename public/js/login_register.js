@@ -3,7 +3,8 @@ $(document).ready(function(){
     
 });
 
-$("log_button").click(function(event){
+$("#log_button").click(function(event){
+    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
     event.preventDefault();
 
     var Data = {
@@ -14,23 +15,24 @@ $("log_button").click(function(event){
     console.log(Data)
 
     $.ajax({
-        url: "/observitory/api/login",
+        url: "/observatory/api/login",
         method: "POST",
         data: Data,
 
-        sucess: function(data,status){
+        success: function(data,status){
+            alert("you logged in succesfully")
             var token = data.token
             localStorage.setItem("token", token)
-            $(location).attr("href", "/");
+            $(location).attr("href", "http://localhost:8765");
         },
         error: function(data,status){
             alert("wrong password or username")
-            $(location).attr("href", "/login");
+            $(location).attr("href", "http://localhost:8765");
         }    
     })
 })
 
-$("reg_button").click(function(event){
+$("#reg_button").click(function(event){
     event.preventDefault();
 
     var Data = {
@@ -43,18 +45,19 @@ $("reg_button").click(function(event){
     console.log(Data)
 
     $.ajax({
-        url: "/observitory/api/login",
+        url: "/observatory/api/login",
         method: "POST",
         data: Data,
 
-        sucess: function(data,status){
+        success: function(data,status){
             var token = data.token
             localStorage.setItem("token", token)
-            $(location).attr("href", "/");
+            
+            $(location).attr("href", "http://localhost:8765");
         },
         error: function(data,status){
-            alert("wrong password or username")
-            $(location).attr("href", "/login");
+            alert("Something went wrong!")
+            $(location).attr("href", "http://localhost:8765");
         }    
     })
 

@@ -3,7 +3,7 @@ module.exports = {
     secret: "Kako Logopegnio Soft Eng 2019",
     database: {
         db_name: "soft_eng_data",
-        username: "orfeas",
+        username: "root",
         password: "orfeas"
     },
     admin_user: {
