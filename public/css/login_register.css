@@ -3,7 +3,7 @@ body{
   font-family: 'Mukta', sans-serif;
 	height:100vh;
 	min-height:550px;
-	background-image:url(background-pattern-with-retro-gasoline-pump_gg100224765.jpg);
+	background-image:url(/static/pictures/background-pattern-with-retro-gasoline-pump_gg100224765.jpg);
 	background-repeat: no-repeat;
 	background-size:cover;
 	background-position:center;
