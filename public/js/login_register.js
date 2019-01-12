@@ -20,9 +20,8 @@ $("#log_button").click(function(event){
         data: Data,
 
         success: function(data,status){
-            alert("you logged in succesfully")
-            var token = data.token
-            localStorage.setItem("token", token)
+            var token = data
+            localStorage.setItem("token", data)
             $(location).attr("href", "http://localhost:8765");
         },
         error: function(data,status){
