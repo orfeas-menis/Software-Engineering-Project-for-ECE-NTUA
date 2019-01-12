@@ -3,8 +3,7 @@ $(document).ready(function(){
     
 });
 
-$("log_button").click(function(event))
-{
+$("log_button").click(function(event){
     event.preventDefault();
 
     var Data = {
@@ -20,7 +19,7 @@ $("log_button").click(function(event))
         data: Data,
 
         sucess: function(data,status){
-            var =  token = data.token
+            var token = data.token
             localStorage.setItem("token", token)
             $(location).attr("href", "/");
         },
@@ -29,4 +28,4 @@ $("log_button").click(function(event))
             $(location).attr("href", "/login");
         }    
     })
-}
+})
