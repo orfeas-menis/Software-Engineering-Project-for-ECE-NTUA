@@ -15,11 +15,12 @@ $("#log_button").click(function(event){
     console.log(Data)
 
     $.ajax({
-        url: "/observitory/api/login",
+        url: "/observatory/api/login",
         method: "POST",
         data: Data,
 
         sucess: function(data,status){
+            console.log("uparxei");
             var token = data.token
             localStorage.setItem("token", token)
             $(location).attr("href", "http://localhost:8765");
@@ -44,7 +45,7 @@ $("#reg_button").click(function(event){
     console.log(Data)
 
     $.ajax({
-        url: "/observitory/api/login",
+        url: "/observatory/api/login",
         method: "POST",
         data: Data,
 
