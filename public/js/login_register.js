@@ -54,7 +54,7 @@ $("#reg_button").click(function(event){
             $(location).attr("href", "http://localhost:8765");
         },
         error: function(data,status){
-            alert("Something went wrong!") //data.status = 400 kai to status = error ( aftes tis times exoun)
+            alert("Something went wrong!") 
             $(location).attr("href", "http://localhost:8765");
         }    
     })
