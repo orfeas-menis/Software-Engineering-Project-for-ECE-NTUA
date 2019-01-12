@@ -19,8 +19,8 @@ $("#log_button").click(function(event){
         method: "POST",
         data: Data,
 
-        sucess: function(data,status){
-            console.log("uparxei");
+        success: function(data,status){
+            alert("you logged in succesfully")
             var token = data.token
             localStorage.setItem("token", token)
             $(location).attr("href", "http://localhost:8765");
@@ -49,7 +49,7 @@ $("#reg_button").click(function(event){
         method: "POST",
         data: Data,
 
-        sucess: function(data,status){
+        success: function(data,status){
             var token = data.token
             localStorage.setItem("token", token)
             
