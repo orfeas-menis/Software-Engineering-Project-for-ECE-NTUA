@@ -4,7 +4,6 @@ $(document).ready(function(){
 });
 
 $("#log_button").click(function(event){
-    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
     event.preventDefault();
 
     var Data = {
