@@ -22,7 +22,7 @@ $("#log_button").click(function(event){
         success: function(data,status){
             var token = data
             localStorage.setItem("token", token)
-            $(location).attr("href", "http://localhost:8765");
+            $(location).attr("href", "/");
         },
         error: function(data,status){
             alert("wrong password or username")
@@ -38,24 +38,24 @@ $("#reg_button").click(function(event){
         username : $("#reg_username").val(),
         email : $("#reg_email").val(),
         password : $("#reg_password").val(),
-        password : $("#reg_conf_password").val()
+        passwordConf : $("#reg_conf_password").val()
     }
 
     console.log(Data)
 
     $.ajax({
-        url: "/observatory/api/login",
+        url: "/userManagement",
         method: "POST",
         data: Data,
 
         success: function(data,status){
             var token = data
             localStorage.setItem("token", token)  
-            $(location).attr("href", "http://localhost:8765");
+            $(location).attr("href", "/");
         },
         error: function(data,status){
             alert("Something went wrong!") 
-            $(location).attr("href", "http://localhost:8765");
+            $(location).attr("href", "/");
         }    
     })
 

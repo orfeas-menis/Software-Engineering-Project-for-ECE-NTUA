@@ -26,22 +26,22 @@
 		</div>
 							
 		<div class="white-panel">
-			<div class="login-show">
+			<form class="login-show">
 				<h2>LOGIN</h2>
-				<input type="text" id="log_username" name="log_username" placeholder="Username">
-                <input type="password" id="log_password" name="log_password" placeholder="Password">
+				<input type="text" id="log_username" name="log_username" placeholder="Username" required>
+                <input type="password" id="log_password" name="log_password" placeholder="Password" required>
                 <button id="log_button">Login</button>
 				<a href="">Forgot password?</a>
-            </div>
+            </form>
 
-            <div class="register-show">
+            <form class="register-show">
 				<h2>REGISTER</h2>
-				<input type="text" id="reg_username" name="reg_username" placeholder="Username">
-				<input type="text" id="reg_email" name="reg_email" placeholder="Email">
-				<input type="password" id="reg_pass" name="reg_pass" placeholder="Password">
-                <input type="password" id="reg_conf_pass" name="reg_conf_pass" placeholder="Confirm Password">
+				<input type="text" id="reg_username" name="reg_username" placeholder="Username" required="required"></input>
+				<input type="text" id="reg_email" name="reg_email" placeholder="Email" required="required"></input>
+				<input type="password" id="reg_password" name="reg_pass" placeholder="Password" required="required"></input>
+                <input type="password" id="reg_conf_password" name="reg_conf_pass" placeholder="Confirm Password" required="required"></input>
                 <button id="reg_button">Register</button>	
-            </div>
+			</form>
 		
 			<script type="text/javascript" src="/static/js/login_register.js"></script>
 
