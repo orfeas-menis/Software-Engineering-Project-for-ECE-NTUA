@@ -1,21 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <title>Product</title>
-    
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+   ></script>
 </head>
 
 <body>
-<form >
-    <input type="text" id="product" name="product" placeholder="Name" required><br>
-    <input type="text" id="prod_desc" name="prod_desc" placeholder="Description" required><br>
-    <input type="text" id="prod_category" name="prod_category" placeholder="Category" required><br>
+<form name="prod_form" id="prod_form">
+    <input type="text" id="product_name" name="product_name" placeholder="Name" ><br>
+    <input type="text" id="product_desc" name="product_desc" placeholder="Description" ><br>
+    <input type="text" id="product_category" name="product_category" placeholder="Category" ><br>
+    
+    <div id="container" name="container">
+        <input class="tag_text" type="text" id="product_tags" name="product_tags" placeholder="Put tag" >  
+        <button id="cell_add_button">Add Tag Cell</button>
+        <button id="cell_remove_button">Remove Tag Cell</button><br>
+    </div>
 
-    <input type="text" id="prod_tags" name="prod_tags" placeholder="Put tags and seperate them with comma" required>
-    <button id="prod_tag_button">Add Product</button><br>
-
-
+    <p id="demo"></p>
     <button id="add_product_button">Add Product</button>
+    
+
 </form>
+<script type="text/javascript" src="/static/js/product.js"></script>
 </body>
 </html>
