@@ -640,34 +640,42 @@ module.exports = {
         const schema = {
             username: Joi.string().min(4).max(30).required(),
             password: Joi.string().required(),           
-            passwordConf: Joi.string().required(),    
             email: Joi.string().email().required()
         };
         const { error } = Joi.validate(req.body, schema);
-
         if(error){
-            
-            res.status(400).json({ error: "Incorrect Input "});
+            switch(error.details[0].context.key){
+                case 'username':
+                    res.status(400).json({message: "Invalid username! (Username length must be 4-30.)"});
+                    break;
+                case 'password':
+                    res.status(400).json({message: "Invalid Password!"});
+                    break;
+                case 'email':
+                    res.status(400).json({message: "Invalid email!"});
+                    break;
+                default:
+                    res.status(400).json({message: "Incorrect Input!"});
+                    break;
+            }
         } 
         else{
             
             User.findAll({where: {username: req.body.username}}).then(user =>{
                 if (user.length > 0){
-                    res.status(400).send("User with username: "+ req.body.username + " already exists.")
+                    var obj = {}
+                    obj.message = "User with username: "+ req.body.username + " already exists."
+                    res.status(400).send(obj)
                 }
                 else{
                     User.findAll({where: {email: req.body.email}}).then(user2 =>{
                         if (user2.length > 0){
-                            res.status(400).send("User with email: "+ req.body.email + " already exists.")
+                            var obj = {}
+                            obj.message = "User with email: "+ req.body.email + " already exists."
+                            res.status(400).send(obj)
                         }
                         else{
-                            if(req.body.password == req.body.passwordConf){
-                                next()
-                            }
-                            else{
-                                res.sendStatus(400)
-                            }
-                            
+                            next()
                         }
                     })          
                 }
