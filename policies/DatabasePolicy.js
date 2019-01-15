@@ -62,26 +62,28 @@ module.exports = {
             if(error){
                 switch(error.details[0].context.key){
                     case 'name':
-                        res.status(400).json({ error: "You must provide a valid name!"});
+                        res.status(400).json({ message: "You must provide a valid name!"});
                         break;
                     case 'category':
-                        res.status(400).json({ error: "Category " + req.body.category + " does not exist!"});
+                        res.status(400).json({ message: "Category " + req.body.category + " does not exist!"});
                         break;
                     case 'descritpion':
-                        res.status(400).json({ error: "Invalid description"});
+                        res.status(400).json({ message: "Invalid description"});
                         break;
                     case 'tags':
-                        res.status(400).json({ error: "invalid tags"});
+                        res.status(400).json({ message: "invalid tags"});
                         break;
                     default:
-                        res.status(400).json({ error: "Incorrect Input "});
+                        res.status(400).json({ message: "Incorrect Input "});
                         break;
                 }
             } else{
                 var flag = true
                 Product.findAll({where: {name: req.body.name}}).then(product =>{
                     if (product.length > 0){
-                        res.status(400).send("Product with name: "+ req.body.name + " already exists.")
+                        var obj = {}
+                        obj.message = "Product with name: "+ req.body.name + " already exists."
+                        res.status(400).send(obj)
                         flag = false
                     }
                 })
