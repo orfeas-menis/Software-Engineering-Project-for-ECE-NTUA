@@ -109,7 +109,11 @@ $("#prod_form").submit(function(event){
                 //$(location).attr("href", "/");
             },
             error: function(data,status){
-                data  = $.parseJSON(data.responseText)
+                try {
+                    data  = $.parseJSON(data.responseText)
+                } catch (e) {
+                    data = {message: "An error occured!"}
+                }
                 var x = document.getElementById("snackbar");
                 if (data.message){
                     x.innerHTML = data.message
