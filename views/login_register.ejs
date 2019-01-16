@@ -26,27 +26,36 @@
 		</div>
 							
 		<div class="white-panel">
-			<form class="login-show">
-				<h2>LOGIN</h2>
-				<input type="text" id="log_username" name="log_username" placeholder="Username" required>
-                <input type="password" id="log_password" name="log_password" placeholder="Password" required>
-                <button id="log_button">Login</button>
-				<a href="">Forgot password?</a>
-            </form>
-
-            <form class="register-show">
-				<h2>REGISTER</h2>
-				<input type="text" id="reg_username" name="reg_username" placeholder="Username" required="required"></input>
-				<input type="text" id="reg_email" name="reg_email" placeholder="Email" required="required"></input>
-				<input type="password" id="reg_password" name="reg_pass" placeholder="Password" required="required"></input>
-                <input type="password" id="reg_conf_password" name="reg_conf_pass" placeholder="Confirm Password" required="required"></input>
-                <button id="reg_button">Register</button>	
+			<form id="loginForm">
+				<div class="login-show">
+					<h2>LOGIN</h2>
+					<input type="text" id="log_username" name="log_username" placeholder="Username" required/>
+					<input type="password" id="log_password" name="log_password" placeholder="Password" required/>
+					<button id="log_button" type="submit">Login</button>
+					<a href="">Forgot password?</a>
+				</div>
 			</form>
-		
-			<script type="text/javascript" src="/static/js/login_register.js"></script>
+			<form id="registerForm">
+				<div class="register-show">
+					<h2>REGISTER</h2>
+					<input type="text" id="reg_username" name="reg_username" placeholder="Username" required/>
+					<input type="text" id="reg_email" name="reg_email" placeholder="Email" required/>
+					<input type="password" id="reg_password" name="reg_password" placeholder="Password" required/>
+					<input type="password" id="reg_conf_password" name="reg_conf_password" placeholder="Confirm Password" required/>
+					<text id="message" name="message"></text>
+					<button id="reg_button" type="submit">Register</button>	
+				</div>
+			</form>
+            
 
+			<script type="text/javascript" src="/static/js/login_register.js"></script>
+			
 		</div>
+		
 	</div>
-  <script type="text/javascript" src="/static/js/log_reg_animation.js"></script>
+	<div id="snackbar"></div>
+
+  	<script type="text/javascript" src="/static/js/log_reg_animation.js"></script>
+
 </body>
 </html>
