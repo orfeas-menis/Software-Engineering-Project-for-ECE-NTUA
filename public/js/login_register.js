@@ -3,6 +3,10 @@ $(document).ready(function(){
     
 });
 
+$(window).on("unload", function() {
+    localStorage.removeItem("token")
+});
+
 $("#loginForm").submit(function(event){
 
     var Data = {
