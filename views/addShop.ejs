@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Shop</title>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="">
+    </head>
+
+    <body>
+        <form name="prod_form" id="prod_form">
+            <input type="text" id="shop_name" name="shop_name" placeholder="Name" required/><br>
+            <input type="text" id="shop_addr" name="shop_addr" placeholder="Address" required/><br>
+            <input type="text" id="shop_x_cord" name="shop_x_cord" placeholder="xCord" required/><br>
+            <input type="text" id="shop_y_cord" name="shop_y_cord" placeholder="yCord" required/><br>
+
+            <div id="container" name="container">
+                <input class="tag_text" type="text" id="shop_tags" name="shop_tags" placeholder="Put tag" required>  
+                <button type="button" id="cell_add_button">Add Tag Cell</button>
+                <button type="button" id="cell_remove_button">Remove Tag Cell</button><br>
+            </div>
+
+            <p id="demo"></p>
+            <button id="add_shop_button" type="submit">Add shop</button>
+            
+
+        </form>
+        <div id="snackbar"></div>
+        <script type="text/javascript" src="/static/js/addShop.js"></script>
+    </body>
+</html>
