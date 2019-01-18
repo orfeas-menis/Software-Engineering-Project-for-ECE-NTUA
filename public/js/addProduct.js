@@ -7,6 +7,7 @@ $(document).ready(function(){
 
     }    
 });
+
 var counter = 0;
 $("#cell_add_button").click(function(event){
     event.preventDefault();
@@ -109,6 +110,12 @@ $("#prod_form").submit(function(event){
                 //$(location).attr("href", "/");
             },
             error: function(data,status){
+                if (data.status == 403){
+                    localStorage.removeItem("token")
+                    alert("You must be logged in to add new product")
+                    $(location).attr("href", "/login");
+
+                }
                 try {
                     data  = $.parseJSON(data.responseText)
                 } catch (e) {
