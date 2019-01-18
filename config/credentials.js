@@ -4,7 +4,7 @@ module.exports = {
     database: {
         db_name: "soft_eng_data",
         username: "root",
-        password: "admin"
+        password: "orfeas"
     },
     admin_user: {
         username: "admin",

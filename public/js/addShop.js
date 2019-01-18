@@ -15,8 +15,8 @@ $("#cell_add_button").click(function(event){
     var cell = document.getElementById("container");
     var input = document.createElement("input");
     input.type = "text";
-    input.id = "product_tags";
-    input.name = "product_tags";
+    input.id = "shop_tags";
+    input.name = "shop_tags";
     var br = document.createElement("br");
     cell.appendChild(input);
     cell.appendChild(br);
@@ -51,7 +51,7 @@ $("#cell_remove_button").click(function(event){
    
 })
 
-$("#prod_form").submit(function(event){
+$("#shop_form").submit(function(event){
     var Data = {
         name : $("#shop_name").val(),
         address : $("#shop_addr").val(),
