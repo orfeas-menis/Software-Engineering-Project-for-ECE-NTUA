@@ -10,7 +10,7 @@ body {
 }
 
 .form_box {
-    align:center;
+    text-align: center;
     margin-top: 15%;
     padding: 10px;
     color:#B8B8B8;
