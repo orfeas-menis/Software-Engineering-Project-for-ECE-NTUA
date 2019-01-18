@@ -1,25 +1,40 @@
-<!doctype html>
-<head></head><body>
-<form action="/observatory/api/products" method="post">
-    <div>
-        <label>Name:</label>
-        <input type="text" name="name"/>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Responsive Animated Sidebar Menu</title>
+  
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+<script>
+  
+</script>
+</head>
+<body>
+    <div id="content">
+        <span class="slide">
+            <a href="#" id="open_sidebar" name="open_sidebar">
+                <i class="fas fa-bars"></i>
+            </a>
+        </span>
+        
+        <div id="menu" class="nav">
+            <a href="#" class="close" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i>
+            </a>
+            <a href="#">Home</a>
+            <a href="#">Map</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <h1>Responsive animated sidebar Menu</h1>
+        
+
+
     </div>
-    <div>
-        <label>Description:</label>
-        <input type="text" name="description"/>
-    </div>
-    <div>
-        <label>Category:</label>
-        <input type="text" name="category"/>
-    </div>
-    <div>
-        <label>Tags:</label>
-        <input type="text" name="tags"/>
-    </div>
-    <div>
-        <input type="submit" value="Log In"/>
-    </div>
-</form>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+
 </body>
 </html>

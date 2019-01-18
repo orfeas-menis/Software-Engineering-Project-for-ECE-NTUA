@@ -110,7 +110,17 @@ $("#shop_form").submit(function(event){
                 //$(location).attr("href", "/");
             },
             error: function(data,status){
-                data  = $.parseJSON(data.responseText)
+                if (data.status == 403){
+                    localStorage.removeItem("token")
+                    alert("You must be logged in to add new product")
+                    $(location).attr("href", "/login");
+
+                }
+                try {
+                    data  = $.parseJSON(data.responseText)
+                } catch (e) {
+                    data = {message: "An error occured!"}
+                }
                 var x = document.getElementById("snackbar");
                 if (data.message){
                     x.innerHTML = data.message

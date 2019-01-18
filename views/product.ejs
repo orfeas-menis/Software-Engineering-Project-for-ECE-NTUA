@@ -1,29 +1,37 @@
 <!doctype html>
-<html>
-<head>
-    <title>Product</title>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.js"
-   ></script>
-</head>
+<html lang="en">
+	<head>
+	    <title>Product</title>
+	    <link rel="stylesheet" type="text/css" href="static/css/add_product.css">
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	</head>
 
-<body>
-<form name="prod_form" id="prod_form">
-    <input type="text" id="product_name" name="product_name" placeholder="Name" ><br>
-    <input type="text" id="product_desc" name="product_desc" placeholder="Description" ><br>
-    <input type="text" id="product_category" name="product_category" placeholder="Category" ><br>
-    
-    <div id="container" name="container">
-        <input class="tag_text" type="text" id="product_tags" name="product_tags" placeholder="Put tag" >  
-        <button id="cell_add_button">Add Tag Cell</button>
-        <button id="cell_remove_button">Remove Tag Cell</button><br>
-    </div>
+	<body>
+		<div class="form_box">
+			<form name="prod_form" id="prod_form">
+			  	<div class="form-group ">
+			    	<label for="product">Product</label>
+			    	<input type="text" class="form-control" id="product" placeholder="Name">
+			  	</div>
+			  	<div class="form-group ">
+			    	<label for="product_desc">Description</label>
+			    	<input type="text" class="form-control" id="product_desc" placeholder="Description">
+			  	</div>
+			  	<div class="form-group">
+			  		<label for="product_tags">Tags</label>
+					<div class="container" name="container">
+                		<input class="form-control" type="text" id="product_tags" name="product_tags" placeholder="Put tag" >  
+                		<button class="btn btn-light" id="cell_add_button">Add Tag Cell</button>
+                		<button class="btn btn-light" id="cell_remove_button">Remove Tag Cell</button><br>
+            		</div>
+            	</div>
 
-    <p id="demo"></p>
-    <button id="add_product_button">Add Product</button>
-    
+			  <div class="form-group ">
+			  	<button type="button" id="add_product_button" class="btn btn-light">Add Product</button>
+			  </div>
 
-</form>
-<script type="text/javascript" src="/static/js/product.js"></script>
-</body>
+			</form>
+		</div>
+
+	</body>
 </html>
