@@ -38,12 +38,12 @@ module.exports = {
     if (token) {
       Blacklist.findByPk(token).then(found => {
         if (found){
-          res.status(403).send("You are not logged in. Please Login.")
+          res.status(403).send({message: "You are not logged in. Please Login."})
         }
         else{
           jwt.verify(token, credentials.secret, (err, decoded) => {
             if (err) {
-              res.status(403).send("Token is not valid")
+              res.status(403).send({message:"Token is not valid. Please login!"})
             } else {
               req.decoded = decoded;
               next();
