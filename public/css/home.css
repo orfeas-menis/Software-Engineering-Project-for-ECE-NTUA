@@ -220,6 +220,23 @@ img {
   width: 100%;
 }
 
+/*fonts*/
+.fa-home {
+    font-size: 25px;
+}
+.fa-user {
+    font-size: 25px;
+}
+.fa-at {
+    font-size: 25px;
+}
+.fa-info {
+    font-size: 25px;
+}
+.fa-euro-sign {
+    font-size: 25px;
+}
+
 /* SEARCH BAR*/
 
 .content{
@@ -256,10 +273,10 @@ img {
 	color: #fff;
 	float: right;
 	padding: 10px;
-	border-radius-top-right: 5px;
+	-border-radius-top-right: 5px;
 	-moz-border-radius-top-right: 5px;
 	-webkit-border-radius-top-right: 5px;
-	border-radius-bottom-right: 5px;
+	-border-radius-bottom-right: 5px;
 	-moz-border-radius-bottom-right: 5px;
 	-webkit-border-radius-bottom-right: 5px;
         cursor:pointer;
@@ -269,13 +286,12 @@ img {
    ====== Medua Query for Search Box ====== 
    =========================== */
 
-@media only screen and (min-width : 600px) and (max-width: 780px)
-{
-	{}
-	.search
-	{
-		width: 95%;
-		margin: 0 auto;
-	}
-
-}
+   @media only screen and (min-width : 150px) and (max-width : 780px)
+   {
+       .search
+       {
+           width: 95%;
+           margin: 0 auto;
+       }
+   
+   }

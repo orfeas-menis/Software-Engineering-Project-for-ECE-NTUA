@@ -1,18 +1,39 @@
-toggle = document.querySelectorAll(".toggle")[0];
-nav = document.querySelectorAll("nav")[0];
-toggle_open_text = 'Menu';
-toggle_close_text = 'Close';
+$(document).ready(function(){
+    console.log("we are ok!");
+    /*var token = localStorage.getItem("token")
+    if (token == null){
+        alert("You must be logged in to add new product")
+        $(location).attr("href", "/login");
 
-toggle.addEventListener('click', function() {
-	nav.classList.toggle('open');
-	
-  if (nav.classList.contains('open')) {
-    toggle.innerHTML = toggle_close_text;
-  } else {
-    toggle.innerHTML = toggle_open_text;
-  }
-}, false);
+    }*/    
+});
 
-setTimeout(function(){
-	nav.classList.toggle('open');	
-}, 800);
+var home = true;
+var add_price = false;
+
+$("#Home").on("click",function(event){
+    console.log("vvvvvvvvvvvvvvvvvvvv")
+    if(home == false)
+    {
+        home = true;
+        add_price =  false;
+        $(location).attr("href", "/");
+    }
+    
+})
+
+$("#Account").on("click",function(event){
+    $(location).attr("href", "/");
+})
+
+$("#AddPrice").on("click",function(event){
+    $(location).attr("href", "/");
+})
+
+$("#About").on("click",function(event){
+    $(location).attr("href", "/");
+})
+
+$("#Contact").on("click",function(event){
+    $(location).attr("href", "/");
+})
