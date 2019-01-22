@@ -112,7 +112,7 @@ $("#shop_form").submit(function(event){
             error: function(data,status){
                 if (data.status == 403){
                     localStorage.removeItem("token")
-                    alert("You must be logged in to add new product")
+                    alert("You must be logged in to add new shop")
                     $(location).attr("href", "/login");
 
                 }
