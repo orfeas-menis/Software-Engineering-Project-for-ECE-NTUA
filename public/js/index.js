@@ -8,9 +8,21 @@ $(document).ready(function(){
     }*/    
 });
 
+var open = false;
 
 $(".slide").on("click", "a" ,function(event){
     console.log("vvvvvvvvvvvvvvvvvvvv")
-    document.getElementById("menu").style.width = "250px";
-    document.getElementById("content").style.marginLeft = "250px";
+    if(open == false)
+    {
+        open = true;
+        document.getElementById("menu").style.width = "250px";
+        document.getElementById("content").style.marginLeft = "250px";
+    }
+    else
+    {
+        open = false;
+        document.getElementById("menu").style.width = "0";
+        document.getElementById("content").style.marginLeft = "0";
+    }
+  
 })
