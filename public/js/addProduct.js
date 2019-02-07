@@ -9,11 +9,6 @@ $(document).ready(function(){
 });
 
 
-$(window).on("unload", function() {
-    localStorage.removeItem("token")
-});
-
-
 var counter = 0;
 $("#cell_add_button").click(function(event){
     event.preventDefault();
