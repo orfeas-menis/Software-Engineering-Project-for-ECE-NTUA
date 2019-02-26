@@ -7,5 +7,4 @@ router.post("/userCategories", authPolicy.isLoggedIn, authPolicy.isAdmin, alters
 router.post("/productCategories", authPolicy.isLoggedIn, authPolicy.isAdmin, altersController.productCategories)
 
 
-
 module.exports = router;

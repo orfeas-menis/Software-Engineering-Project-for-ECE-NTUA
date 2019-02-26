@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Responsive Animated Sidebar Menu</title>
-  
-  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+  <title>Home</title>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
+  <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/static/css/index.css">
 <script>
   
 </script>
 </head>
 <body>
-    <div id="content">
-        <span class="slide">
-            <a href="#" id="open_sidebar" name="open_sidebar">
-                <i class="fas fa-bars"></i>
-            </a>
-        </span>
-        
-        <div id="menu" class="nav">
-            <a href="#">Home</a>
-            <a href="#">Map</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+    <div class="page">
+        <header tabindex="0">Welcome to our serach machine!</header>
+        <div id="nav-container">
+          <div class="bg"></div>
+          <div class="button" tabindex="0">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </div>
+          <div class="nav-content"id="nav-content" tabindex="0">
+            <ul>
+              <li><a id="Home" ><i class="fas fa-home"> Home</a></i></li>
+              <li><a id="Account" ><i class="fas fa-user"></i> Account</a></li>
+              <li><a id="AddPrice" ><i class="fas fa-euro-sign"></i></i> Add Price</a></li>
+              <li><a id="About" > <i class="fas fa-info"></i> About</a></li>
+              <li><a id="Contact" ><i class="fas fa-at"></i> Contact</a></li>
+
+              <li class="small"><a>Facebook</a><a>Instagram</a></li>
+            </ul>
+          </div>
         </div>
-
-        <h1>Responsive animated sidebar Menu</h1>
-        
-
-
+      
+        <main>
+          <div class="content">
+                <div class="search">
+                        <form class="search-form">
+                            <input type="text" placeholder="Search for books, authors, categories and more..">
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+          </div>
+        </main>
     </div>
-    <script type="text/javascript" src="/static/js/index.js"></script>
-
+      <script type="text/javascript" src="/static/js/index.js"></script>
 </body>
-</html>
+

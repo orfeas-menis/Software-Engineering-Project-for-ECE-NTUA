@@ -1,4 +1,4 @@
-var     User                = require("../database/models/users");
+var User = require("../database/models/users");
 
 const loginController = {}
 
