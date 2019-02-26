@@ -4,7 +4,8 @@ const index_controller = {}
 
 
 index_controller.indexAction = (req, res) => {
-    res.render("login_register", {});
+    console.log(req.query.format)
+    res.render("addPrice", {});
 };
 
 

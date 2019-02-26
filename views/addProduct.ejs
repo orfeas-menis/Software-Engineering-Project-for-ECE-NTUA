@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Product</title>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/add_product.css">
+    </head>
+
+    <body>
+        <div class="form_box">
+            <form name="prod_form" id="prod_form">
+                <input type="text" id="product_name" name="product_name" placeholder="Name" required/><br>
+                <input type="text" id="product_desc" name="product_desc" placeholder="Description" required/><br>
+                <input type="text" id="product_category" name="product_category" placeholder="Category" required/><br>
+                
+                <div class="container" id="container" name="container">
+                    <button type="button" id="cell_add_button">Add TagCell</button>
+                    <button type="button" id="cell_remove_button">Rem TagCell</button><br>
+                    <input class="tag_text" type="text" id="product_tags" name="product_tags" placeholder="Put tag" required/> 
+                </div>
+
+                <p id="demo"></p>
+                <button id="add_product_button" type="submit">Add Product</button>
+            </form>
+        </div>
+        <div id="snackbar"></div>
+        <script type="text/javascript" src="/static/js/addProduct.js"></script>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+.search_bar{
+    position: relative;
+    top: center;
+    left:25%;
+    width: 600px;
+}
+
+.container{
+    width: 600px;
+    height: 100%;
+}
+
+.prices_map{
+    height: 400px;
+}

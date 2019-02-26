@@ -83,7 +83,7 @@ ApiProductController.addProduct = (req, res) => {
             res.status(200).send(product)
         }
         else{
-            res.sendStatus(400)
+            res.status(400).send({message: "Server Error!"})
         }   
     })
 

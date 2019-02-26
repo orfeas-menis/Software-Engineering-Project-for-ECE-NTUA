@@ -17,7 +17,7 @@ ApiAuthController.login = (req, res) => {
     var password = req.body.password;
     User.findOne({where: {username: username}}).then(user => {
         if (!user){
-            res.status(404).send("User with username: \"" + username + "\" does not exist.")
+            res.status(404).json({message: "User with username: \"" + username + "\" does not exist."})
         }
         else{
             bcrypt.compare(password, user.password).then(isMatch => {
@@ -32,7 +32,7 @@ ApiAuthController.login = (req, res) => {
                     res.status(200).send(token)
                 }
                 else{
-                    res.status(400).send("Wrong Password!")
+                    res.status(400).json({message: "Wrong Password!"})
                 }
             })
         }
