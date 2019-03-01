@@ -1,9 +1,5 @@
 $(document).ready(function(){
-<<<<<<< HEAD
     console.log("we are ok!");   
-=======
-    console.log("we are ok!");
->>>>>>> master
 });
 
 var home = true;
