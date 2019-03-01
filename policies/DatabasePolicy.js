@@ -1,6 +1,8 @@
 const Product = require("../database/models/products")
 const Shop = require("../database/models/shops")
 const User = require("../database/models/users")
+const bcrypt = require("bcryptjs");
+
 
 const Joi = require('joi')
 alters = require("../config/alters")
@@ -685,15 +687,31 @@ module.exports = {
         }
     },
     changeCategory(req, res, next){
+        password = req.body.password
         category = req.body.category
         userId = parseInt(req.params.userId)
         if (category && !isNaN(userId)){
-            if ((alters.userCategories).includes(category)){
-                next()
-            }
-            else{
-                res.sendStatus(400)
-            }
+            User.findByPk(userId).then(user => {
+                if (!user){
+                    res.status(404).json({message: "User with id: \"" + userId + "\" does not exist."})
+                }
+                else{
+                    bcrypt.compare(password, user.password).then(isMatch => {
+                        if (isMatch){
+                            if ((alters.userCategories).includes(category)){
+                                next()
+                            }
+                            else{
+                                res.sendStatus(400)
+                            }
+                        }
+                        else{
+                            res.status(400).json({message: "Wrong Password!"})
+                        }
+                    })
+                }
+            })
+            
         }
         else{
             res.sendStatus(400)
