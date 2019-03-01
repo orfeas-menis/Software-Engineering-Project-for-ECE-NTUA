@@ -33,7 +33,7 @@ $("#Account").on("click",function(event){
 })
 
 $("#AddPrice").on("click",function(event){
-    $(location).attr("href", "/shops");
+    $(location).attr("href", "/addprice");
 })
 
 $("#About").on("click",function(event){
