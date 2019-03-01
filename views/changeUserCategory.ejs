@@ -18,19 +18,27 @@
 <body>
     <div id="form-box">
         <div id="form-group" name="form-group" class="form-group" style="width: 400px">
-            <label for="usr">User id:</label>
+            <label for="usr">Search Users by Id:</label>
             <input type="text" class="form-control" id="user_id">
             <button name="userSearch "id="userSearch" type="button" class="btn" 
                 style="color:white; background: black">Search</button>
-                  
         </div>
-        
-        <div name = "category_select" id="category_select" >
+                  
+        <div id="userinfo"></div>
+
+        <div name = "category_select" id="category_select" style="width: 400px">
+                <label>Change User Category</label>
                 <select name = "categories" id="categories" class="form-control input-lg">
                         <option value="">Select Category</option>
                 </select>
-            </div>
-        <button type="button" class="btn" style="color:white; background: black">Submit</button>
+        </div>
+
+        <div id="form-group" name="form-group" class="form-group" style="width: 400px">
+                <label>Admin Password Verification:</label>
+                <input type="text" class="form-control" id="admin_password">        
+        </div>
+
+        <button id="category_change_sumbit" type="button" class="btn" style="color:white; background: black">Submit</button>
 
     </div>
         
