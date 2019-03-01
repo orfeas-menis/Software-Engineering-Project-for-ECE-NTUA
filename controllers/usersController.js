@@ -156,4 +156,22 @@ usersController.deleteUser = (req, res) => {
     }
 }
 
+usersController.whoAmI = (req, res) => {
+    if(req.decoded){
+        username = req.decoded.username
+        userId = req.decoded.userId
+        email = req.decoded.email
+        category = req.decoded.category
+        var myJson = {}
+        myJson.username = username
+        myJson.userId = iserId
+        myJson.email = email
+        myJson.category = category
+        res.send(myJson).status(200)
+    }
+    else{
+        res.sendStatus(400)
+    }
+}
+
 module.exports = usersController;
