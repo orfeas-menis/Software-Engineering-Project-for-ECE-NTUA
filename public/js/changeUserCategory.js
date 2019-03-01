@@ -85,7 +85,7 @@ $('#category_change_sumbit').click(function(){
     var admin_pas = document.getElementById('admin_password').value;
     var Data = {
         category: user_cat,
-        password: admin_pas 
+        password: admin_pas.trim() 
     }
 
     $.ajax({
