@@ -164,7 +164,7 @@ usersController.whoAmI = (req, res) => {
         category = req.decoded.category
         var myJson = {}
         myJson.username = username
-        myJson.userId = iserId
+        myJson.userId = userId
         myJson.email = email
         myJson.category = category
         res.send(myJson).status(200)
