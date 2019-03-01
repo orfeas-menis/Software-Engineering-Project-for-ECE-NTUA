@@ -6,7 +6,7 @@
     <title>Admins Only</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="/static/js/changeUserCategory.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
     <!--bootstap-->
     <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
@@ -17,20 +17,24 @@
 </head>
 <body>
     <div id="form-box">
-        <div class="form-group" style="width: 400px">
+        <div id="form-group" name="form-group" class="form-group" style="width: 400px">
             <label for="usr">User id:</label>
-            <input type="text" class="form-control" id="usr">                   
+            <input type="text" class="form-control" id="user_id">
+            <button name="userSearch "id="userSearch" type="button" class="btn" 
+                style="color:white; background: black">Search</button>
+                  
         </div>
-        <div name = "user_select_category" id="user_select_category" style="width: 400px">
-            <label>Change User Category:</label>
-            <select name = "user_category" id="user_category" class="form-control input-lg">
-                <option value="">Select Category</option>
-            </select>
-        </div>
+        
+        <div name = "category_select" id="category_select" >
+                <select name = "categories" id="categories" class="form-control input-lg">
+                        <option value="">Select Category</option>
+                </select>
+            </div>
         <button type="button" class="btn" style="color:white; background: black">Submit</button>
 
     </div>
         
+    <script type="text/javascript" src="/static/js/changeUserCategory.js"></script>
 
     
 </body>

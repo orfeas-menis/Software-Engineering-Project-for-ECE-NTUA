@@ -8,24 +8,50 @@ $(document).ready(function(){
     }    
 });
 
+$('#userSearch').click(function(e){
+    event.preventDefault();
+    var id = document.getElementById('user_id').value ;
+    console.log(id)
+
+    /*$.ajax({
+        url: "/userManagment/",
+        method: "GET",
+        headers: {
+            "X-OBSERVATORY-AUTH" : token
+        },*/
+
+})
+
 
 var visited = false;
-$('#user_category').click(function(){
-    
-    console.log("its working")
+$('#category_select').click(function(){
+    var token = localStorage.getItem("token")
     $.ajax({
         url: "/alters/userCategories",
         method: "GET",
+        headers: {
+            "X-OBSERVATORY-AUTH" : token
+        },
         
-        success: function(response){
+        success: function(response,status){
             if(visited == false)
             {
                 visited = true;
-                var list = response.products
+                var list = response
+                console.log(response)
+
                 $.each(list, function(i,data){
-                    $("#products").append("<option value='"+data.id+"'>"+data.name+"</option>")
+                    $("#categories").append("<option value='"+data+"'>"+data+"</option>")
                 })
-            }      
+            }     
+        },
+        error: function(response, status){
+            if(response.status == 403)
+            {
+                alert("you must be an admin")
+                $(location).attr("href", "/login");
+            }
         }
+        
     })
 }) 
