@@ -8,6 +8,64 @@ $(document).ready(function(){
     }    
 });
 
+var xcord,ycord;
+//map starts
+var map= L.map('shop_map',{center:[37.918084, 23.707027], zoom: 10});
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 20}).addTo(map);
+
+
+var petrolIcon = L.icon({
+    iconUrl: '/static/pictures/1170466.svg',
+    iconSize:     [30, 35],
+    iconAnchor:   [15, 35],
+    popupAnchor:  [-5, -36]
+});
+
+// click event
+map.on('click', onMapClick);
+
+var markers = [];
+
+// Script for adding marker on map click
+function onMapClick(e) {
+
+  var geojsonFeature = {
+    "type": "Feature",
+    "properties": {},
+    "geometry": {
+      "type": "Point",
+      "coordinates": [e.latlng.lat, e.latlng.lng],
+    }
+  }
+  if (markers.length > 0) {
+    map.removeLayer(markers.pop());
+  }
+  var marker;
+
+  L.geoJson(geojsonFeature, {
+
+    pointToLayer: function(feature, latlng) {
+
+      marker = L.marker(e.latlng, {
+
+        title: "lat"+e.latlng.lat+",lng"+e.latlng.lng,
+        alt: "lat"+e.latlng.lat+",lng"+e.latlng.lng,
+        riseOnHover: true,
+        draggable: true,
+        icon: petrolIcon
+      });
+      markers.push(marker)
+      xcord = e.latlng.lat;
+      ycord = e.latlng.lng;
+      return marker;
+    }
+  }).addTo(map);
+
+}
+//map ends
+
 var counter = 0;
 $("#cell_add_button").click(function(event){
     event.preventDefault();
@@ -52,14 +110,15 @@ $("#cell_remove_button").click(function(event){
 })
 
 $("#shop_form").submit(function(event){
+    event.preventDefault();
     var Data = {
         name : $("#shop_name").val(),
         address : $("#shop_addr").val(),
-        lng : $("#shop_x_cord").val(),
-        lat : $("#shop_y_cord").val(),
+        lng : xcord,
+        lat : ycord
     }
 
-    var x = document.forms["prod_form"];
+    var x = document.forms["shop_form"];
     var tag = "";
     var cnt = counter;
     
@@ -93,7 +152,7 @@ $("#shop_form").submit(function(event){
     }
     else{
         $.ajax({
-            url: "/observatory/api/shop",
+            url: "/observatory/api/shops",
             method: "POST",
             data: Data,
             headers: {
@@ -106,8 +165,7 @@ $("#shop_form").submit(function(event){
                 x.className = "show";
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    
-                //$(location).attr("href", "/");
+
             },
             error: function(data,status){
                 if (data.status == 403){

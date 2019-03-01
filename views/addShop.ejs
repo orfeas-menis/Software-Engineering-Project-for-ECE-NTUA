@@ -2,31 +2,51 @@
 <html>
     <head>
         <title>Shop</title>
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-    ></script>
-    <link rel="stylesheet" type="text/css" href="">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/add_shop.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin="">
+    </script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
     </head>
 
     <body>
-        <form name="shop_form" id="shop_form">
-            <input type="text" id="shop_name" name="shop_name" placeholder="Name" required/><br>
-            <input type="text" id="shop_addr" name="shop_addr" placeholder="Address" required/><br>
-            <input type="text" id="shop_x_cord" name="shop_x_cord" placeholder="xCord" required/><br>
-            <input type="text" id="shop_y_cord" name="shop_y_cord" placeholder="yCord" required/><br>
+        <div class="form_container">
+            <div class="shop_map" id="shop_map"></div>
 
-            <div id="container" name="container">
-                <input class="tag_text" type="text" id="shop_tags" name="shop_tags" placeholder="Put tag" required>  
-                <button type="button" id="cell_add_button">Add Tag Cell</button>
-                <button type="button" id="cell_remove_button">Remove Tag Cell</button><br>
-            </div>
-
-            <p id="demo"></p>
-            <button id="add_shop_button" type="submit">Add shop</button>
-            
-
-        </form>
-        <div id="snackbar"></div>
+            <form name="shop_form" id="shop_form">
+                    <input type="text" id="shop_name" name="shop_name" placeholder="Name" required/><br>
+                    <input type="text" id="shop_addr" name="shop_addr" placeholder="Address" required/><br>
+                    
+                    
+        
+                    <!--<input type="text" id="shop_x_cord" name="shop_x_cord" placeholder="xCord" required/><br>
+                    <input type="text" id="shop_y_cord" name="shop_y_cord" placeholder="yCord" required/><br>--->
+        
+                    <div id="container" name="container">
+                        <input class="tag_text" type="text" id="shop_tags" name="shop_tags" placeholder="Put tag" required>  
+                        <button type="button" id="cell_add_button">Add Tag Cell</button>
+                        <button type="button" id="cell_remove_button">Remove Tag Cell</button><br>
+                    </div>
+        
+                    <p id="demo"></p>
+                    <button id="add_shop_button" type="submit">Add shop</button>
+                    
+        
+                </form>
+            <div id="snackbar"></div>
+        </div>
+        
         <script type="text/javascript" src="/static/js/addShop.js"></script>
+        
     </body>
 </html>

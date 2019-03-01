@@ -1,11 +1,11 @@
 $(document).ready(function(){
     console.log("we are ok!");
-    /*var token = localStorage.getItem("token")
+    var token = localStorage.getItem("token")
     if (token == null){
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
 
-    }*/    
+    }   
 });
 
 var home = true;
@@ -33,7 +33,7 @@ $("#Account").on("click",function(event){
 })
 
 $("#AddPrice").on("click",function(event){
-    $(location).attr("href", "/shops");
+    $(location).attr("href", "/addprice");
 })
 
 $("#About").on("click",function(event){
