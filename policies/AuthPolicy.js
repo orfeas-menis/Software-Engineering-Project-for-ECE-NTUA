@@ -12,20 +12,20 @@ Joi Documentation: https://www.npmjs.com/package/joi
 module.exports = {
   login (req, res, next){
     const schema = {
-      username: Joi.string().max(30).required(),
+      username: Joi.string().min(4).max(30).required(),
       password: Joi.string().required()
     };
     const { error } = Joi.validate(req.body, schema);
     if(error){
       switch(error.details[0].context.key){
         case 'username':
-          res.status(400).json({ error: "You must provide a valid username"});
+          res.status(400).json({ message: "You must provide a valid username"});
           break;
         case 'password':
-          res.status(400).json({ error: "Incorrent password"});
+          res.status(400).json({ message: "Incorrent password"});
           break;
         default:
-          res.status(400).json({ error: "Incorrect Input "});
+          res.status(400).json({ message: "Incorrect Input "});
           break;
       }
     } else{
@@ -38,12 +38,12 @@ module.exports = {
     if (token) {
       Blacklist.findByPk(token).then(found => {
         if (found){
-          res.status(403).send("You are not logged in. Please Login.")
+          res.status(403).send({message: "You are not logged in. Please Login."})
         }
         else{
           jwt.verify(token, credentials.secret, (err, decoded) => {
             if (err) {
-              res.status(403).send("Token is not valid")
+              res.status(403).send({message:"Token is not valid. Please login!"})
             } else {
               req.decoded = decoded;
               next();

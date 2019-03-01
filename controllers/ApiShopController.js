@@ -96,7 +96,7 @@ ApiShopController.addShop = (req, res) => {
             res.status(200).send(shop)
         }
         else{
-            res.sendStatus(400)
+            res.sendStatus(400).send({message: "Server Error!"})
         }   
     })
 
