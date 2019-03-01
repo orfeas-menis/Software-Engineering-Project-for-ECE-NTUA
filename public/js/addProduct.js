@@ -8,6 +8,7 @@ $(document).ready(function(){
     }    
 });
 
+
 var counter = 0;
 $("#cell_add_button").click(function(event){
     event.preventDefault();

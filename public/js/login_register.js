@@ -3,8 +3,8 @@ $(document).ready(function(){
     
 });
 
-$("#loginForm").click(function(event){
-    event.preventDefault();
+
+$("#loginForm").submit(function(event){
 
     var Data = {
         username : $("#log_username").val().trim(),
