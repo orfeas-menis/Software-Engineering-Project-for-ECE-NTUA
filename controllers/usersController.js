@@ -20,6 +20,18 @@ usersController.users = (req, res) => {
     })
 }
 
+usersController.userId = (req, res) => {
+    var userId = parseInt(req.params.userId)
+    User.findByPk(userId).then(user => {
+        if (user){
+            res.status(200).send(user)
+        }
+        else{
+            res.sendStatus(400)
+        }
+    })
+}
+
 usersController.addUser = (req, res) => {
     username = req.body.username
     password = req.body.password
