@@ -83,3 +83,15 @@ app.listen(8765, () => {
     console.log("Hello World console");
 })
 
+var fs = require('fs');
+
+// SET UP KEY FOR HTTPS
+var key = fs.readFileSync('./SSL KEYS/15886504_stas.com.key');
+var cert = fs.readFileSync( './SSL KEYS/15886504_stas.com.cert' );
+var options = {
+    key: key,
+    cert: cert
+  };
+ 
+var https = require('https');
+https.createServer(options, app).listen(8765);
