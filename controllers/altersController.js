@@ -49,6 +49,13 @@ altersController.userCategories = (req,res) => {
     
 }
 
+altersController.GetUserCategories = (req,res) => {
+    userCategories = alters.userCategories
+    res.send(userCategories).status(200)
+}
+
+
+
 //required body parameter example:  "productCategories": "['FUEL', 'SERVICE']"
 altersController.productCategories = (req,res) => {
     productCategories = alters.productCategories
@@ -82,6 +89,11 @@ altersController.productCategories = (req,res) => {
     }
             
 
+}
+
+altersController.GetProductCategories = (req,res) => {
+    productCategories = alters.productCategories
+    res.send(productCategories).status(200)
 }
 
 module.exports = altersController;

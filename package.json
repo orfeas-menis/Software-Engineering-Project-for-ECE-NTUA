@@ -29,6 +29,7 @@
     "joi": "^14.3.0",
     "jsonwebtoken": "^8.4.0",
     "mariadb": "^2.0.2-rc",
+    "nodemon": "^1.18.10",
     "nodeom": "0.0.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

@@ -19,6 +19,7 @@ $("#loginForm").submit(function(event){
 
         success: function(data,status){
             var token = data
+
             localStorage.setItem("token", token)
             $(location).attr("href", "/");
         },
