@@ -3,7 +3,7 @@ $(document).ready(function(){
     var token = localStorage.getItem("token")
     if (token == null){
         alert("You must be logged in to add new shop")
-        //$(location).attr("href", "/login");
+        $(location).attr("href", "/login");
 
     }    
 });
@@ -11,7 +11,10 @@ $(document).ready(function(){
 var xcord,ycord;
 //map starts
 var map= L.map('shop_map',{center:[37.918084, 23.707027], zoom: 10});
-    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20,subdomains:['mt0','mt1','mt2','mt3']}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 20}).addTo(map);
+
 
 var petrolIcon = L.icon({
     iconUrl: '/static/pictures/1170466.svg',

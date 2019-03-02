@@ -1,11 +1,11 @@
 $(document).ready(function(){
     console.log("we are ok!");
-    /*var token = localStorage.getItem("token")
+    var token = localStorage.getItem("token")
     if (token == null){
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
 
-    }*/    
+    }    
 });
 
 var visited = false;
@@ -31,6 +31,6 @@ $('#product_select').click(function(){
 
 $("#add_product_page_button").click(function(event){
     event.preventDefault();
-    $(location).attr("href", "/");
+    $(location).attr("href", "/addproduct");
 })
 
