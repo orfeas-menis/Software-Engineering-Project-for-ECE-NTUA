@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log("we are ok!");
+    console.log("we are ok!");   
 });
 
 var home = true;
@@ -17,7 +17,7 @@ $("#Home").on("click",function(event){
 $("#Account").on("click",function(event){  
     var token = localStorage.getItem("token")
     if (token == null){
-        alert("You must be logged in to add new product")
+        alert("You must be logged in to see your Account")
         $(location).attr("href", "/login");
     } 
     else

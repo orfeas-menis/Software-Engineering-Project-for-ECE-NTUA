@@ -8,12 +8,50 @@ $(document).ready(function(){
     }    
 });
 
+var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+
 var xcord,ycord;
 //map starts
 var map= L.map('shop_map',{center:[37.918084, 23.707027], zoom: 10});
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         maxZoom: 20}).addTo(map);
+        
+        var myprovider =  new OpenStreetMapProvider();
+
+        var geocoder = new GeoSearchControl({
+            provider: myprovider,              // required
+            style: 'bar',                             
+            showMarker: false,                                   // optional: true|false  - default true
+            showPopup: false,                                   // optional: true|false  - default false
+            marker: {                                           // optional: L.Marker    - default L.Icon.Default
+              icon: new L.Icon.Default(),
+              draggable: false,
+            },
+            popupFormat: ({ query, result }) => result.label,   // optional: function    - default returns result label
+            maxMarkers: 1,                                      // optional: number      - default 1
+            retainZoomLevel: false,                             // optional: true|false  - default false
+            animateZoom: true,                                  // optional: true|false  - default true
+            autoClose: true,                                   // optional: true|false  - default false
+            searchLabel: 'Enter address',                       // optional: string      - default 'Enter address'
+            keepResult: true                                 // optional: true|false  - default false
+        })
+
+        map.addControl(geocoder);
+
+        /*geocoder.on('result', function(result){
+            console.log(result)
+        });
+
+        myprovider
+        .search({ query: '...' })
+        .then(function(result) { 
+            // do something with result;
+            console.log(result)
+        })
+
+        map.on('geosearch/showlocation', on.submit)*/
 
 
 var petrolIcon = L.icon({

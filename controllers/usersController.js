@@ -78,6 +78,7 @@ usersController.changeCategory = (req, res) => {
         else{
             res.sendStatus(400)
         }
+
     })
 }
 
