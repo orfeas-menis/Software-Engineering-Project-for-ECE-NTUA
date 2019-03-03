@@ -16,7 +16,7 @@ var xcord,ycord;
 var map= L.map('shop_map',{center:[37.918084, 23.707027], zoom: 10});
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 20}).addTo(map);
+        maxZoom: 18}).addTo(map);
         
         var myprovider =  new OpenStreetMapProvider();
 

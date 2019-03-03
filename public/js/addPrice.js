@@ -14,15 +14,15 @@ $(document).ready(function(){
     else
     {
         //map initialize
-var GeoSearchControl = window.GeoSearch.GeoSearchControl;
-var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+        var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+        var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
 
-//var xcord,ycord;
-//map starts
-var map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18}).addTo(map);
+        //var xcord,ycord;
+        //map starts
+        var map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18}).addTo(map);
         
         var myprovider =  new OpenStreetMapProvider();
 
@@ -71,10 +71,13 @@ var map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
                         $("#prices_products").append("<option value='"+data.name+"'>"+data.name+"</option>")
                     })
                 }      
+            },
+            error: function(response,status){
+            
             }
         })
         //telos dropdown list gia products
-        
+
         //arxh gia eisagwgh markers sto xarth 
         $.ajax({
             url: "/observatory/api/shops",
@@ -94,7 +97,6 @@ var map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
                         coordinates[k+1] = lng;
                         k = k + 2;
                     })
-                    console.log(coordinates.length)
                     var j = 0;
                     for(var i=0; i<=coordinates.length-2;i=i+2)
                     {
@@ -103,6 +105,9 @@ var map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
                         j = j + 1;
                     }           
                 }      
+            },
+            error: function(response,status){
+            
             }
         })
         //telos gia markers
@@ -127,10 +132,25 @@ $("#add_product_page_button").click(function(event){
 
 $("#add_shop_page_button").click(function(event){
     event.preventDefault();
-    $(location).attr("href", "/addproduct");
+    $(location).attr("href", "/addshop");
 })
 
+$("#add_price_submit_button").click(function(event){
+    event.preventDefault();
+    var Data = {
 
+    }
+    $.ajax({
+        url: "/observatory/api/addprice",
+        method: "GET",
+        data: Data,
+        
+        success: function(response,status){
+                 
+        },
+        error: function(response,status){
 
-
-
+        }
+    })
+    
+})
