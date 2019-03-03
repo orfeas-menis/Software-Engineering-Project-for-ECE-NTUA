@@ -3,6 +3,7 @@ var coordinates = [];
 var markers = [];
 var lenght = 0; 
 var flag = false; 
+var ShopID;
 $(document).ready(function(){
     console.log("we are ok!");
     var token = localStorage.getItem("token")
@@ -68,7 +69,7 @@ $(document).ready(function(){
                     visited = true;
                     var list = response.products
                     $.each(list, function(i,data){
-                        $("#prices_products").append("<option value='"+data.name+"'>"+data.name+"</option>")
+                        $("#prices_products").append("<option value='"+data.id+"'>"+data.name+"</option>")
                     })
                 }      
             },
@@ -89,21 +90,32 @@ $(document).ready(function(){
                     visited1 = true;
                     var cords = response.shops
                     
+                    var j = 0;
                     var k = 0;
-                    $.each(cords, function(i,data){
+                    $.each(cords, function(i,data){ 
                         var lat = data.lat;
                         var lng = data.lng;
                         coordinates[k] = lat; 
                         coordinates[k+1] = lng;
-                        k = k + 2;
+                        
+                        var marker = new L.marker([coordinates[i], coordinates[i+1]]);
+                        marker.key = "Name: "+data.name+", lat: "+coordinates[i]+", lng: "+coordinates[i+1];
+                        marker.myId = data.id;
+                        marker.addTo(map).on('click',onClick)
+                        markers[j] = marker;
+                        j = j + 1;
+                        k = k + 2;    
                     })
+                    /*console.log(response.shops)
                     var j = 0;
                     for(var i=0; i<=coordinates.length-2;i=i+2)
                     {
-                        var marker = new L.marker([coordinates[i], coordinates[i+1]]).addTo(map);
+                        var marker = new L.marker([coordinates[i], coordinates[i+1]]).addTo(map).on('click',onClick);
+                        marker.key = "name: lat: "+coordinates[i]+"lng: "+coordinates[i+1];
+                        console.log(marker.key)
                         markers[j] = marker;
                         j = j + 1;
-                    }           
+                    }*/           
                 }      
             },
             error: function(response,status){
@@ -111,10 +123,19 @@ $(document).ready(function(){
             }
         })
         //telos gia markers
+        var popup = L.popup();
+
+        function onClick(e) { //afto kanei trigger otan pataw se ena marker mono
+            popup
+                .setLatLng(e.latlng)
+                .setContent(this.key)
+                .openOn(map);
+            ShopId = e.target.myId; //edw krataw to ShopId otan kanw click se ena marker gia na to xrhsimopoihsw sto submit argotera
+            console.log(ShopId)
+        }
 
     } 
 });
-
 
 
 var selectedProd;
