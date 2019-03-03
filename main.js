@@ -17,6 +17,7 @@ var express             = require('express'),
     sessionOptions      = require("./config/session"),
     addpriceRouter      = require("./routing/addpriceRouter"),
     addproductRouter    = require("./routing/addproductRouter");
+    addshopRouter       = require("./routing/addshopRouter");
 
 /*
 set view engine as ejs to omit .ejs when rendering a view
@@ -74,6 +75,7 @@ app.use("/static", express.static("public"));
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
 app.use('/addprice', addpriceRouter)
+app.use('/addshop',addshopRouter)
 app.use('/addproduct', addproductRouter)
 app.use('/observatory/api', ApiRouter)
 app.use('/alters', altersRouter)

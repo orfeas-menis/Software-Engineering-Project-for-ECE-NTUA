@@ -696,7 +696,6 @@ module.exports = {
                     res.status(404).json({message: "User with id: \"" + userId + "\" does not exist."})
                 }
                 else{
-                    console.log("a1",password,password)
                     bcrypt.compare(password, user.password).then(isMatch => {
                         if (isMatch){
                             if ((alters.userCategories).includes(category)){
