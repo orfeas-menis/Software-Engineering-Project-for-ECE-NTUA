@@ -170,6 +170,13 @@ usersController.deleteUser = (req, res) => {
 }
 
 usersController.whoAmI = (req, res) => {
+    console.log("aaaaaaaaaaaaaaa")
+    console.log(req.decoded)
+    console.log(req.decoded.username)
+    console.log(req.decoded.userId)
+    console.log(req.decoded.email)    
+    console.log(req.decoded.category)
+
     if(req.decoded){
         username = req.decoded.username
         userId = req.decoded.userId
