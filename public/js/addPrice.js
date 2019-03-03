@@ -141,7 +141,7 @@ $(document).ready(function(){
 var selectedProd;
 $('#product_select').click(function(){ 
     event.preventDefault();  
-    selectedProd = document.getElementById('prices_products').value; //edw apothikevw thn epilogh tou xrhsth
+    selectedProd = document.getElementById('prices_products').value; //edw apothikevw thn epilogh tou xrhsth dld to productId
     console.log(selectedProd)
  
 }) 
