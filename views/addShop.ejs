@@ -14,11 +14,14 @@
         crossorigin="">
     </script>
 
+<link  href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" />
+<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
+
     </head>
 
     <body>
         <div class="form_container">
-            <div class="shop_map" id="shop_map"></div>
+            <div id="shop_map"></div>
 
             <form name="shop_form" id="shop_form">
                     <input type="text" id="shop_name" name="shop_name" placeholder="Name" required/><br>
@@ -44,5 +47,6 @@
         </div>
         
         <script type="text/javascript" src="/static/js/addShop.js"></script>
+        
     </body>
 </html>

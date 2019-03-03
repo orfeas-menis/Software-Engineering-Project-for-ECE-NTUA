@@ -20,6 +20,18 @@ usersController.users = (req, res) => {
     })
 }
 
+usersController.userId = (req, res) => {
+    var userId = parseInt(req.params.userId)
+    User.findByPk(userId).then(user => {
+        if (user){
+            res.status(200).send(user)
+        }
+        else{
+            res.sendStatus(400)
+        }
+    })
+}
+
 usersController.addUser = (req, res) => {
     username = req.body.username
     password = req.body.password
@@ -66,6 +78,7 @@ usersController.changeCategory = (req, res) => {
         else{
             res.sendStatus(400)
         }
+
     })
 }
 
@@ -150,6 +163,24 @@ usersController.deleteUser = (req, res) => {
                 res.sendStatus(400)
             }
         })
+    }
+    else{
+        res.sendStatus(400)
+    }
+}
+
+usersController.whoAmI = (req, res) => {
+    if(req.decoded){
+        username = req.decoded.username
+        userId = req.decoded.userId
+        email = req.decoded.email
+        category = req.decoded.category
+        var myJson = {}
+        myJson.username = username
+        myJson.userId = userId
+        myJson.email = email
+        myJson.category = category
+        res.send(myJson).status(200)
     }
     else{
         res.sendStatus(400)

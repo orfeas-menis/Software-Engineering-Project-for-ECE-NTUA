@@ -3,6 +3,7 @@ $(document).ready(function(){
     
 });
 
+
 $("#loginForm").submit(function(event){
 
     var Data = {
@@ -18,6 +19,7 @@ $("#loginForm").submit(function(event){
 
         success: function(data,status){
             var token = data
+
             localStorage.setItem("token", token)
             $(location).attr("href", "/");
         },

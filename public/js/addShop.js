@@ -3,15 +3,56 @@ $(document).ready(function(){
     var token = localStorage.getItem("token")
     if (token == null){
         alert("You must be logged in to add new shop")
-        //$(location).attr("href", "/login");
+        $(location).attr("href", "/login");
 
     }    
 });
 
+var GeoSearchControl = window.GeoSearch.GeoSearchControl;
+var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
+
 var xcord,ycord;
 //map starts
 var map= L.map('shop_map',{center:[37.918084, 23.707027], zoom: 10});
-    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20,subdomains:['mt0','mt1','mt2','mt3']}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 20}).addTo(map);
+        
+        var myprovider =  new OpenStreetMapProvider();
+
+        var geocoder = new GeoSearchControl({
+            provider: myprovider,              // required
+            style: 'bar',                             
+            showMarker: false,                                   // optional: true|false  - default true
+            showPopup: false,                                   // optional: true|false  - default false
+            marker: {                                           // optional: L.Marker    - default L.Icon.Default
+              icon: new L.Icon.Default(),
+              draggable: false,
+            },
+            popupFormat: ({ query, result }) => result.label,   // optional: function    - default returns result label
+            maxMarkers: 1,                                      // optional: number      - default 1
+            retainZoomLevel: false,                             // optional: true|false  - default false
+            animateZoom: true,                                  // optional: true|false  - default true
+            autoClose: true,                                   // optional: true|false  - default false
+            searchLabel: 'Enter address',                       // optional: string      - default 'Enter address'
+            keepResult: true                                 // optional: true|false  - default false
+        })
+
+        map.addControl(geocoder);
+
+        /*geocoder.on('result', function(result){
+            console.log(result)
+        });
+
+        myprovider
+        .search({ query: '...' })
+        .then(function(result) { 
+            // do something with result;
+            console.log(result)
+        })
+
+        map.on('geosearch/showlocation', on.submit)*/
+
 
 var petrolIcon = L.icon({
     iconUrl: '/static/pictures/1170466.svg',
