@@ -127,7 +127,7 @@ $("#add_product_page_button").click(function(event){
 
 $("#add_shop_page_button").click(function(event){
     event.preventDefault();
-    $(location).attr("href", "/addproduct");
+    $(location).attr("href", "/addshop");
 })
 
 
