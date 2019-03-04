@@ -29,7 +29,10 @@ ApiAuthController.login = (req, res) => {
                     var now = new Date()
                     user.update({"lastLogin" : now},{fileds:["lastLogin"]})
                     // return the JWT token for the future API calls
-                    res.status(200).send(token)
+                    var answer = {
+                        token: token
+                    }
+                    res.status(200).send(answer)
                 }
                 else{
                     res.status(400).json({message: "Wrong Password!"})

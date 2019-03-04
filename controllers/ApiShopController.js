@@ -82,8 +82,7 @@ ApiShopController.addShop = (req, res) => {
     saddress = req.body.address.toString()
     slng = req.body.lng.toString()
     slat = req.body.lat.toString()
-    stags = req.body.tags.toString() // We take as granted that tags have been sent to us as one String and tags are seperated with commas
-        
+    stags = req.body.tags // We take as granted that tags have been sent to us as one String and tags are seperated with commas
   
     Shop.create({
         name: sname,

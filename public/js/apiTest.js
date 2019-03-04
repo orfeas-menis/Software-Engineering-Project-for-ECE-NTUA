@@ -12,7 +12,7 @@ $(document).ready(function(){
         method: "POST",
         data: Data,
         success: function(data,status){
-            token = data
+            token = data.token
             console.log("Login Successful")
             var ProdName = "Robot Test Product Name"
             var prodDesc = "This is the Robot Test Product Description"
