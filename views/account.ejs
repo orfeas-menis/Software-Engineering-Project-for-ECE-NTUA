@@ -2,21 +2,36 @@
 <html lang="en">
     <head>
         <title>Account</title>
+        <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/css/account.css">
     </head>
 
     <body>
-        <div class="form_box">
-            <form name="user_info" id="user_info">
-                <label for="username">Username:</label>
-                <input type="text" id="username" value="Skase"><br>
-                <label for="user_id">UserID:</label>
-                <input type="text" id="user_id" value="id"><br>
-                <label for="email">Email:</label>
-                <input type="text" id="email" value="email"><br>
-                <label for="category">Category:</label>
-            </form>
-        </div>
+        <h2>Account Information</h2>
+        <template class="info-template" id="info-template">
+            <div data-id="{{userId}}" id="editable_info">
+                <p>
+                    <span class="noedit username">Username: {{username}}</span>
+                    <input class="edit username"/>
+                </p>
+                <p>
+                    <span class="noedit email">Email: {{email}}</span>
+                    <input class="edit email"/>
+                </p>
+                <button class="editinfo noedit">Edit</button>
+                <button class="saveinfo edit">Save</button>
+                <button class="cancelinfo edit">Cancel</button>
+            </div>
+            <div id="non_editable_info">
+                <p>
+                    <span class="noedit">Category: {{category}}</span>
+                </p>
+            </div>
+        </template>
         <script type="text/javascript" src="/static/js/account.js"></script>
     </body>
 </html>

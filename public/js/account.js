@@ -6,19 +6,55 @@ $(document).ready(function(){
         $(location).attr("href", "/login");
 
     }
+    var $infos = $("#info-template");
+    var infotemplate = $('#info-template').html();
     $.ajax({
         url:"/userManagement/whoami",
         method: "GET",
         headers: {
             "X-OBSERVATORY-AUTH": token
         },
-        success: function(response,status) {
-            console.log(response)
-
+        success: function(infos,status) {
+            
         },
         error: function(response,status){
             alert("Something went wrong")
             console.log(response)
         }
-    })    
+    });
+    
+    $infos.delegate('.editinfo', 'click',function(){
+        var $div= $(this).closest('div');
+        $div.find('input.username').val( $div.find('span.username').html() );
+        $div.find('input.email').val( $div.find('span.email').html() );
+        $div.addClass('edit');
+    });
+
+    $infos.delegate('.cancelinfo', 'click',function(){
+        $(this).closest('div').removeClass('edit');
+    });
+
+    $infos.delegate('.saveinfo', 'click',function(){
+        var $div= $(this).closest('div');
+        var info = {
+            username: $infos.find('input.username').val(),
+            email: $infos.find('input.email').val()
+        };
+
+        $.ajax({
+            url:"/userManagement/whoami" + $div.attr('data-id'),
+            method: "PUT",
+            headers: {
+                "X-OBSERVATORY-AUTH": token
+            },
+            success: function(infos,status) {
+                $div.find('span.username').html(info.username);
+                $div.find('span.email').html(info.email);
+                $div.removeClass('edit');
+            },
+            error: function(response,status){
+
+            }
+        });
+    });
 });

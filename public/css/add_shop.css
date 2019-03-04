@@ -1,8 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:400,600');
 .form_container{
     width: 600px;
     height: 100%;
 }
 
-#shop_map{
+.shop_map{
     height: 400px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+body, html {
+  height: 100%;
+}
+
+.bg { 
+  /* The image used */
+  background-image: url("/static/pictures/background.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
+html,
+body {
+  height: 100%
 }

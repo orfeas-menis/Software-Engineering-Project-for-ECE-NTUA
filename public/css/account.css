@@ -1,23 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Mukta');
 body{
     font-family: 'Mukta', sans-serif;
-      height:100vh;
-      min-height:550px;
-      background-image:url(/static/pictures/background.jpg);
-      background-repeat: no-repeat;
-      background-size:cover;
-      background-position:center;
-      position:relative;
-      overflow-y: hidden;
-  }
+	height:100vh;
+	min-height:550px;
+	background-image:url(/static/pictures/background.jpg);
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position:center;
+	position:relative;
+    overflow-y: hidden;
 
-.form_box {
-    text-align: center;
-    margin-top: 15%;
-    padding: 10px;
-    color:#B8B8B8;
-    background-color: rgba(30,30,30, 0.9);
-    margin-right:25%;
-    margin-left:25%;
 }
 
+.info-template .edit {
+    display:none;
+}
+
+.info-template.edit .edit {
+    display:initial;
+}
+
+.info-template.edit .noedit {
+    display:none;
+}
