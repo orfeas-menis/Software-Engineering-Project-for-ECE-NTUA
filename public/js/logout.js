@@ -33,6 +33,7 @@ $("#logout_form").submit(function(event){
                 x.className = "show";
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                $(location).attr("href", "/");
                 },
             error: function(data,status){
                 if (data.status == 403){

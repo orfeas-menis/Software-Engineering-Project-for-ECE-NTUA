@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Home</title>
+  <title>AddPrice</title>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <link rel="stylesheet" type="text/css" href="/static/css/addPrice.css">
   
@@ -17,27 +17,35 @@
    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
    crossorigin="">
   </script>
+
+  <link  href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" />
+  <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
     
 </head>
 <body>
 
     <div class="form_container">
-        <div class="prices_map" id="prices_map">
-                
-        </div>
-        
-        <div name = "product_select" id="product_select" >
-            <select name = "products" id="products" class="form-control input-lg">
+
+        <div class="md-form mt-0">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        </div></br>
+
+        <div class="prices_map" id="prices_map"></div>
+        </select><button type="button" id="add_shop_page_button" class="btn btn-dark">Add Shop</button>
+
+        <div name="product_select" id="product_select">
+            <select name = "prices_products" id="prices_products" class="form-control input-lg">
                     <option value="">Select Product</option>
             </select><button type="button" id="add_product_page_button" class="btn btn-dark">Add Product</button>
         </div>
 
         <div class="md-form mt-0">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-          </div>
+            <input class="form-control" type="text" placeholder="Put the Price">
+        </div> 
+
+        <button type="button" id="add_price_submit_button" class="btn btn-dark">Submit Price</button>
     </div>
 
     <script type="text/javascript" src="/static/js/addPrice.js"></script>
-    <script type="text/javascript" src="/static/js/pricesMap.js"></script>
 </body>
 
