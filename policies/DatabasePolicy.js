@@ -57,7 +57,7 @@ module.exports = {
                 name: Joi.string().max(50).required(),
                 description: Joi.string().required(),
                 category: Joi.string().uppercase().valid(productCategories).required(),
-                tags: Joi.string().required(),
+                tags: Joi.required(),
             };
             const { error } = Joi.validate(req.body, schema);
 
@@ -89,7 +89,15 @@ module.exports = {
                         flag = false
                     }
                 })
+                tags = req.body.tags
                 if (flag){
+                    if (Array.isArray(tags)){
+                        temp = tags[0]
+                        for (i=1; i<tags.length; i++){
+                            temp = temp + "," + tags[i] 
+                        }
+                        req.body.tags = temp
+                    }
                     next();
                 }           
             }
@@ -126,7 +134,7 @@ module.exports = {
                 name: Joi.string().required(),
                 description: Joi.string().required(),
                 category: Joi.string().valid('FUEL','SERVICE','fuel','service').required(),
-                tags: Joi.string().required()
+                tags: Joi.required()
             };
             const { error } = Joi.validate(req.body, schema);
             if(error){
@@ -153,6 +161,14 @@ module.exports = {
                         res.status(404).send("Product with id: "+ prodId + " does not exist.")
                     }
                     else{
+                        tags = req.body.tags
+                        if (Array.isArray(tags)){
+                            temp = tags[0]
+                            for (i=1; i<tags.length; i++){
+                                temp = temp + "," + tags[i] 
+                            }
+                            req.body.tags = temp
+                        }
                         next();
                     }
                 })        
@@ -171,7 +187,7 @@ module.exports = {
                 name: Joi.string(),
                 description: Joi.string(),
                 category: Joi.string().valid('FUEL','SERVICE','fuel','service'),
-                tags: Joi.string()
+                tags: Joi.any().optional()
             };
             const { error } = Joi.validate(req.body, schema);
 
@@ -187,7 +203,7 @@ module.exports = {
                         res.status(400).json({ error: "Invalid description"});
                         break;
                     case 'tags':
-                        res.status(400).json({ error: "invalid tags"});
+                        res.status(400).json({ error: "Invalid tags"});
                         break;
                     default:
                         res.status(400).json({ error: "Incorrect Input "});
@@ -199,6 +215,16 @@ module.exports = {
                         res.status(404).send("Product with id: "+ prodId + " does not exist.")
                     }
                     else{
+                        if(req.body.tags){
+                            tags = req.body.tags
+                            if (Array.isArray(tags)){
+                                var temp = tags[0]
+                                for (i=1; i<tags.length; i++){
+                                    temp = temp + "," + tags[i] 
+                                }
+                                req.body.tags = temp
+                            }
+                        }
                         next();
                     }
                 })
@@ -274,7 +300,7 @@ module.exports = {
                 address: Joi.string().required(),
                 lng: Joi.number().required(),
                 lat: Joi.number().required(),
-                tags: Joi.string().required()
+                tags: Joi.required()
             };
             const { error } = Joi.validate(req.body, schema);
 
@@ -314,6 +340,13 @@ module.exports = {
                     }
                     else{
                         if (flag){
+                            if (Array.isArray(tags)){
+                                temp = tags[0]
+                                for (i=1; i<tags.length; i++){
+                                    temp = temp + "," + tags[i] 
+                                }
+                                req.body.tags = temp
+                            }
                             next();
                         }
                     }
@@ -351,7 +384,7 @@ module.exports = {
                 address: Joi.string().required(),
                 lng: Joi.number().required(),
                 lat: Joi.number().required(),
-                tags: Joi.string().required()
+                tags: Joi.required()
             };
             const { error } = Joi.validate(req.body, schema);
             if(error){
@@ -390,6 +423,13 @@ module.exports = {
                     }
                     else{
                         if(flag){
+                            if (Array.isArray(tags)){
+                                temp = tags[0]
+                                for (i=1; i<tags.length; i++){
+                                    temp = temp + "," + tags[i] 
+                                }
+                                req.body.tags = temp
+                            }
                             next();
                         }
                     }
@@ -409,7 +449,7 @@ module.exports = {
                 address: Joi.string(),
                 lng: Joi.number(),
                 lat: Joi.number(),
-                tags: Joi.string()
+                tags: Joi.any().optional()
             };
             const { error } = Joi.validate(req.body, schema);
             if(error){
@@ -456,6 +496,16 @@ module.exports = {
                     }
                     else{
                         if (flag){
+                            if(req.body.tags){
+                                tags = req.body.tags
+                                if (Array.isArray(tags)){
+                                    var temp = tags[0]
+                                    for (i=1; i<tags.length; i++){
+                                        temp = temp + "," + tags[i] 
+                                    }
+                                    req.body.tags = temp
+                                }
+                            }
                             next();
                         }
                     }

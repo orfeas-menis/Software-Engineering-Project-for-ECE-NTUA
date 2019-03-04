@@ -165,7 +165,7 @@ ApiProductController.partialUpdateProduct = (req, res) => {
 
 }
 
-//Checked! (Remains onDelete Cascade implementation!)
+//Checked! 
 ApiProductController.deleteProduct = (req, res) => {
     var prodId = parseInt(req.params.productId)
     delResponse={}

@@ -16,7 +16,8 @@ var express             = require('express'),
     userManagementRouter= require("./routing/userManagementRouter")
     sessionOptions      = require("./config/session"),
     addpriceRouter      = require("./routing/addpriceRouter"),
-    addproductRouter    = require("./routing/addproductRouter");
+    addproductRouter    = require("./routing/addproductRouter"),
+    testRouter          = require("./routing/testRouter");
 
 /*
 set view engine as ejs to omit .ejs when rendering a view
@@ -78,6 +79,8 @@ app.use('/addproduct', addproductRouter)
 app.use('/observatory/api', ApiRouter)
 app.use('/alters', altersRouter)
 app.use('/userManagement', userManagementRouter)
+app.use('/test', testRouter)
+
 
 app.listen(1245, () => {
     console.log("Hello World console");
