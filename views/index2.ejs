@@ -9,6 +9,16 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin="">
+  </script>
+
+<link  href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" />
+  <script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
 
 </head>
 <body>
@@ -60,7 +70,8 @@
         
         <main>
 
-                <div class="form-row">
+            <div class="index_map" id="index_map"></div>
+            <div class="form-row">
                 <div class="form-group col-lg-6 col-md-2 offset-sm-4">
                     <div class="dropdown">
                         <label for="">Are you looking for a Product?</label>
@@ -79,25 +90,21 @@
                             </select>
                         </div> 
                     </div>
-                      
-                      <div name="tags-input" class = "tags-input"  data-name="tags-input" id="tag_search" placeholder="You may use relevant tags" >
-                          <!--<form name = "shop_select" class="search-form">-->
-              <!--</form>-->
-             <!-- <input class="main-input" type="text" >-->
-
-                    </div>
+                    
+                    <label for="">You may use relevant tags</label>
+                    <div name="tags-input" class = "tags-input"  data-name="tags-input" id="tag_search"></div>
                
-               <button type="button" id="home_search" class="btn btn-dark">Search</button>
-               </form>
+                    <button type="button" id="index_search" class="btn btn-dark">Search</button>
+                    
                
           
-          </div>
-          </div>
+                </div>
+            </div>
 
        
         </main>
     </div>
-      <script type="text/javascript" src="/static/js/index.js"></script>
-      <script src="/static/js/tags.js"></script>
-   
+
+    <!--<script type="text/javascript" src="/static/js/tags.js"></script>-->
+    <script type="text/javascript" src="/static/js/index.js"></script>
 </body>

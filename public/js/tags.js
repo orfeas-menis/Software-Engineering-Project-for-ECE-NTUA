@@ -1,3 +1,4 @@
+
 [].forEach.call(document.getElementsByClassName('tags-input'), function (el) {
     let hiddenInput = document.createElement('input'),
         mainInput = document.createElement('input'),
@@ -47,12 +48,9 @@
             removeTag(tags.indexOf(tag));
         });
         tag.element.appendChild(closeBtn);
-
         tags.push(tag);
-
         el.insertBefore(tag.element, mainInput);
-
-        refreshTags();
+        refreshTags();   
     }
 
     function removeTag (index) {

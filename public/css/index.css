@@ -282,6 +282,10 @@ img {
         cursor:pointer;
 }
 
+.index_map{
+  height: 400px;
+}
+
 /* ===========================
    ====== Medua Query for Search Box ====== 
    =========================== */
