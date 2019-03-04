@@ -33,6 +33,11 @@ $(document).ready(function(){
     }  
 });
 
+var prod_cat;
+$('#product_category_select').click(function(){
+     prod_cat = document.getElementById('product_category').value;
+})
+
 var counter = 0;
 $("#cell_add_button").click(function(event){
     event.preventDefault();
@@ -81,7 +86,7 @@ $("#prod_form").submit(function(event){
     var Data = {
         name : $("#product_name").val(),
         description : $("#product_desc").val(),
-        category : $("#product_category").val()
+        category : prod_cat
     }
 
     var x = document.forms["prod_form"];
