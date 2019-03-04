@@ -19,16 +19,14 @@ $(document).ready(function(){
                 if(visited == false)
                 {
                     visited = true;
-                    //console.log(response)
                     $.each(response, function(i,data){
                         $("#product_category").append("<option value='"+data+"'>"+data+"</option>")
                     })  
                 }     
             },
-            error: function(response, status){
-
+            error: function(response,status){
+                
             }
-            
         })
     }  
 });
