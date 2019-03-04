@@ -170,24 +170,16 @@ usersController.deleteUser = (req, res) => {
 }
 
 usersController.whoAmI = (req, res) => {
-    console.log("aaaaaaaaaaaaaaa")
-    console.log(req.decoded)
-    console.log(req.decoded.username)
-    console.log(req.decoded.userId)
-    console.log(req.decoded.email)    
-    console.log(req.decoded.category)
-
     if(req.decoded){
         username = req.decoded.username
-        userId = req.decoded.userId
-        email = req.decoded.email
-        category = req.decoded.category
-        var myJson = {}
-        myJson.username = username
-        myJson.userId = userId
-        myJson.email = email
-        myJson.category = category
-        res.send(myJson).status(200)
+        User.findOne({where: {username: username}}).then(user => {
+        if (user){
+            res.send(user).status(200)
+        }
+        else{
+            res.sendStatus(400)
+        }
+        })  
     }
     else{
         res.sendStatus(400)

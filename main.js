@@ -11,6 +11,7 @@ var express             = require('express'),
     sequelize           = require("./database/connect"),
     indexRouter         = require("./routing/indexRouter"),
     loginRouter         = require("./routing/loginRouter"),
+    logoutRouter        = require("./routing/logoutRouter"),
     ApiRouter           = require("./routing/ApiRouter"),
     altersRouter        = require("./routing/altersRouter"),
     userManagementRouter= require("./routing/userManagementRouter")
@@ -74,6 +75,7 @@ app.use("/static", express.static("public"));
 //testing
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
+app.use('/logout', logoutRouter)
 app.use('/addprice', addpriceRouter)
 app.use('/addshop',addshopRouter)
 app.use('/addproduct', addproductRouter)

@@ -55,7 +55,6 @@ $("#add_product_button").click(function(event){
         category : $("#product_category").val()
     }
 
-    //console.log(counter)
 
     var x = document.forms["prod_form"];
     var tag = "";
@@ -81,7 +80,6 @@ $("#add_product_button").click(function(event){
         }      
     }
     document.getElementById("demo").innerHTML = tag;
-    console.log(tag)
  
 })
 
