@@ -13,6 +13,7 @@ $(document).ready(function(){
                 "X-OBSERVATORY-AUTH": token
             },
             success: function(response,status) {
+                console.log("All good man!")
                 console.log(response)
     
             },
