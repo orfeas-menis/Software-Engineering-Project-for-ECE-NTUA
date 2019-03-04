@@ -4,10 +4,11 @@ var markers = [];
 var lenght = 0; 
 var flag = false; 
 var ShopID;
+var token;
 $(document).ready(function(){
     console.log("we are ok!");
-    var token = localStorage.getItem("token")
-    if (token == null){
+    token = localStorage.getItem("token")
+    if (token == null){   
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
 
@@ -137,7 +138,6 @@ $(document).ready(function(){
     } 
 });
 
-
 var selectedProd;
 $('#product_select').click(function(){ 
     event.preventDefault();  
@@ -158,20 +158,44 @@ $("#add_shop_page_button").click(function(event){
 
 $("#add_price_submit_button").click(function(event){
     event.preventDefault();
-    var Data = {
+    var datefrom,dateto;
 
+      datefrom = new Date($('#DF').val());
+      day = datefrom.getDate();
+      month = datefrom.getMonth() + 1;
+      year = datefrom.getFullYear();
+      var DATEFROM = [year, month, day].join('-');
+
+      dateto = new Date($('#DT').val());
+      day = dateto.getDate();
+      month = dateto.getMonth() + 1;
+      year = dateto.getFullYear();
+      var DATETO = [year, month, day].join('-');
+      console.log(DATEFROM,DATETO)
+
+    /*var Data = {
+        price: $("#prod_price").val(),
+        shopId: ShopId,
+        productId: selectedProd,
+        dateFrom: DATEFROM,
+        dateTo: DATETO,
     }
+    
     $.ajax({
-        url: "/observatory/api/addprice",
-        method: "GET",
+        url: "/observatory/api/prices",
+        method: "POST",
         data: Data,
+        headers: {
+            "X-OBSERVATORY-AUTH" : token
+        },    
         
         success: function(response,status){
-                 
+            alert("your price submitted succesfully")
         },
         error: function(response,status){
-
+            alert("something went wrong")
         }
     })
+    */
     
 })

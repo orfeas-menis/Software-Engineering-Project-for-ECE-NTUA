@@ -13,7 +13,12 @@
             <form name="prod_form" id="prod_form">
                 <input type="text" id="product_name" name="product_name" placeholder="Name" required/><br>
                 <input type="text" id="product_desc" name="product_desc" placeholder="Description" required/><br>
-                <input type="text" id="product_category" name="product_category" placeholder="Category" required/><br>
+
+                <div name = "product_category_drop" id="product_category_drop">
+                    <select name = "product_category" id="product_category" class="form-control input-lg">
+                            <option value="">Select Category</option>
+                    </select>
+                </div>
                 
                 <div class="container" id="container" name="container">
                     <button type="button" id="cell_add_button">Add TagCell</button>

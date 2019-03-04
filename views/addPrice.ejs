@@ -3,8 +3,12 @@
 <head>
   <title>AddPrice</title>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+
+
   <link rel="stylesheet" type="text/css" href="/static/css/addPrice.css">
-  
+
   <link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -34,13 +38,27 @@
         </select><button type="button" id="add_shop_page_button" class="btn btn-dark">Add Shop</button>
 
         <div name="product_select" id="product_select">
-            <select name = "prices_products" id="prices_products" class="form-control input-lg">
+            <select name = "prices_products" id="prices_products" class="form-control input-lg" required>
                     <option value="">Select Product</option>
-            </select><button type="button" id="add_product_page_button" class="btn btn-dark">Add Product</button>
+            </select>
+        </div>
+
+        <button type="button" id="add_product_page_button" class="btn btn-dark">Add Product</button>
+
+        <div class="md-form mt-0" id="DateFrom">
+            <form id="date">
+                <input class="form-control" type="date" id="DF" required>
+            </form>
+        </div>
+
+        <div class="md-form mt-0" id="DateTo">
+            <form id="date">
+                <input class="form-control" type="date" id="DT" required>
+            </form>
         </div>
 
         <div class="md-form mt-0">
-            <input class="form-control" type="text" placeholder="Put the Price">
+            <input class="form-control" type="text" placeholder="Put the Price" id = "prod_price" required>
         </div> 
 
         <button type="button" id="add_price_submit_button" class="btn btn-dark">Submit Price</button>

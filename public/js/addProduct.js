@@ -5,9 +5,33 @@ $(document).ready(function(){
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
 
-    }    
-});
+    }  
+    else
+    {
+        var visited = false;
+        $.ajax({
+            url: "/alters/productCategories",
+            method: "GET",
+            headers: {
+                "X-OBSERVATORY-AUTH" : token
+            },
+            success: function(response,status){
+                if(visited == false)
+                {
+                    visited = true;
+                    //console.log(response)
+                    $.each(response, function(i,data){
+                        $("#product_category").append("<option value='"+data+"'>"+data+"</option>")
+                    })  
+                }     
+            },
+            error: function(response, status){
 
+            }
+            
+        })
+    }  
+});
 
 var counter = 0;
 $("#cell_add_button").click(function(event){
