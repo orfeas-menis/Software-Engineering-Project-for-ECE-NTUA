@@ -46,7 +46,6 @@ module.exports = {
               res.status(403).send({message:"Token is not valid. Please login!"})
             } else {
               req.decoded = decoded;
-              console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
               next();
             }
           });
