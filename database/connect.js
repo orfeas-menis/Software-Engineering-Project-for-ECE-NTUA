@@ -2,6 +2,10 @@ const Sequelize = require("sequelize");
 const Credentials = require("../config/credentials.js");
 
 const sequelize = new Sequelize(Credentials.database.db_name, Credentials.database.username, Credentials.database.password, {
+    define: {
+        charset: 'utf8',
+        collate: 'utf8_general_ci'
+    },
     host: Credentials.host,
     dialect: "mariadb"
 })
