@@ -4,6 +4,7 @@ var markers = [];
 var lenght = 0; 
 var flag = false; 
 var ShopID;
+var map;
 var token;
 $(document).ready(function(){
     console.log("we are ok!");
@@ -20,7 +21,7 @@ $(document).ready(function(){
 
         //var xcord,ycord;
         //map starts
-        var map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
+        map= L.map('prices_map',{center:[37.918084, 23.707027], zoom: 10});
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxZoom: 18}).addTo(map);
@@ -92,6 +93,8 @@ $(document).ready(function(){
                     
                     var j = 0;
                     var k = 0;
+
+
                     $.each(cords, function(i,data){ 
                         var lat = data.lat;
                         var lng = data.lng;
@@ -103,6 +106,7 @@ $(document).ready(function(){
                         marker.myId = data.id;
                         marker.addTo(map).on('click',onClick)
                         markers[j] = marker;
+                        console.log(marker)
                         j = j + 1;
                         k = k + 2;    
                     })
@@ -110,7 +114,6 @@ $(document).ready(function(){
                 }      
             },
             error: function(response,status){
-            
             }
         })
         //telos gia markers

@@ -134,6 +134,9 @@ $("#prod_form").submit(function(event){
                 x.className = "show";
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                setTimeout(function () {
+                    window.location.href = "/addPrice"; 
+                 }, 2000);
     
                 //$(location).attr("href", "/");
             },
@@ -171,7 +174,6 @@ $("#prod_form").submit(function(event){
 var home = true;
 
 $("#Home").on("click",function(event){
-    console.log("vvvvvvvvvvvvvvvvvvvv")
     if(home == false)
     {
         home = true;

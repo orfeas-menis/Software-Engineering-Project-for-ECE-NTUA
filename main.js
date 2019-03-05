@@ -24,6 +24,7 @@ var express             = require('express'),
     contactRouter       = require("./routing/contactRouter");
     indexRouter         = require("./routing/indexRouter");
     changeUserCategoryRouter = require("./routing/changeUserCategoryRouter");
+    accountRouter       = require("./routing/accountRouter");
     
 
 /*
@@ -93,6 +94,7 @@ app.use('/contact',contactRouter)
 app.use('/index',indexRouter)
 app.use('/test', testRouter)
 app.use('/changeusercategory', changeUserCategoryRouter)
+app.use('/account', accountRouter)
 
 
 app.listen(1245, () => {
