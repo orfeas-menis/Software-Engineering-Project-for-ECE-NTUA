@@ -209,7 +209,6 @@ var TagsStringList = [];
 var home = true;
 
 $("#Home").on("click",function(event){
-    console.log("vvvvvvvvvvvvvvvvvvvv")
     if(home == false)
     {
         home = true;
