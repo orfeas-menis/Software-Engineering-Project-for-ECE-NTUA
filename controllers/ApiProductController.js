@@ -52,7 +52,7 @@ ApiProductController.products = (req, res) => {
             sort[1] = temp[1]
         }
     }
-
+    console.log(whereClause)
     Product.findAndCountAll({ where: whereClause , order:[[sort[0],sort[1]]]  }).then(result => {
         var total = result.count;
         var slice = result.rows.slice(start,start+count);
@@ -69,7 +69,7 @@ ApiProductController.addProduct = (req, res) => {
     
     sname = req.body.name.toString()
     sdescription = req.body.description.toString()
-    scategory = req.body.category.toUpperCase()
+    scategory = req.body.category
     stags = req.body.tags.toString() // We take as granted that tags have been sent to us as one String and tags are seperated with commas
         
   
@@ -165,7 +165,7 @@ ApiProductController.partialUpdateProduct = (req, res) => {
 
 }
 
-//Checked! (Remains onDelete Cascade implementation!)
+//Checked! 
 ApiProductController.deleteProduct = (req, res) => {
     var prodId = parseInt(req.params.productId)
     delResponse={}

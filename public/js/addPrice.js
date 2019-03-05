@@ -9,7 +9,6 @@ $(document).ready(function(){
     if (token == null){
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
-
     }
     else
     {
@@ -137,13 +136,16 @@ $("#add_shop_page_button").click(function(event){
 
 $("#add_price_submit_button").click(function(event){
     event.preventDefault();
+    var token = localStorage.getItem("token")
     var Data = {
-
     }
     $.ajax({
-        url: "/observatory/api/addprice",
-        method: "GET",
+        url: "/observatory/api/prices",
+        method: "POST",
         data: Data,
+        headers: {
+            "X-OBSERVATORY-AUTH" : token
+        },
         
         success: function(response,status){
                  
