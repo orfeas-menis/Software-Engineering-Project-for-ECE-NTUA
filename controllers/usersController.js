@@ -172,6 +172,7 @@ usersController.deleteUser = (req, res) => {
 usersController.whoAmI = (req, res) => {
     if(req.decoded){
         username = req.decoded.username
+        console.log(username)
         User.findOne({where: {username: username}}).then(user => {
         if (user){
             res.send(user).status(200)

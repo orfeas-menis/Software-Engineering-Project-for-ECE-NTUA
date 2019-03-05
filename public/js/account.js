@@ -9,14 +9,14 @@ $(document).ready(function(){
     var infotemplate = $('#info-template').html();
     $.ajax({
         url:"/userManagement/whoami",
-        method: "GET",
+        method: "POST",
         headers: {
             "X-OBSERVATORY-AUTH": token
         },
         success: function(infos,status) {
             var category = $infos.category;
             var adminbutton=""+ "<button>Change user category</button>";
-            if (category=='0'){
+            if (category=='admin'){
                 $infos.append(adminbutton);
             }
             $infos.delegate('.editinfo', 'click',function(){
@@ -38,7 +38,7 @@ $(document).ready(function(){
                 };
         
                 $.ajax({
-                    url:"/userManagement/whoami" + $div.attr('data-id'),
+                    url:"/userManagement/userId" + $div.attr('data-id'),
                     method: "PUT",
                     headers: {
                         "X-OBSERVATORY-AUTH": token
@@ -55,8 +55,6 @@ $(document).ready(function(){
             });
         },
         error: function(response,status){
-            var adminbutton=""+ "<button>Change user category</button>";
-                $infos.append(adminbutton);
             alert("Something went wrong")
             console.log(response)
         }

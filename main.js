@@ -31,15 +31,15 @@ app.set("view engine", "ejs");
 
 /*
  - - - - - - - - - - - - - - - - - - MIDDLEWARES - - - - - - - - - - - - - - - - - - - - - - - -
-Middleware is/are function(s) run between the client request and the server answer. 
-The most common middleware functionality needed are error managing, database interaction, 
-getting info from static files or other resources. To move on the middleware stack the next 
+Middleware is/are function(s) run between the client request and the server answer.
+The most common middleware functionality needed are error managing, database interaction,
+getting info from static files or other resources. To move on the middleware stack the next
 callback must be called, you can see it in the end of middleware function to move to the next step in the flow.
 
 Documentation: https://expressjs.com/en/guide/using-middleware.html
 */
 
-/* 
+/*
 Add bodyParser middleware to parse POST request body
 --------------------------------------------------------------------------------------------
 Documentation: https://www.npmjs.com/package/body-parser

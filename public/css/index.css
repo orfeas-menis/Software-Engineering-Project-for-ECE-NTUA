@@ -43,6 +43,10 @@ body {
 }
 >>>>>>> aria
 
+/*hide role-specific div html*/
+ div.end_user, div.visitor {
+display: none;
+}
 
 .page {
   width: 100%;

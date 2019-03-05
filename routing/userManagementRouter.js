@@ -10,7 +10,7 @@ router.post("/", databasePolicy.addUser , usersController.addUser)
 router.put("/:userId", authPolicy.isLoggedIn, authPolicy.isAdmin, databasePolicy.changeCategory, usersController.changeCategory)
 router.patch("/", authPolicy.isLoggedIn, usersController.updateUser)
 router.delete("/:userId", authPolicy.isLoggedIn, authPolicy.isAdmin, usersController.deleteUser)
-router.get("/whoami", authPolicy.isLoggedIn, usersController.whoAmI)
+router.post("/whoami", authPolicy.isLoggedIn, usersController.whoAmI)
 
 
 
