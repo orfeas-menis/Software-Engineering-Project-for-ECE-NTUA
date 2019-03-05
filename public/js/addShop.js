@@ -203,6 +203,9 @@ $("#shop_form").submit(function(event){
                 x.className = "show";
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                setTimeout(function () {
+                    window.location.href = "/addPrice"; 
+                 }, 2000);
 
             },
             error: function(data,status){
