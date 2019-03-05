@@ -87,14 +87,11 @@ app.use('/addproduct', addproductRouter)
 app.use('/observatory/api', ApiRouter)
 app.use('/alters', altersRouter)
 app.use('/userManagement', userManagementRouter)
-<<<<<<< HEAD
 app.use('/about',aboutRouter)
 app.use('/contact',contactRouter)
 app.use('/index',indexRouter)
-=======
 app.use('/test', testRouter)
 
->>>>>>> master
 
 app.listen(1245, () => {
     console.log("Hello World console");

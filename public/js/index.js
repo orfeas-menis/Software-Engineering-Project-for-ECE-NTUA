@@ -1,6 +1,8 @@
 var xcord,ycord,token;
 var cords = false;
 var dist = false;
+var coordinates = [];
+var markers = [];
 var map;
 
 $(document).ready(function(){
@@ -71,7 +73,7 @@ $(document).ready(function(){
 
     map.addControl(geocoder);
 
-    var petrolIcon = L.icon({
+    var customIcon = L.icon({
         iconUrl: '/static/pictures/1170466.svg',
         iconSize:     [30, 35],
         iconAnchor:   [15, 35],
@@ -109,7 +111,7 @@ function onMapClick(e) {
         alt: "lat"+e.latlng.lat+",lng"+e.latlng.lng,
         riseOnHover: true,
         draggable: true,
-        
+        icon: customIcon
       });
       markers.push(marker)
       xcord = e.latlng.lat;
@@ -252,13 +254,13 @@ $("#Contact").on("click",function(event){
 
 var myshop = [];
 $('#shop_select').click(function(){
-     myshop = document.getElementById('shops_drop').value;
+     myshop[0] = document.getElementById('shops_drop').value;
      //console.log(myshop)
 })
 
 var myproduct = [];
 $('#product_select').click(function(){
-     myproduct = document.getElementById('products_drop').value;
+     myproduct[0] = document.getElementById('products_drop').value;
      //console.log(myproduct)
 })
 
@@ -272,48 +274,81 @@ var mytag;
 var visited3=false; 
 $('#index_search').click(function(){
     token = localStorage.getItem("token")
-    var Data={
-        shops: myshop,
-        products: myproduct,
-        geoDist:myDist,
-        geoLng: ycord,
-        geoLat: xcord,
-        tags: TagsList,
-    }
-    
     if(dist == cords)
     {
+        var myurl = "/observatory/api/prices?";
+        if(myshop)
+            myurl = myurl + "&shops="+myshop;
+        if(myproduct)
+            myurl = myurl + "&products="+myproduct;
+        if(myDist)
+            myurl = myurl + "&geoDist="+myDist;
+        if(ycord)
+            myurl = myurl + "&geoLng="+ycord+"&geoLat="+xcord;
+        if(TagsList)
+            myurl = myurl + "&tags="+TagsList;
+
         $.ajax({
-            url: "/observatory/api/prices",
+            url: myurl,
             method: "GET",
-            data: Data,
             headers: {
                 "X-OBSERVATORY-AUTH" : token
             }, 
             
             success: function(response,status){
+                for(i=0;i<markers.length;i++){
+                    map.removeLayer(markers[i]);
+                }
                 //eisagwgh markers ston xarth
                 console.log(response)
-                var shops = response.prices;
+                var selectedshops = response.prices;
                 var j = 0;
                 var k = 0;
-                $.each(shops, function(i,data){ 
-                    var lat = data.lat;
-                    var lng = data.lng;
-                    coordinates[k] = lat; 
-                    coordinates[k+1] = lng;
+                $.each(selectedshops, function(i,data){
+                    var temp = data.shopId;
+                    var productName = data.productName;
+                    var shopdist = data.shopDist
+                    var date = data.date;
+                    $.ajax({
+                        url: "/observatory/api/shops/"+temp,
+                        method: "GET",   
+                        
+                        success: function(response,status){
+                            var lat = response.lat;
+                            var lng = response.lng;
+                            
+                            var marker = new L.marker([lat, lng]);
+                            marker.key = "Name: "+response.name+", Product: "+productName+", Distance: "+shopdist+", Date: "+date;
+                            marker.myId = data.id;
+                            marker.addTo(map).on('click',onClick)
+                            markers[j] = marker;
+                            j = j + 1;
+                            
+                            
+                        },
+                        error: function(response,status){
+                            alert("something went wrong")
+                        }
+                    })
+
                     
-                    var marker = new L.marker([coordinates[i], coordinates[i+1]]);
-                    marker.key = "Name: "+data.name+", lat: "+coordinates[i]+", lng: "+coordinates[i+1];
-                    marker.myId = data.id;
-                    marker.addTo(map).on('click',onClick)
-                    markers[j] = marker;
-                    j = j + 1;
-                    k = k + 2;    
+                    /**/    
                 }) 
+                
+                var popup = L.popup();
+
+                function onClick(e) { //afto kanei trigger otan pataw se ena marker mono
+                    popup
+                        .setLatLng(e.latlng)
+                        .setContent(this.key)
+                        .openOn(map);
+                    ShopId = e.target.myId; //edw krataw to ShopId otan kanw click se ena marker gia na to xrhsimopoihsw sto submit argotera
+                }
 
             },
             error: function(response,status){
+                console.log("shops="+myshop+"&products="+myproduct+"&geoDist="+myDist+"&geoLng="+ycord+"&geoLat="+xcord+"&tags="+TagsList)
+
                 alert("kophkes"+response)
                 
             }

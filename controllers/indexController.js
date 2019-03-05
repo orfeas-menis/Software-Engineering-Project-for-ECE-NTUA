@@ -5,11 +5,7 @@ const index_controller = {}
 
 index_controller.indexAction = (req, res) => {
     console.log(req.query.format)
-<<<<<<< HEAD
-    res.render("index2", {});
-=======
-    res.render("apiTest", {});
->>>>>>> master
+    res.render("index", {});
 };
 
 

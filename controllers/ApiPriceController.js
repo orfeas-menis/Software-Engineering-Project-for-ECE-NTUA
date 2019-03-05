@@ -86,16 +86,16 @@ ApiPriceController.prices = (req, res) => {
     }   
 
     date = new Date()
-    date.setHours(2,0,0,0) //Due to time difference if I set all hours to zero date gets one day earlier at 22:00 (24:00 at Greenwich)
+    date.setHours(0,0,0,0) //Due to time difference if I set all hours to zero date gets one day earlier at 22:00 (24:00 at Greenwich)
     dateFrom = date
-    dateTo = date
+    dateTo = new Date()
+    dateTo.setHours(24,0,0,0)
 
     if (req.query.dateFrom && req.query.dateTo){
         dateFrom = new Date(req.query.dateFrom) 
         dateTo = new Date (req.query.dateTo)
     }
     whereClause.date = {[Op.and]: {[Op.gte]: dateFrom, [Op.lte]: dateTo}}
-    console.log(whereClause)
     Price.findAndCountAll({include: [{model: Product, attributes: ['name','tags']},{model: Shop, attributes: ['name','tags','address','lat','lng']}], where: whereClause , order:[[sort[0],sort[1]]]  }).then(result => {
         var temp
         var total = result.count;
@@ -121,10 +121,11 @@ ApiPriceController.prices = (req, res) => {
             slice[i].shopAddress = shop.address
 
             temp = req.query.tags
-            if (typeof temp === 'string' || temp instanceof String){
-                temp = [temp]
-            }
+            
             if(temp){
+                if (typeof temp === 'string' || temp instanceof String){
+                    temp = [temp]
+                }
                 if(slice[i].productTags){
                     found1 = temp.some(r=> slice[i].productTags.indexOf(r) >= 0)
                 }
@@ -143,16 +144,16 @@ ApiPriceController.prices = (req, res) => {
                     deleted = true
                     
                 }
-                if (req.query.geoDist && !deleted){
-                    var dist = distance (req.query.geoLat, lat, req.query.geoLng,lng)
-                    slice[i].shopDist = dist
-                    if(dist/1000 > req.query.geoDist){
-                        delete slice[i]
-                        total = total - 1
-                        deleted = true
-                    }
+            }
+            if (req.query.geoDist && !deleted){
+                var dist = distance (req.query.geoLat, lat, req.query.geoLng,lng)
+                console.log("aaaaaaa",dist)
+                slice[i].shopDist = dist
+                if(dist/1000 > req.query.geoDist){
+                    delete slice[i]
+                    total = total - 1
+                    deleted = true
                 }
-
             }
         }
         var text = '{ "start" : ' + start.toString() + ' , "count" : ' + count.toString() + ', "total" : ' + total.toString() +  '}';
@@ -171,7 +172,9 @@ ApiPriceController.addPrice = (req, res) => {
     shopId = req.body.shopId
     productId = req.body.productId
     dateFrom = new Date(req.body.dateFrom)
+    dateFrom.setHours(0,0,0,0)
     dateTo = new Date(req.body.dateTo) 
+    dateTo.setHours(0,0,0,0)
     username = req.decoded.username
     var date 
     var counter = 0
