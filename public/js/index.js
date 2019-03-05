@@ -1,6 +1,7 @@
 var xcord,ycord,token;
 var cords = false;
 var dist = false;
+var map;
 
 $(document).ready(function(){
     console.log("we are ok!"); 
@@ -38,13 +39,12 @@ $(document).ready(function(){
         }
     })
     //map initialize
-    //map initialize
     var GeoSearchControl = window.GeoSearch.GeoSearchControl;
     var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
 
     //var xcord,ycord;
     //map starts
-    var map= L.map('index_map',{center:[37.918084, 23.707027], zoom: 10});
+    map= L.map('index_map',{center:[37.918084, 23.707027], zoom: 10});
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 18}).addTo(map);
@@ -250,16 +250,16 @@ $("#Contact").on("click",function(event){
     $(location).attr("href", "/contact");
 })
 
-var myshop;
+var myshop = [];
 $('#shop_select').click(function(){
      myshop = document.getElementById('shops_drop').value;
-     console.log(myshop)
+     //console.log(myshop)
 })
 
-var myproduct;
+var myproduct = [];
 $('#product_select').click(function(){
      myproduct = document.getElementById('products_drop').value;
-     console.log(TagsList,TagsStringList)
+     //console.log(myproduct)
 })
 
 var myDist;
@@ -278,25 +278,59 @@ $('#index_search').click(function(){
         geoDist:myDist,
         geoLng: ycord,
         geoLat: xcord,
-        dateFrom: "",
-        dateTo: "",
         tags: TagsList,
-
     }
     
-    $.ajax({
-        url: "/observatory/api/prices",
-        method: "GET",
-        data: Data,
-        headers: {
-            "X-OBSERVATORY-AUTH" : token
-        }, 
-        
-        success: function(response,status){
-                 
-        },
-        error: function(response,status){
+    if(dist == cords)
+    {
+        $.ajax({
+            url: "/observatory/api/prices",
+            method: "GET",
+            data: Data,
+            headers: {
+                "X-OBSERVATORY-AUTH" : token
+            }, 
+            
+            success: function(response,status){
+                //eisagwgh markers ston xarth
+                console.log(response)
+                var shops = response.prices;
+                var j = 0;
+                var k = 0;
+                $.each(shops, function(i,data){ 
+                    var lat = data.lat;
+                    var lng = data.lng;
+                    coordinates[k] = lat; 
+                    coordinates[k+1] = lng;
+                    
+                    var marker = new L.marker([coordinates[i], coordinates[i+1]]);
+                    marker.key = "Name: "+data.name+", lat: "+coordinates[i]+", lng: "+coordinates[i+1];
+                    marker.myId = data.id;
+                    marker.addTo(map).on('click',onClick)
+                    markers[j] = marker;
+                    j = j + 1;
+                    k = k + 2;    
+                }) 
 
+            },
+            error: function(response,status){
+                alert("kophkes"+response)
+                
+            }
+        })
+    }
+    else
+    {
+        if(cords==true)
+        {
+            alert("You have to select search area distanse when you have a marker!")
         }
-    })
+        else
+        {
+            alert("You have to put a marker when you have search area distance!")
+        }
+        
+    }
+    
+    
 })
