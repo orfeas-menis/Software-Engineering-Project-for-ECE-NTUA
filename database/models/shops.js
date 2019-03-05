@@ -82,6 +82,7 @@ Shop.sync({ force: false }).then(() => {
             console.log("there's already a shop in the db. Contact dev team for more info");
         } else {
             console.log("shop not found");
+            /*
             Shop.create({
                 name: 'Sample Shop',
                 address: 'Sample Shop Address',
@@ -94,6 +95,7 @@ Shop.sync({ force: false }).then(() => {
                 lng:  "23.724",
                 lat:  "37.93"
             })
+            */
 
         }
     })

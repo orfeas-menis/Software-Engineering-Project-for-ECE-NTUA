@@ -11,11 +11,13 @@ var express             = require('express'),
     sequelize           = require("./database/connect"),
     indexRouter         = require("./routing/indexRouter"),
     loginRouter         = require("./routing/loginRouter"),
+    logoutRouter        = require("./routing/logoutRouter"),
     ApiRouter           = require("./routing/ApiRouter"),
     altersRouter        = require("./routing/altersRouter"),
     userManagementRouter= require("./routing/userManagementRouter")
     sessionOptions      = require("./config/session"),
     addpriceRouter      = require("./routing/addpriceRouter"),
+    testRouter          = require("./routing/testRouter");
     addproductRouter    = require("./routing/addproductRouter");
     addshopRouter       = require("./routing/addshopRouter");
     aboutRouter         = require("./routing/aboutRouter");
@@ -78,15 +80,21 @@ app.use("/static", express.static("public"));
 //testing
 app.use('/', indexRouter)
 app.use('/login', loginRouter)
+app.use('/logout', logoutRouter)
 app.use('/addprice', addpriceRouter)
 app.use('/addshop',addshopRouter)
 app.use('/addproduct', addproductRouter)
 app.use('/observatory/api', ApiRouter)
 app.use('/alters', altersRouter)
 app.use('/userManagement', userManagementRouter)
+<<<<<<< HEAD
 app.use('/about',aboutRouter)
 app.use('/contact',contactRouter)
 app.use('/index',indexRouter)
+=======
+app.use('/test', testRouter)
+
+>>>>>>> master
 
 app.listen(1245, () => {
     console.log("Hello World console");
@@ -96,3 +104,15 @@ app.listen(8765, () => {
     console.log("Hello World console");
 })
 
+var fs = require('fs');
+
+// SET UP KEY FOR HTTPS
+var key = fs.readFileSync('./SSL KEYS/15886504_stas.com.key');
+var cert = fs.readFileSync( './SSL KEYS/15886504_stas.com.cert' );
+var options = {
+    key: key,
+    cert: cert
+  };
+ 
+var https = require('https');
+https.createServer(options, app).listen(8766);

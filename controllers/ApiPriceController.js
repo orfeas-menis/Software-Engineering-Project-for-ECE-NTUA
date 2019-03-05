@@ -91,12 +91,11 @@ ApiPriceController.prices = (req, res) => {
     dateTo = date
 
     if (req.query.dateFrom && req.query.dateTo){
-        dateFrom = new Date(req.query.dateFrom)
-        dateFrom.setHours(2,0,0,0)
+        dateFrom = new Date(req.query.dateFrom) 
         dateTo = new Date (req.query.dateTo)
-        dateTo.setHours(2,0,0,0)
     }
     whereClause.date = {[Op.and]: {[Op.gte]: dateFrom, [Op.lte]: dateTo}}
+    console.log(whereClause)
     Price.findAndCountAll({include: [{model: Product, attributes: ['name','tags']},{model: Shop, attributes: ['name','tags','address','lat','lng']}], where: whereClause , order:[[sort[0],sort[1]]]  }).then(result => {
         var temp
         var total = result.count;
@@ -203,7 +202,15 @@ ApiPriceController.addPrice = (req, res) => {
             Price.bulkCreate(myArr).then(prices => {
         
                 if (prices){
-                    res.status(200).send(prices)
+                    var answer ={
+                        start:0,
+                        count: 0,
+                        total: 0,
+                        prices: prices
+                    }
+                    answer.count = answer.prices.length
+                    answer.total = answer.prices.length
+                    res.status(200).send(answer)
                 }
                 else{
                     res.sendStatus(400)

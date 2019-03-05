@@ -18,7 +18,7 @@ $("#loginForm").submit(function(event){
         data: Data,
 
         success: function(data,status){
-            var token = data
+            var token = data.token
 
             localStorage.setItem("token", token)
             $(location).attr("href", "/index");
@@ -80,7 +80,7 @@ $("#registerForm").submit(function(event){
                 data: Data,
         
                 success: function(data,status){
-                    var token = data
+                    var token = data.token
                     localStorage.setItem("token", token)
                     $(location).attr("href", "/");
                 },

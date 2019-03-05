@@ -11,7 +11,6 @@ $(document).ready(function(){
     if (token == null){   
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
-
     }
     else
     {
@@ -158,6 +157,7 @@ $("#add_shop_page_button").click(function(event){
 
 $("#add_price_submit_button").click(function(event){
     event.preventDefault();
+<<<<<<< HEAD
     var datefrom,dateto;
 
       datefrom = new Date($('#DF').val());
@@ -179,6 +179,10 @@ $("#add_price_submit_button").click(function(event){
         productId: selectedProd,
         dateFrom: DATEFROM,
         dateTo: DATETO,
+=======
+    var token = localStorage.getItem("token")
+    var Data = {
+>>>>>>> master
     }
     
     $.ajax({
@@ -187,7 +191,11 @@ $("#add_price_submit_button").click(function(event){
         data: Data,
         headers: {
             "X-OBSERVATORY-AUTH" : token
+<<<<<<< HEAD
         },    
+=======
+        },
+>>>>>>> master
         
         success: function(response,status){
             alert("your price submitted succesfully")
