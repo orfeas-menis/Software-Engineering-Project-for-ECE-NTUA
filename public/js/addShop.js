@@ -152,8 +152,8 @@ $("#shop_form").submit(function(event){
     var Data = {
         name : $("#shop_name").val(),
         address : $("#shop_addr").val(),
-        lng : xcord,
-        lat : ycord
+        lng : ycord,
+        lat : xcord
     }
 
     var x = document.forms["shop_form"];
@@ -203,6 +203,9 @@ $("#shop_form").submit(function(event){
                 x.className = "show";
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                setTimeout(function () {
+                    window.location.href = "/addPrice"; 
+                 }, 2000);
 
             },
             error: function(data,status){

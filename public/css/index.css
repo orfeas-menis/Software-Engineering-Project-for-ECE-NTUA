@@ -82,6 +82,11 @@ main small {
   visibility: visible;
 }
 
+.label{
+  color:white;
+}
+
+
 .button {
   position: relative;
   display: flex;
@@ -299,3 +304,87 @@ img {
        }
    
    }
+
+
+body{
+  font-family: 'Mukta', sans-serif;
+	height:100vh;
+	min-height:550px;
+	background-image:url(/static/pictures/background.jpg);
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position:center;
+	position:relative;
+    
+}
+
+.bg { 
+  /* The image used */
+  background-image: url(/static/pictures/background.jpg);
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: unset;
+}
+
+.cat{
+margin:auto;
+ position: relative;
+ width:300px;
+}
+
+.form_box {
+    position: relative;
+	text-align:center;
+    width:700px;
+	right:0;left:0;
+    margin:auto;
+    min-height:420px;
+    background-color: rgba(30,30,30, 0.9);
+    
+}
+
+.form_box input[type="text"]{
+    text-align: left;
+    position: relative;
+    width: 60%;
+    margin:8px 0;
+    padding: 15px;
+    border: 1px solid #b5b5b5;
+    outline: none;
+    box-sizing: border-box;
+    border-radius: 5px;
+    align-self: center;
+}
+
+
+.form_box button[id="cell_add_button"], .form_box button[id="cell_remove_button"]{
+    max-width: 150px;
+    width: auto;
+    background: #444444;
+    color:#f9f9f9;
+    border: none;
+    margin: auto;
+    padding: 10px;
+    border-radius: 2px;
+    cursor:pointer;
+}
+
+
+.form_box button[id="add_product_button"]{
+    max-width: 150px;
+    width: 100%;
+    background: #444444;
+    color: #f9f9f9;
+    border: none;
+    padding: 10px;
+    float:center;
+    text-transform: uppercase;
+    border-radius: 2px;
+    cursor:pointer;
+    
+}
