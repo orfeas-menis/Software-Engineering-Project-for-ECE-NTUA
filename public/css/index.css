@@ -8,6 +8,39 @@ strong {
   font-weight: 600;
 }
 
+body, html {
+  height: 100%;
+}
+
+.jumbotron{
+  background: none;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("/static/pictures/background.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
+html,
+body {
+  height: 100%
+}
+
+.yolo{
+  position: absolute;
+  top:10px;
+  left:-15px;
+}
+
+
 .page {
   width: 100%;
   height: 100vh;
@@ -30,11 +63,13 @@ header {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+
+
 main {
   padding: 70px 20px 0;
   display: flex;
   flex-direction: column;
-  height: 100%; 
+  height: 100%;
 }
 
 main > div {
@@ -57,6 +92,13 @@ main small {
   color: #888;
 }
 
+#log-container {
+  position: fixed;
+  height: 0px;
+  width: 0px;
+  pointer-events: none;
+}
+
 #nav-container {
   position: fixed;
   height: 100vh;
@@ -74,6 +116,18 @@ main small {
   transition: .3s;
   background: #000;
 }
+#nav-container .bgg {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px);
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
+  background: #000;
+}
+
 #nav-container:focus-within .bg {
   visibility: visible;
   opacity: .6;
@@ -236,62 +290,3 @@ img {
 .fa-euro-sign {
     font-size: 25px;
 }
-
-/* SEARCH BAR*/
-
-.content{
-    position: relative;
-    width: 100%;
-}
-
-.search
-{
-	border: 2px solid black;
-	overflow: auto;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-}
-
-.search input[type="text"]
-{
-	border: 0px;
-	width: 89%;
-	padding: 10px 10px;
-}
-
-.search input[type="text"]:focus
-{
-	outline: 0;
-}
-
-.search input[type="submit"]
-{
-	border: 0px;
-	background: none;
-	background-color: black;
-	color: #fff;
-	float: right;
-	padding: 10px;
-	-border-radius-top-right: 5px;
-	-moz-border-radius-top-right: 5px;
-	-webkit-border-radius-top-right: 5px;
-	-border-radius-bottom-right: 5px;
-	-moz-border-radius-bottom-right: 5px;
-	-webkit-border-radius-bottom-right: 5px;
-        cursor:pointer;
-}
-
-/* ===========================
-   ====== Medua Query for Search Box ====== 
-   =========================== */
-
-   @media only screen and (min-width : 150px) and (max-width : 780px)
-   {
-       .search
-       {
-           width: 95%;
-           margin: 0 auto;
-       }
-   
-   }

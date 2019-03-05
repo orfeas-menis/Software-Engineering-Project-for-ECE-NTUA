@@ -11,19 +11,19 @@ $("#Home").on("click",function(event){
         home = true;
         $(location).attr("href", "/");
     }
-    
+
 })
 
-$("#Account").on("click",function(event){  
+$("#Account").on("click",function(event){
     var token = localStorage.getItem("token")
     if (token == null){
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
-    } 
+    }
     else
     {
         $(location).attr("href", "/"); //gia twra to vazw na me vazei pali sto home
-    }  
+    }
 })
 
 $("#AddPrice").on("click",function(event){
@@ -36,4 +36,8 @@ $("#About").on("click",function(event){
 
 $("#Contact").on("click",function(event){
     $(location).attr("href", "/");
+})
+
+$("#btn").click(function(event){
+  window.location.assign("/login");
 })
