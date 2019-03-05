@@ -5,7 +5,7 @@ $(document).ready(function(){
         alert("You are not logged in!")
         $(location).attr("href", "/login");
 
-    }    
+    }
 });
 
 
@@ -25,12 +25,13 @@ $("#logout_form").submit(function(event){
             headers: {
                 "X-OBSERVATORY-AUTH" : token
             },
-    
+
             success: function(data,status){
                 localStorage.removeItem("token")
                 var x = document.getElementById("snackbar");
                 x.innerHTML = "Logged out succesfully!"
                 x.className = "show";
+                    window.location.assign("/index");
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
                 },
@@ -54,13 +55,17 @@ $("#logout_form").submit(function(event){
                     x.innerHTML = "Wrong Input!"
                 }
                 x.className = "show";
-          
+
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-            }    
+            }
         })
     }
-    
-    
+
+
     return false;
 })
+window.onload = function() {
+    // similar behavior as an HTTP redirect
+    window.location.replace("/index");
+}

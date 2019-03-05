@@ -45,7 +45,7 @@ $("#btn").click(function(event){
 
 var tok = localStorage.getItem("token")
 $("#bton").click(function(event){
-
+  window.location.assign("/logout");
 })
 
 
