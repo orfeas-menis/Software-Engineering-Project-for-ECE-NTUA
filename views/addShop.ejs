@@ -2,92 +2,52 @@
 <html>
     <meta charset="utf-8">
     <head>
-        <title>Add Shop</title>
-        <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-    ></script>
+        <title>Shop</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/static/css/add_shop.css">
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin="">
+    </script>
+
+<link  href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" />
+<script src="https://unpkg.com/leaflet-geosearch@latest/dist/bundle.min.js"></script>
 
     </head>
 
     <body>
-<<<<<<< HEAD
-=======
         <div class="form_box">
             <div id="shop_map"></div>
->>>>>>> front
 
-    <div class="bg">
-
-         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-          <a class="navbar-brand" href="#">Welcome!</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-          </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/account">Account</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#">Add Price</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Social Media
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Facebook</a>
-          <a class="dropdown-item" href="#">Instagram</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Contact</a>
-        </div>
-      </li>
-    
-    </ul>
-    
-  <span class="navbar-text"> Username </span>
-
-  </div>
-
-</nav>
-
-        <div class="form_box">
-            <form name="prod_form" id="prod_form">
-                <input type="text" id="shop_name" name="shop_name" placeholder="Shop Name" required/><br><br>
-                <input type="text" id="address" name="address" placeholder="Address" required/>
-
-    
-                
-                <div class="container" id="container" name="container">
-                <br>
-                   <!-- <button type="button" id="cell_add_button">Add TagCell</button>
-                    <button type="button" id="cell_remove_button">Rem TagCell</button><br>-->
-                    <input class="tag_text" type="text" id="product_tags" name="product_tags" placeholder="Put tag" required/> 
-                    <div class="btn-group btn-group-lg" role="group">
-
+            <form name="shop_form" id="shop_form">
+                    <input type="text" id="shop_name" name="shop_name" placeholder="Name" required/><br>
+                    <input type="text" id="shop_addr" name="shop_addr" placeholder="Address" required/><br>
                     
-                    <button type="button" id="cell_add_button">Add TagCell</button>&nbsp;
-                    <button type="button" id="cell_remove_button">Rem TagCell</button>
+                    
+        
+                    <!--<input type="text" id="shop_x_cord" name="shop_x_cord" placeholder="xCord" required/><br>
+                    <input type="text" id="shop_y_cord" name="shop_y_cord" placeholder="yCord" required/><br>--->
+        
+                    <div id="container" name="container">
+                        <input class="tag_text" type="text" id="shop_tags" name="shop_tags" placeholder="Put tag" required>  
+                        <button type="button" id="cell_add_button">Add Tag Cell</button>
+                        <button type="button" id="cell_remove_button">Remove Tag Cell</button><br>
                     </div>
-                </div>
-
-                <p id="demo"></p>
-                <button id="add_product_button" type="submit">Add Shop</button>
-                 </form>
-                    </div>
+        
+                    <p id="demo"></p>
+                    <button id="add_shop_button" type="submit">Add shop</button>
+                    
+        
+                </form>
             <div id="snackbar"></div>
-            </div>
-        <script type="text/javascript" src="static/js/addShop.js"></script>
+        </div>
+        
+        <script type="text/javascript" src="/static/js/addShop.js"></script>
+        
     </body>
 </html>
