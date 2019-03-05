@@ -5,9 +5,36 @@ $(document).ready(function(){
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
 
-    }    
+    }  
+    else
+    {
+        var visited = false;
+        $.ajax({
+            url: "/alters/productCategories",
+            method: "GET",
+            headers: {
+                "X-OBSERVATORY-AUTH" : token
+            },
+            success: function(response,status){
+                if(visited == false)
+                {
+                    visited = true;
+                    $.each(response, function(i,data){
+                        $("#product_category").append("<option value='"+data+"'>"+data+"</option>")
+                    })  
+                }     
+            },
+            error: function(response,status){
+                
+            }
+        })
+    }  
 });
 
+var prod_cat;
+$('#product_category_select').click(function(){
+     prod_cat = document.getElementById('product_category').value;
+})
 
 var counter = 0;
 $("#cell_add_button").click(function(event){
@@ -57,7 +84,7 @@ $("#prod_form").submit(function(event){
     var Data = {
         name : $("#product_name").val(),
         description : $("#product_desc").val(),
-        category : $("#product_category").val()
+        category : prod_cat
     }
 
     var x = document.forms["prod_form"];
@@ -139,4 +166,48 @@ $("#prod_form").submit(function(event){
     
     
     return false;
+})
+
+var home = true;
+
+$("#Home").on("click",function(event){
+    console.log("vvvvvvvvvvvvvvvvvvvv")
+    if(home == false)
+    {
+        home = true;
+        $(location).attr("href", "/");
+    }
+    
+})
+
+$("#Account").on("click",function(event){  
+    var token = localStorage.getItem("token")
+    if (token == null){
+        alert("You must be logged in to see your account")
+        $(location).attr("href", "/login");
+    } 
+    else
+    {
+        $(location).attr("href", "/account"); //gia twra to vazw na me vazei pali sto home
+    }  
+})
+
+$("#AddPrice").on("click",function(event){
+    var token = localStorage.getItem("token")
+    if (token == null){
+        alert("You must be logged in to add price")
+        $(location).attr("href", "/login");
+    } 
+    else
+    {
+       $(location).attr("href", "/addprice"); //gia twra to vazw na me vazei pali sto home
+    }  
+})
+
+$("#About").on("click",function(event){
+    $(location).attr("href", "/about");
+})
+
+$("#Contact").on("click",function(event){
+    $(location).attr("href", "/contact");
 })

@@ -3,10 +3,12 @@ var coordinates = [];
 var markers = [];
 var lenght = 0; 
 var flag = false; 
+var ShopID;
+var token;
 $(document).ready(function(){
     console.log("we are ok!");
-    var token = localStorage.getItem("token")
-    if (token == null){
+    token = localStorage.getItem("token")
+    if (token == null){   
         alert("You must be logged in to add new product")
         $(location).attr("href", "/login");
     }
@@ -67,7 +69,7 @@ $(document).ready(function(){
                     visited = true;
                     var list = response.products
                     $.each(list, function(i,data){
-                        $("#prices_products").append("<option value='"+data.name+"'>"+data.name+"</option>")
+                        $("#prices_products").append("<option value='"+data.id+"'>"+data.name+"</option>")
                     })
                 }      
             },
@@ -88,21 +90,23 @@ $(document).ready(function(){
                     visited1 = true;
                     var cords = response.shops
                     
+                    var j = 0;
                     var k = 0;
-                    $.each(cords, function(i,data){
+                    $.each(cords, function(i,data){ 
                         var lat = data.lat;
                         var lng = data.lng;
                         coordinates[k] = lat; 
                         coordinates[k+1] = lng;
-                        k = k + 2;
-                    })
-                    var j = 0;
-                    for(var i=0; i<=coordinates.length-2;i=i+2)
-                    {
-                        var marker = new L.marker([coordinates[i], coordinates[i+1]]).addTo(map);
+                        
+                        var marker = new L.marker([lat,lng]);
+                        marker.key = "Name: "+data.name+", lat: "+lat+", lng: "+lng;
+                        marker.myId = data.id;
+                        marker.addTo(map).on('click',onClick)
                         markers[j] = marker;
                         j = j + 1;
-                    }           
+                        k = k + 2;    
+                    })
+                               
                 }      
             },
             error: function(response,status){
@@ -110,16 +114,24 @@ $(document).ready(function(){
             }
         })
         //telos gia markers
+        var popup = L.popup();
+
+        function onClick(e) { //afto kanei trigger otan pataw se ena marker mono
+            popup
+                .setLatLng(e.latlng)
+                .setContent(this.key)
+                .openOn(map);
+            ShopId = e.target.myId; //edw krataw to ShopId otan kanw click se ena marker gia na to xrhsimopoihsw sto submit argotera
+            console.log(ShopId)
+        }
 
     } 
 });
 
-
-
 var selectedProd;
 $('#product_select').click(function(){ 
     event.preventDefault();  
-    selectedProd = document.getElementById('prices_products').value; //edw apothikevw thn epilogh tou xrhsth
+    selectedProd = document.getElementById('prices_products').value; //edw apothikevw thn epilogh tou xrhsth dld to productId
     console.log(selectedProd)
  
 }) 
@@ -136,22 +148,42 @@ $("#add_shop_page_button").click(function(event){
 
 $("#add_price_submit_button").click(function(event){
     event.preventDefault();
-    var token = localStorage.getItem("token")
+    var datefrom,dateto;
+
+      datefrom = new Date($('#DF').val());
+      day = datefrom.getDate();
+      month = datefrom.getMonth() + 1;
+      year = datefrom.getFullYear();
+      var DATEFROM = [year, month, day].join('-');
+
+      dateto = new Date($('#DT').val());
+      day = dateto.getDate();
+      month = dateto.getMonth() + 1;
+      year = dateto.getFullYear();
+      var DATETO = [year, month, day].join('-');
+      //console.log(DATEFROM,DATETO)
+
     var Data = {
+        price: $("#prod_price").val(),
+        shopId: ShopId,
+        productId: selectedProd,
+        dateFrom: DATEFROM,
+        dateTo: DATETO,
     }
+    
     $.ajax({
         url: "/observatory/api/prices",
         method: "POST",
         data: Data,
         headers: {
             "X-OBSERVATORY-AUTH" : token
-        },
+        },    
         
         success: function(response,status){
-                 
+            alert("your price submitted succesfully")
         },
         error: function(response,status){
-
+            alert("something went wrong")
         }
     })
     

@@ -21,7 +21,7 @@ $("#loginForm").submit(function(event){
             var token = data.token
 
             localStorage.setItem("token", token)
-            $(location).attr("href", "/");
+            $(location).attr("href", "/index");
         },
         error: function(data,status){
             try {

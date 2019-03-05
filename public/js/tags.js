@@ -2,7 +2,7 @@
     let hiddenInput = document.createElement('input'),
         mainInput = document.createElement('input'),
         tags = [];
-
+    
     hiddenInput.setAttribute('type', 'hidden');
     hiddenInput.setAttribute('name', el.getAttribute('data-name'));
 
@@ -47,12 +47,9 @@
             removeTag(tags.indexOf(tag));
         });
         tag.element.appendChild(closeBtn);
-
         tags.push(tag);
-
         el.insertBefore(tag.element, mainInput);
-
-        refreshTags();
+        refreshTags();   
     }
 
     function removeTag (index) {

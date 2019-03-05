@@ -12,14 +12,30 @@ body{
 
 }
 
-.info-template .edit {
+.hidden {
+	display:none;
+}
+
+.editinfo .edit {
     display:none;
 }
 
-.info-template.edit .edit {
+.noeditinfo .edit {
     display:initial;
 }
 
-.info-template.edit .noedit {
+.noeditinfo .noedit {
     display:none;
+}
+
+.kouti {
+	color: white;
+    position: relative;
+	text-align:center;
+    width:400px;
+	right:0;left:0;
+    margin:auto;
+    min-height:420px;
+    background-color: rgba(30,30,30, 0.9);
+    
 }

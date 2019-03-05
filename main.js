@@ -20,6 +20,11 @@ var express             = require('express'),
     testRouter          = require("./routing/testRouter");
     addproductRouter    = require("./routing/addproductRouter");
     addshopRouter       = require("./routing/addshopRouter");
+    aboutRouter         = require("./routing/aboutRouter");
+    contactRouter       = require("./routing/contactRouter");
+    indexRouter         = require("./routing/indexRouter");
+    changeUserCategoryRouter = require("./routing/changeUserCategoryRouter");
+    
 
 /*
 set view engine as ejs to omit .ejs when rendering a view
@@ -83,7 +88,11 @@ app.use('/addproduct', addproductRouter)
 app.use('/observatory/api', ApiRouter)
 app.use('/alters', altersRouter)
 app.use('/userManagement', userManagementRouter)
+app.use('/about',aboutRouter)
+app.use('/contact',contactRouter)
+app.use('/index',indexRouter)
 app.use('/test', testRouter)
+app.use('/changeusercategory', changeUserCategoryRouter)
 
 
 app.listen(1245, () => {
