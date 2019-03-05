@@ -250,11 +250,23 @@ $("#Contact").on("click",function(event){
     $(location).attr("href", "/contact");
 })
 
+
+$("#Login").on("click",function(event){
+    $(location).attr("href", "/login");
+})
+
+
+$("#Logout").on("click",function(event){
+    $(location).attr("href", "/logout");
+})
+
 var myshop = [];
 $('#shop_select').click(function(){
      myshop[0] = document.getElementById('shops_drop').value;
      //console.log(myshop)
 })
+
+
 
 var myproduct = [];
 $('#product_select').click(function(){
