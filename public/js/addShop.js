@@ -11,6 +11,59 @@ $(document).ready(function(){
 var GeoSearchControl = window.GeoSearch.GeoSearchControl;
 var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
 
+home=false
+$("#Home").on("click",function(event){
+    console.log("vvvvvvvvvvvvvvvvvvvv")
+    if(home == false)
+    {
+        home = true;
+        $(location).attr("href", "/");
+    }
+
+})
+
+$("#Account").on("click",function(event){
+    var token = localStorage.getItem("token")
+    if (token == null){
+        alert("You must be logged in to see your account")
+        $(location).attr("href", "/login");
+    }
+    else
+    {
+        $(location).attr("href", "/account"); //gia twra to vazw na me vazei pali sto home
+    }  
+})
+
+$("#AddPrice").on("click",function(event){
+    var token = localStorage.getItem("token")
+    if (token == null){
+        alert("You must be logged in to add price")
+        $(location).attr("href", "/login");
+    } 
+    else
+    {
+       $(location).attr("href", "/addprice"); 
+    }  
+})
+
+$("#About").on("click",function(event){
+    $(location).attr("href", "/about");
+})
+
+$("#Contact").on("click",function(event){
+    $(location).attr("href", "/contact");
+})
+
+
+$("#Login").on("click",function(event){
+    $(location).attr("href", "/login");
+})
+
+
+$("#Logout").on("click",function(event){
+    $(location).attr("href", "/logout");
+})
+
 var xcord,ycord;
 //map starts
 var map= L.map('shop_map',{center:[37.918084, 23.707027], zoom: 10});
