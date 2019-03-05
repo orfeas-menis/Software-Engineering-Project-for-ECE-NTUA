@@ -152,8 +152,8 @@ $("#shop_form").submit(function(event){
     var Data = {
         name : $("#shop_name").val(),
         address : $("#shop_addr").val(),
-        lng : xcord,
-        lat : ycord
+        lng : ycord,
+        lat : xcord
     }
 
     var x = document.forms["shop_form"];
