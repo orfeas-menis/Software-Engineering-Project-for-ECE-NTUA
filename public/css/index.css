@@ -8,6 +8,40 @@ strong {
   font-weight: 600;
 }
 
+<<<<<<< HEAD
+=======
+body, html {
+  height: 100%;
+}
+
+.jumbotron{
+  background: none;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("/static/pictures/background.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@import url('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css');
+html,
+body {
+  height: 100%
+}
+
+.yolo{
+  position: absolute;
+  top:10px;
+  left:-15px;
+}
+>>>>>>> aria
 
 
 .page {
@@ -38,7 +72,7 @@ main {
   padding: 70px 20px 0;
   display: flex;
   flex-direction: column;
-  height: 100%; 
+  height: 100%;
 }
 
 main > div {
@@ -259,6 +293,9 @@ img {
 .fa-euro-sign {
     font-size: 25px;
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> aria

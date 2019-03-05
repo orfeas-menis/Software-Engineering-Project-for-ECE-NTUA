@@ -1,22 +1,23 @@
 <!doctype html>
 <html>
     <head>
-        <title>Shop</title>
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="/static/css/add_shop.css">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <title>Add Shop</title>
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/add_shop.css">
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
     </head>
 
     <body>
+
     <div class="bg">
-           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
           <a class="navbar-brand" href="#">Welcome!</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,33 +55,33 @@
   </div>
 
 </nav>
-        
 
-    <main>
-        <div class="form_container">
-            <div class="shop_map" id="shop_map"></div>
+        <div class="form_box">
+            <form name="prod_form" id="prod_form">
+                <input type="text" id="shop_name" name="shop_name" placeholder="Shop Name" required/><br><br>
+                <input type="text" id="address" name="address" placeholder="Address" required/>
 
-            <form name="shop_form" id="shop_form">
-                    <input type="text" id="shop_name" name="shop_name" placeholder="Name" required/><br>
-                    <input type="text" id="shop_addr" name="shop_addr" placeholder="Address" required/><br>
+    
                 
-        
-                    <div id="container" name="container">
-                        <input class="tag_text" type="text" id="shop_tags" name="shop_tags" placeholder="Put tag" required>  
-                        <button type="button" id="cell_add_button">Add Tag Cell</button>
-                        <button type="button" id="cell_remove_button">Remove Tag Cell</button><br>
-                    </div>
-        
-            
-                    <button id="add_shop_button" type="submit">Add shop</button>
+                <div class="container" id="container" name="container">
+                <br>
+                   <!-- <button type="button" id="cell_add_button">Add TagCell</button>
+                    <button type="button" id="cell_remove_button">Rem TagCell</button><br>-->
+                    <input class="tag_text" type="text" id="product_tags" name="product_tags" placeholder="Put tag" required/> 
+                    <div class="btn-group btn-group-lg" role="group">
+
                     
-        
-                </form>
-            
-        </div>
-        
-       </main>
-        </div>
-         <script type="text/javascript" src="/static/js/addShop.js"></script>
+                    <button type="button" id="cell_add_button">Add TagCell</button>&nbsp;
+                    <button type="button" id="cell_remove_button">Rem TagCell</button>
+                    </div>
+                </div>
+
+                <p id="demo"></p>
+                <button id="add_product_button" type="submit">Add Shop</button>
+                 </form>
+                    </div>
+            <div id="snackbar"></div>
+            </div>
+        <script type="text/javascript" src="static/js/addShop.js"></script>
     </body>
 </html>

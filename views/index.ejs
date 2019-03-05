@@ -2,32 +2,35 @@
 <html>
 <head>
    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-  
-  <link rel="stylesheet" href="tags.css">
+
+  <link rel="stylesheet" href="/static/css/tags.css">
+  <link rel="stylesheet" href="/static/css/index.css">
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+
 </head>
 <body>
-        
+  <div class="bg">
        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Welcome!</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+          <a class="navbar-brand" href="#">Welcome!</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/" id="Home">Home </a>
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/account" id="Account">Account</a>
+        <a class="nav-link" href="/account">Account</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="/addPrice" id="AddPrice">Add Price</a>
+        <a class="nav-link " href="/addPrice">Add Price</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,62 +38,63 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Facebook</a>
-          <a class="dropdown-item" href="#">Instagram</a>
+          <a class="dropdown-item" href="/about">About</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Contact</a>
+          <a class="dropdown-item" href="/contact">Contact</a>
         </div>
       </li>
-    
+
     </ul>
 
-  </div>
-</nav>
-      
-        <main>
+  <button type="button" class="btn btn-secondary" href="" id="btn">Log In</button>
 
-                
-                    <div class="dropdown show">
+  </div>
+
+</nav>
+
+        <main>
+ <br><br>  <br><br><br><br><br><br><br><br><br>  <br>
+                <div class="row offset-lg-4">
+
+                <div class="form-group col-lg-4 offset-md-1">
+                    <div class="dropdown">
                       <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Are You Looking For A Product?
                       </a>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    
+                            <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Action</a>
+
+                           </div>
                     </div>
+
+                     <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="shop_select">
+                       Are You Looking For A shop?
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Action</a>
+                       </div>
                     </div>
-                     
-                    <div name = "shop_select" id="shop_select" >
-						        <select name = "shops" id="shops" class="form-shop input-lg">
-                         <option value="">Are You Looking For A shop?</option>  
-                         </select>  
-                       </div> 
-                    
-                      
+
                       <div name="tags-input" class = "tags-input"  data-name="tags-input" id="tag_search" placeholder="You may use relevant tags" >
                           <!--<form name = "shop_select" class="search-form">-->
-						  <!--</form>-->
-						 <!-- <input class="main-input" type="text" >-->
+              <!--</form>-->
+             <!-- <input class="main-input" type="text" >-->
 
-                		</div>
-               
+                    </div>
+
                <button type="button" id="home_search" class="btn btn-dark">Search</button>
                </form>
-               </div>
-          <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
+
+
+          </div>
+          </div>
+
+
         </main>
     </div>
-      <script type="text/javascript" src="/index.js"></script>
-      <script src="tags.js"></script>
-   
+      <script type="text/javascript" src="/static/js/index.js"></script>
+      <script src="/static/js/tags.js"></script>
+
 </body>

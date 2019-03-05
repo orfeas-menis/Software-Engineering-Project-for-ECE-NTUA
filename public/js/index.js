@@ -11,19 +11,24 @@ $("#Home").on("click",function(event){
         home = true;
         $(location).attr("href", "/");
     }
-    
+
 })
 
-$("#Account").on("click",function(event){  
+$("#Account").on("click",function(event){
     var token = localStorage.getItem("token")
     if (token == null){
         alert("You must be logged in to see your account")
         $(location).attr("href", "/login");
-    } 
+    }
     else
     {
+<<<<<<< HEAD
         $(location).attr("href", "/account"); //gia twra to vazw na me vazei pali sto home
     }  
+=======
+        $(location).attr("href", "/"); //gia twra to vazw na me vazei pali sto home
+    }
+>>>>>>> aria
 })
 
 $("#AddPrice").on("click",function(event){
@@ -46,6 +51,7 @@ $("#Contact").on("click",function(event){
     $(location).attr("href", "/");
 })
 
+<<<<<<< HEAD
 var visited2 = false;       // ti sto kalo einai i visited kai poses forew ti thelo
 $('#product_select').click(function(){
     
@@ -124,3 +130,8 @@ $(".button-collapse").sideNav();
 // SideNav Scrollbar Initialization
 var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 Ps.initialize(sideNavScrollbar);
+=======
+$("#btn").click(function(event){
+  window.location.assign("/login");
+})
+>>>>>>> aria
