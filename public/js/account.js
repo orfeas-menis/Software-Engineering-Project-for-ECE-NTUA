@@ -66,6 +66,7 @@ $(document).ready(function(){
                         $div.removeClass('edit');
                     },
                     error: function(response,status){
+                        $(location).attr("href", "/login");
                         alert("Something went not right")
                     }
                 });
