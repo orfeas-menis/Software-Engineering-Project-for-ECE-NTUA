@@ -171,9 +171,9 @@ $("#add_price_submit_button").click(function(event){
       month = dateto.getMonth() + 1;
       year = dateto.getFullYear();
       var DATETO = [year, month, day].join('-');
-      console.log(DATEFROM,DATETO)
+      //console.log(DATEFROM,DATETO)
 
-    /*var Data = {
+    var Data = {
         price: $("#prod_price").val(),
         shopId: ShopId,
         productId: selectedProd,
@@ -196,6 +196,5 @@ $("#add_price_submit_button").click(function(event){
             alert("something went wrong")
         }
     })
-    */
     
 })

@@ -1,4 +1,6 @@
-var xcord,ycord;
+var xcord,ycord,token;
+var cords = false;
+var dist = false;
 
 $(document).ready(function(){
     console.log("we are ok!"); 
@@ -112,6 +114,7 @@ function onMapClick(e) {
       markers.push(marker)
       xcord = e.latlng.lat;
       ycord = e.latlng.lng;
+      cords = true;
       return marker;
     }
   }).addTo(map);
@@ -259,13 +262,20 @@ $('#product_select').click(function(){
      console.log(TagsList,TagsStringList)
 })
 
+var myDist;
+$('#dist_select').click(function(){
+     myDist = document.getElementById('dist_drop').value;
+     dist = true;
+})
+
 var mytag; 
 var visited3=false; 
 $('#index_search').click(function(){
+    token = localStorage.getItem("token")
     var Data={
         shops: myshop,
         products: myproduct,
-        geoDist:"",
+        geoDist:myDist,
         geoLng: ycord,
         geoLat: xcord,
         dateFrom: "",
@@ -274,21 +284,19 @@ $('#index_search').click(function(){
 
     }
     
-    console.log("its working")
     $.ajax({
-        url: "/observatory/api/shops",
+        url: "/observatory/api/prices",
         method: "GET",
         data: Data,
+        headers: {
+            "X-OBSERVATORY-AUTH" : token
+        }, 
         
-        success: function(response){
-            if(visited3 == false)
-            {
-                visited3 = true;
-                var list = response.shops
-                $.each(list, function(i,data){
-                    $("#shops").append("<option value='"+data.id+"'>"+data.name+"</option>")
-                })
-            }      
+        success: function(response,status){
+                 
+        },
+        error: function(response,status){
+
         }
     })
 })
