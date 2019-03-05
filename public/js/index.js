@@ -44,7 +44,7 @@ $(document).ready(function(){
     var GeoSearchControl = window.GeoSearch.GeoSearchControl;
     var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
 
-    //var xcord,ycord;
+    
     //map starts
     map= L.map('index_map',{center:[37.918084, 23.707027], zoom: 10});
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -161,8 +161,6 @@ var TagsStringList = [];
     el.appendChild(mainInput);
     el.appendChild(hiddenInput);
 
-    addTag('hello!');
-
     function addTag (text) {
         let tag = {
             text: text,
@@ -240,7 +238,7 @@ $("#AddPrice").on("click",function(event){
     } 
     else
     {
-       $(location).attr("href", "/addprice"); //gia twra to vazw na me vazei pali sto home
+       $(location).attr("href", "/addprice"); 
     }  
 })
 
@@ -300,7 +298,6 @@ $('#index_search').click(function(){
                     map.removeLayer(markers[i]);
                 }
                 //eisagwgh markers ston xarth
-                console.log(response)
                 var selectedshops = response.prices;
                 var j = 0;
                 var k = 0;

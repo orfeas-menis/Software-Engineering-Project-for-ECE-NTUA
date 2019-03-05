@@ -98,24 +98,15 @@ $(document).ready(function(){
                         coordinates[k] = lat; 
                         coordinates[k+1] = lng;
                         
-                        var marker = new L.marker([coordinates[i], coordinates[i+1]]);
-                        marker.key = "Name: "+data.name+", lat: "+coordinates[i]+", lng: "+coordinates[i+1];
+                        var marker = new L.marker([lat,lng]);
+                        marker.key = "Name: "+data.name+", lat: "+lat+", lng: "+lng;
                         marker.myId = data.id;
                         marker.addTo(map).on('click',onClick)
                         markers[j] = marker;
                         j = j + 1;
                         k = k + 2;    
                     })
-                    /*console.log(response.shops)
-                    var j = 0;
-                    for(var i=0; i<=coordinates.length-2;i=i+2)
-                    {
-                        var marker = new L.marker([coordinates[i], coordinates[i+1]]).addTo(map).on('click',onClick);
-                        marker.key = "name: lat: "+coordinates[i]+"lng: "+coordinates[i+1];
-                        console.log(marker.key)
-                        markers[j] = marker;
-                        j = j + 1;
-                    }*/           
+                               
                 }      
             },
             error: function(response,status){
