@@ -306,6 +306,7 @@ $('#index_search').click(function(){
                     var productName = data.productName;
                     var shopdist = data.shopDist
                     var date = data.date;
+                    var price = data.price;
                     $.ajax({
                         url: "/observatory/api/shops/"+temp,
                         method: "GET",   
@@ -316,7 +317,7 @@ $('#index_search').click(function(){
                             
                             var marker = new L.marker([lat, lng]);
                             marker.key = "Name: "+response.name+", Product: "+productName+", Distance: "+shopdist+", Date: "+date;
-                            marker.myId = data.id;
+                            marker.myId = temp;
                             marker.addTo(map).on('click',onClick)
                             markers[j] = marker;
                             j = j + 1;
