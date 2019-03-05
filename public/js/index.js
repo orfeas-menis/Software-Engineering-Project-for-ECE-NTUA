@@ -17,7 +17,7 @@ $("#Home").on("click",function(event){
 $("#Account").on("click",function(event){
     var token = localStorage.getItem("token")
     if (token == null){
-        alert("You must be logged in to add new product")
+        alert("You must be logged in to see your Account")
         $(location).attr("href", "/login");
     }
     else
@@ -44,10 +44,6 @@ $("#btn").click(function(event){
 
 
 var tok = localStorage.getItem("token")
-$("#bton").click(function(event){
-  window.location.assign("/logout");
-})
-
 
 if (tok==null){
 
@@ -58,3 +54,7 @@ else{
    document.getElementById('btn').style.visibility='hidden';
    document.getElementById('bton').style.visibility='visible';
 }
+
+$("#bton").click(function(event){
+  window.location.assign("/logout");
+})

@@ -11,6 +11,7 @@ body{
     overflow-y: hidden;
 }
 
+<<<<<<< HEAD
 .bg { 
   /* The image used */
   background-image: url("background.jpg");
@@ -67,6 +68,10 @@ margin:auto;
     padding: 10px;
     border-radius: 2px;
     cursor:pointer;
+=======
+#shop_map{
+    height: 400px;
+>>>>>>> master
 }
 
 

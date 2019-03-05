@@ -31,9 +31,10 @@ $("#logout_form").submit(function(event){
                 var x = document.getElementById("snackbar");
                 x.innerHTML = "Logged out succesfully!"
                 x.className = "show";
-                    window.location.assign("/index");
-                // After 3 seconds, remove the show class from DIV
+                                  // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                $(location).attr("href", "/");
+
                 },
             error: function(data,status){
                 if (data.status == 403){
@@ -58,6 +59,7 @@ $("#logout_form").submit(function(event){
 
                 // After 3 seconds, remove the show class from DIV
                 setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                window.location.assign("/");
             }
         })
     }
@@ -65,7 +67,3 @@ $("#logout_form").submit(function(event){
 
     return false;
 })
-window.onload = function() {
-    // similar behavior as an HTTP redirect
-    window.location.replace("/index");
-}

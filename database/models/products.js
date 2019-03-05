@@ -82,6 +82,7 @@ Product.sync({ force: false }).then(() => {
             console.log("there's already a product in the db. Contact dev team for more info");
         } else {
             console.log("product not found");
+            /*
             Product.create({
                 name: 'Gasoline',
                 description: 'Normal Gasoline Description',
@@ -113,6 +114,7 @@ Product.sync({ force: false }).then(() => {
                 category: 'SERVICE',
                 tags: 'katharisma man,new777,ka8aro file'
             })
+            */
 
         }
     })

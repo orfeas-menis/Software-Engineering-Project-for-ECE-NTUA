@@ -56,8 +56,10 @@ module.exports = {
             const schema = {
                 name: Joi.string().max(50).required(),
                 description: Joi.string().required(),
-                category: Joi.string().uppercase().valid(productCategories).required(),
+                //category: Joi.string().uppercase().valid(productCategories).required(),
+                category: Joi.string().required(),
                 tags: Joi.required(),
+                withdrawn: Joi.any().optional()
             };
             const { error } = Joi.validate(req.body, schema);
 
@@ -88,18 +90,22 @@ module.exports = {
                         res.status(400).send(obj)
                         flag = false
                     }
-                })
-                tags = req.body.tags
-                if (flag){
-                    if (Array.isArray(tags)){
-                        temp = tags[0]
-                        for (i=1; i<tags.length; i++){
-                            temp = temp + "," + tags[i] 
-                        }
-                        req.body.tags = temp
+                    else{
+                        tags = req.body.tags
+                        if (flag){
+                            if (Array.isArray(tags)){
+                                temp = tags[0]
+                                for (i=1; i<tags.length; i++){
+                                    temp = temp + "," + tags[i] 
+                                }
+                                req.body.tags = temp
+                            }
+                            next();
+                        } 
+
                     }
-                    next();
-                }           
+                })
+                          
             }
         }
     },
@@ -133,7 +139,7 @@ module.exports = {
             const schema = {
                 name: Joi.string().required(),
                 description: Joi.string().required(),
-                category: Joi.string().valid('FUEL','SERVICE','fuel','service').required(),
+                category: Joi.string().required(),
                 tags: Joi.required()
             };
             const { error } = Joi.validate(req.body, schema);
@@ -186,7 +192,7 @@ module.exports = {
             const schema = {
                 name: Joi.string(),
                 description: Joi.string(),
-                category: Joi.string().valid('FUEL','SERVICE','fuel','service'),
+                category: Joi.string(),
                 tags: Joi.any().optional()
             };
             const { error } = Joi.validate(req.body, schema);
@@ -300,7 +306,8 @@ module.exports = {
                 address: Joi.string().required(),
                 lng: Joi.number().required(),
                 lat: Joi.number().required(),
-                tags: Joi.required()
+                tags: Joi.required(),
+                withdrawn: Joi.any().optional()
             };
             const { error } = Joi.validate(req.body, schema);
 
@@ -340,6 +347,7 @@ module.exports = {
                     }
                     else{
                         if (flag){
+                            tags = req.body.tags
                             if (Array.isArray(tags)){
                                 temp = tags[0]
                                 for (i=1; i<tags.length; i++){
@@ -423,6 +431,7 @@ module.exports = {
                     }
                     else{
                         if(flag){
+                            tags = req.body.tags
                             if (Array.isArray(tags)){
                                 temp = tags[0]
                                 for (i=1; i<tags.length; i++){

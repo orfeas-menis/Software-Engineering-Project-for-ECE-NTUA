@@ -1,0 +1,27 @@
+body {
+	background-image:url(venzina.png);
+	background-repeat: no-repeat;
+	background-size:cover;
+	background-position:center;
+}
+
+.button,.cell_add_button,.cell_remove_button {
+	padding: 0 50px;
+}
+
+.form_box {
+    text-align: center;
+    margin-top: 15%;
+    padding: 10px;
+    color:#B8B8B8;
+    background-color: rgba(30,30,30, 0.9);
+    margin-right:25%;
+    margin-left:25%;
+}
+
+.form-group, .container {
+	width: 45%;
+	margin: 0 auto;
+	font-size:20px;
+}
+

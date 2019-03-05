@@ -78,6 +78,7 @@ usersController.changeCategory = (req, res) => {
         else{
             res.sendStatus(400)
         }
+
     })
 }
 
@@ -171,15 +172,14 @@ usersController.deleteUser = (req, res) => {
 usersController.whoAmI = (req, res) => {
     if(req.decoded){
         username = req.decoded.username
-        userId = req.decoded.userId
-        email = req.decoded.email
-        category = req.decoded.category
-        var myJson = {}
-        myJson.username = username
-        myJson.userId = userId
-        myJson.email = email
-        myJson.category = category
-        res.send(myJson).status(200)
+        User.findOne({where: {username: username}}).then(user => {
+        if (user){
+            res.send(user).status(200)
+        }
+        else{
+            res.sendStatus(400)
+        }
+        })  
     }
     else{
         res.sendStatus(400)
