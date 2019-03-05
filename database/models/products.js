@@ -82,7 +82,7 @@ Product.sync({ force: false }).then(() => {
             console.log("there's already a product in the db. Contact dev team for more info");
         } else {
             console.log("product not found");
-            Product.create({
+             /*Product.create({
                 name: 'Gasoline',
                 description: 'Normal Gasoline Description',
                 category: 'FUEL',
@@ -112,7 +112,7 @@ Product.sync({ force: false }).then(() => {
                 description: 'Whole Car Cleaning Description',
                 category: 'SERVICE',
                 tags: 'katharisma man,new777,ka8aro file'
-            })
+            }) */
 
         }
     })

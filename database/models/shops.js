@@ -82,18 +82,18 @@ Shop.sync({ force: false }).then(() => {
             console.log("there's already a shop in the db. Contact dev team for more info");
         } else {
             console.log("shop not found");
-            Shop.create({
+            /*Shop.create({
                 name: 'Sample Shop',
                 address: 'Sample Shop Address',
                 lng:  "23.7275",
                 lat:  "37.9838"
-            })
+            }) 
             Shop.create({
                 name: 'Sample Shop2',
                 address: 'Sample Shop2 Address',
                 lng:  "23.724",
                 lat:  "37.93"
-            })
+            }) */
 
         }
     })

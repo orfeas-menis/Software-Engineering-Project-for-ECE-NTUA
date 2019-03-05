@@ -70,7 +70,7 @@ Price.sync({ force: false }).then(() => {
             console.log("there's already a price in the db. Contact dev team for more info");
         } else {
             console.log("price not found");
-            Price.create({
+            /*Price.create({
                 name: 'Sample Price',
                 price: 18.99,
                 date: '2016-08-09',
@@ -93,7 +93,7 @@ Price.sync({ force: false }).then(() => {
                 userId: 1,
                 productId: 2,
                 shopId: 1
-            })
+            }) */
 
         }
     })
