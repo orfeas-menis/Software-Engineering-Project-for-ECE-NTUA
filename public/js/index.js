@@ -42,14 +42,19 @@ $("#btn").click(function(event){
   window.location.assign("/login");
 })
 
+
 var tok = localStorage.getItem("token")
+$("#bton").click(function(event){
+
+})
+
+
 if (tok==null){
 
  document.getElementById('bton').style.visibility='hidden';
  document.getElementById('btn').style.visibility='visible';
 }
 else{
-
    document.getElementById('btn').style.visibility='hidden';
    document.getElementById('bton').style.visibility='visible';
 }
