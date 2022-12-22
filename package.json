@@ -28,7 +28,7 @@
     "express-session": "^1.15.6",
     "frisby": "^2.1.1",
     "joi": "^14.3.0",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "leaflet-geosearch": "^2.7.0",
     "mariadb": "^2.0.2-rc",
     "mysql": "^2.16.0",
